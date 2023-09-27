@@ -1,10 +1,17 @@
-The README file is a text file that explains what a project is.
-It should contain information on
+Author: Joshua Wilkinson
+Student Number: C00262503
+Date: 26/09/2023
+License: GPL-3.0 licenseyu666666666666nb                                    98iiiiiii===
+Purpose: This is the README file for lab 2, the goal of which is to make the file rendezvous.cpp print the firsts before the seconds using a rendezvous barrier.
+Install: g++
+Required Libraries (c++): thread, vector
+Files: 
+- makefile   
+- Makefile1   
+- README  
+- '#rendezvous.cpp#'   
+- rendezvous.cpp   
+- Semaphore.cpp   
+- Semaphore.h
 
-1. Project Licence
-2. Authors of Project
-3. How to install project
-4. List of any required Libraries, platform issues, etc.
-5. TO DO section listing items that need to be completed (errors, missing features etc.)
-6. List of files and what they contain
-7. Any other relevent information
+
