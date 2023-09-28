@@ -10,11 +10,28 @@
 
 /*! displays the first function in the barrier being executed */
 void task(std::shared_ptr<Semaphore> mutexSem,std::shared_ptr<Semaphore> barrierSem, std::shared_ptr<int> threadCount){
+  //template< typename R, typename P >;
+  //std::chrono_literals s;
+  //int mutexSem.get()->Wait(5s);  
 
+  mutexSem.get()->Wait();
   std::cout << "first " << std::endl;
-
-  //put barrier code here
+  
+  //barrier here
+  /*
+  if (*threadCount == 0){
+    barrierSem.get()->Signal();
+  }
+  else{
+    barrierSem.get()->Wait();
+  }  
+  */
+  mutexSem.get()->Signal();
   std::cout << "second" << std::endl;
+
+  // end of barrier
+  
+  *threadCount = *threadCount - 1;
 }
 
 
