@@ -9,29 +9,31 @@
 #include <iostream>
 
 /*! displays the first function in the barrier being executed */
-void task(std::shared_ptr<Semaphore> mutexSem,std::shared_ptr<Semaphore> barrierSem, std::shared_ptr<int> threadCount){
+void task(std::shared_ptr<Semaphore> mutexSem,std::shared_ptr<Semaphore> barrierSem, std::shared_ptr<int> threadCount, std::shared_ptr<int> firstArrived){
   //template< typename R, typename P >;
   //std::chrono_literals s;
   //int mutexSem.get()->Wait(5s);  
 
   mutexSem.get()->Wait();
+  *firstArrived = *firstArrived + 1;
+  mutexSem.get()->Signal();
+  
+  *threadCount = *threadCount - 1;
   std::cout << "first " << std::endl;
   
   //barrier here
-  /*
-  if (*threadCount == 0){
+  
+  if (*threadCount == *firstArrived){
     barrierSem.get()->Signal();
   }
   else{
     barrierSem.get()->Wait();
   }  
-  */
-  mutexSem.get()->Signal();
   std::cout << "second" << std::endl;
 
   // end of barrier
   
-  *threadCount = *threadCount - 1;
+  
 }
 
 
@@ -40,16 +42,23 @@ void task(std::shared_ptr<Semaphore> mutexSem,std::shared_ptr<Semaphore> barrier
 int main(void){
   std::shared_ptr<Semaphore> mutexSem;
   std::shared_ptr<Semaphore> barrierSem;
+
+  std::shared_ptr<int> firstArrived;
+  std::shared_ptr<int> secondArrived;
+  
   std::shared_ptr<int> threadCount;
+  
   mutexSem=std::make_shared<Semaphore>(1);
   barrierSem=std::make_shared<Semaphore>(0);
+  firstArrived=std::make_shared<int>(0);
+  secondArrived=std::make_shared<int>(0);
   threadCount=std::make_shared<int>(5);
   /*!< An array of threads*/
   std::vector<std::thread> threadArray(*threadCount);
   /*!< Pointer to barrier object*/
 
   for(long unsigned int i=0; i < threadArray.size(); i++){
-    threadArray[i]=std::thread(task,mutexSem,barrierSem,threadCount);
+    threadArray[i]=std::thread(task,mutexSem,barrierSem,threadCount, firstArrived);
   }
 
   for(long unsigned int i = 0; i < threadArray.size(); i++){
