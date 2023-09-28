@@ -9,11 +9,10 @@
 #include <iostream>
 
 /*! displays the first function in the barrier being executed */
-void task(std::shared_ptr<Semaphore> mutexSem,std::shared_ptr<Semaphore> barrierSem, int threadCount){
+void task(std::shared_ptr<Semaphore> mutexSem,std::shared_ptr<Semaphore> barrierSem, std::shared_ptr<int> threadCount){
 
   std::cout << "first " << std::endl;
 
-  
   //put barrier code here
   std::cout << "second" << std::endl;
 }
@@ -24,11 +23,12 @@ void task(std::shared_ptr<Semaphore> mutexSem,std::shared_ptr<Semaphore> barrier
 int main(void){
   std::shared_ptr<Semaphore> mutexSem;
   std::shared_ptr<Semaphore> barrierSem;
-  int threadCount = 5;
+  std::shared_ptr<int> threadCount;
   mutexSem=std::make_shared<Semaphore>(1);
   barrierSem=std::make_shared<Semaphore>(0);
+  threadCount=std::make_shared<int>(5);
   /*!< An array of threads*/
-  std::vector<std::thread> threadArray(threadCount);
+  std::vector<std::thread> threadArray(*threadCount);
   /*!< Pointer to barrier object*/
 
   for(long unsigned int i=0; i < threadArray.size(); i++){
