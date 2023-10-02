@@ -12,30 +12,19 @@
 void task(std::shared_ptr<Semaphore> mutexSem,std::shared_ptr<Semaphore> barrierSem, std::shared_ptr<int> threadCount, std::shared_ptr<int> firstArrived){  
   mutexSem->Wait();
   *firstArrived += 1;
-  //std::cout << "Arrival number: " << *firstArrived << std::endl;
-  mutexSem->Signal();  
+  //std::cout << "Arrival number: " << *firstArrived << std::endl;  
   
   std::cout << "first " << std::endl;
   
   //barrier here
   
-  if (*firstArrived < *threadCount){
-    mutexSem->Signal();
-    barrierSem->Wait();
-  }
-  else{
+  if (*firstArrived == *threadCount){
     barrierSem->Signal();
-    mutexSem->Wait();
   }
-
-  mutexSem->Wait();
-  *firstArrived -= 1;
-  //std::cout << "Arrival number: " << *firstArrived << std::endl;
   mutexSem->Signal();
 
-  if (*firstArrived >= 1){
-    barrierSem->Signal();
-  }
+  barrierSem->Wait();
+  barrierSem->Signal();
   
   std::cout << "second" << std::endl;
 
