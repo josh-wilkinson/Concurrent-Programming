@@ -14,5 +14,3 @@ Files:
 - rendezvous.cpp   
 - Semaphore.cpp   
 - Semaphore.h
-
-

@@ -20,6 +20,8 @@ void task(std::shared_ptr<Semaphore> mutexSem,std::shared_ptr<Semaphore> barrier
   
   if (*firstArrived == *threadCount){
     barrierSem->Signal();
+    // outerDoor.wait
+    // innerDoor.signal
   }
   mutexSem->Signal();
 
