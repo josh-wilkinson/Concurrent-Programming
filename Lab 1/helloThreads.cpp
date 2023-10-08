@@ -4,17 +4,19 @@
 #include <unistd.h>
 
 /*! displays a message first*/
-void taskOne(std::shared_ptr<Semaphore> theSemaphore, int delay){
+void taskOne(std::shared_ptr<Semaphore> mutexSem, int delay){
   sleep(delay);
   std::cout <<"I ";
   std::cout << "must ";
   std::cout << "print ";
   std::cout << "first"<<std::endl;
   //tell taskTwo to start now
+  mutexSem->Signal();
 }
 
 /*! displays a message second*/
-void taskTwo(std::shared_ptr<Semaphore> theSemaphore){
+void taskTwo(std::shared_ptr<Semaphore> mutexSem){
+  mutexSem->Wait();
   //wait here until taskOne finishes...
   std::cout <<"This ";
   std::cout << "will ";
@@ -26,8 +28,12 @@ void taskTwo(std::shared_ptr<Semaphore> theSemaphore){
 
 int main(void){
   std::thread threadOne, threadTwo;
-  std::shared_ptr<Semaphore> sem( new Semaphore);
-  sem->Signal();sem->Wait();//these serve no purpose
+  std::shared_ptr<Semaphore> sem(new Semaphore);
+
+  sem = std::make_shared<Semaphore>(0);
+  
+  //sem->Signal();
+  //sem->Wait();//these serve no purpose
   /**< Launch the threads  */
   int taskOneDelay=5;
   threadOne=std::thread(taskTwo,sem);
