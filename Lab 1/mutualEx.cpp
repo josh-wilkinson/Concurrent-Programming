@@ -1,3 +1,7 @@
+// Name: Joshua Wilkinson
+// Student Number: C00262503
+// Date 02/10/2023
+
 #include "Semaphore.h"
 #include <iostream>
 #include <thread>
