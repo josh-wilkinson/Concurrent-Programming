@@ -39,50 +39,66 @@
 #include <vector>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
-#include<unistd.h>
+#include <unistd.h>
 
 const int COUNT = 5;
 const int THINKTIME=3;
 const int EATTIME=5;
-std::vector<Semaphore> forks(COUNT);
-
+std::vector<std::shared_ptr<Semaphore>> forks(COUNT);
+std::shared_ptr<Semaphore> stopper;
+//std::shared_ptr<Semaphore> dummy;
 
 void think(int myID){
+  //stopper->Wait();
   int seconds=rand() % THINKTIME + 1;
   std::cout << myID << " is thinking! "<<std::endl;
   sleep(seconds);
 }
 
 void get_forks(int philID){
-  forks[philID].Wait();
-  forks[(philID+1)%COUNT].Wait();
+  stopper->Wait();
+  std::cout << philID << " is getting their forks!" << std::endl; 
+  forks[philID]->Wait();
+  std::cout << philID << " has gotten their fork!" << std::endl; 
+  forks[(philID+1)%COUNT]->Wait();
+  std::cout << philID << " has gotten their fork!" << std::endl; 
 }
 
 void put_forks(int philID){
-  forks[philID].Signal();
-  forks[(philID+1)%COUNT].Signal();  
+  std::cout << philID << " is putting their forks down!" << std::endl; 
+  forks[philID]->Signal();
+  forks[(philID+1)%COUNT]->Signal();
+  stopper->Signal();
 }
 
 void eat(int myID){
   int seconds=rand() % EATTIME + 1;
-    std::cout << myID << " is chomping! "<<std::endl;
+  std::cout << myID << " is chomping! "<<std::endl;
   sleep(seconds);  
 }
 
 void philosopher(int id/* other params here*/){
-  while(true){
+  int times=1;
+  while(times>0){
     think(id);
     get_forks(id);
     eat(id);
     put_forks(id);
+    times--;
   }//while  
 }//philosopher
 
 
 
 int main(void){
+
+  for (int i = 0; i < COUNT; ++i){
+    forks[i] = std::make_shared<Semaphore>(1);
+  }
+  
   srand (time(NULL)); // initialize random seed: 
   std::vector<std::thread> vt(COUNT);
+  stopper = std::make_shared<Semaphore>(4); // can withstand 4 waits before blocking
   int id=0;
   for(std::thread& t: vt){
     t=std::thread(philosopher,id++/*,params*/);
