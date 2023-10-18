@@ -1,8 +1,7 @@
-#Joseph Kehoe 13/9/2017
-#First simple Makefile
-#Used to contain commands to compile projects
-#Equivalent(?) to a project file in VStudio -- only better!
-#See http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/ for info.
+#Name: Joshua Wilkinson
+#Date: 18/10/2023
+#Purpose: Make file for lab 5
+#See http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/ for info on make files.
 
 
 CC=g++
