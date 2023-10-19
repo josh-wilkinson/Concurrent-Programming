@@ -1,11 +1,11 @@
 # Name: Joshua Wilkinson
 # Date: 02/10/2023
-# Purpose:
+# Purpose: Make file for lab 3, reusable barrier.
 
 CC=g++
 CPPFILES=Barrier.cpp main.cpp Semaphore.cpp
 HFILES=Barrier.h Semaphore.h
-CFLAGS= -std=c++11 -pthread -I.
+CFLAGS= -std=c++11 -Wall -pthread -I.
 OBJFILES=Barrier.o main.o Semaphore.o
 
 %.o: %.cpp
