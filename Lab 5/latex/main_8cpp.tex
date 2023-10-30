@@ -1,0 +1,151 @@
+\doxysection{main.\+cpp File Reference}
+\hypertarget{main_8cpp}{}\label{main_8cpp}\index{main.cpp@{main.cpp}}
+{\ttfamily \#include "{}Semaphore.\+h"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_semaphore}{Semaphore}} $>$ $>$ \mbox{\hyperlink{main_8cpp_ad71e682f90c04e62ef16d8d720da488e}{forks}} (\mbox{\hyperlink{main_8cpp_a308572e3937ef7742e8cc93025faf712}{COUNT}})
+\item 
+void \mbox{\hyperlink{main_8cpp_a995feefa383b82265e681a3fe8c012c2}{think}} (int my\+ID)
+\item 
+void \mbox{\hyperlink{main_8cpp_a21a9defcc14025ebcaa9484d47622b9d}{get\+\_\+forks}} (int phil\+ID)
+\item 
+void \mbox{\hyperlink{main_8cpp_a4cec90aab433a1e4df09b9b6662d5c3e}{put\+\_\+forks}} (int phil\+ID)
+\item 
+void \mbox{\hyperlink{main_8cpp_a228fa031b8deb86a9df2eea2892c3241}{eat}} (int my\+ID)
+\item 
+void \mbox{\hyperlink{main_8cpp_a61d704a6f65c3d915b82ea8a844cc527}{philosopher}} (int id)
+\item 
+int \mbox{\hyperlink{main_8cpp_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const int \mbox{\hyperlink{main_8cpp_a308572e3937ef7742e8cc93025faf712}{COUNT}} = 5
+\item 
+const int \mbox{\hyperlink{main_8cpp_a5a1bc6e8c62cf965547cd9bba4da2448}{THINKTIME}} =3
+\item 
+const int \mbox{\hyperlink{main_8cpp_a92e894dc749f0caa8232e432965090af}{EATTIME}} =5
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_semaphore}{Semaphore}} $>$ \mbox{\hyperlink{main_8cpp_acafd20d0ee2785faac5f73249b6c96a2}{stopper}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8cpp_a228fa031b8deb86a9df2eea2892c3241}\label{main_8cpp_a228fa031b8deb86a9df2eea2892c3241} 
+\index{main.cpp@{main.cpp}!eat@{eat}}
+\index{eat@{eat}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{eat()}{eat()}}
+{\footnotesize\ttfamily void eat (\begin{DoxyParamCaption}\item[{int}]{my\+ID }\end{DoxyParamCaption})}
+
+The philosopher eats for a random amount of time 
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00076}{76}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\Hypertarget{main_8cpp_ad71e682f90c04e62ef16d8d720da488e}\label{main_8cpp_ad71e682f90c04e62ef16d8d720da488e} 
+\index{main.cpp@{main.cpp}!forks@{forks}}
+\index{forks@{forks}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{forks()}{forks()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_semaphore}{Semaphore}} $>$ $>$ forks (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{main_8cpp_a308572e3937ef7742e8cc93025faf712}{COUNT}}}]{ }\end{DoxyParamCaption})}
+
+\Hypertarget{main_8cpp_a21a9defcc14025ebcaa9484d47622b9d}\label{main_8cpp_a21a9defcc14025ebcaa9484d47622b9d} 
+\index{main.cpp@{main.cpp}!get\_forks@{get\_forks}}
+\index{get\_forks@{get\_forks}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{get\_forks()}{get\_forks()}}
+{\footnotesize\ttfamily void get\+\_\+forks (\begin{DoxyParamCaption}\item[{int}]{phil\+ID }\end{DoxyParamCaption})}
+
+A philosopher searches for a fork to their left and to their right 
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00058}{58}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\Hypertarget{main_8cpp_a840291bc02cba5474a4cb46a9b9566fe}\label{main_8cpp_a840291bc02cba5474a4cb46a9b9566fe} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\texorpdfstring{$<$}{<} iterates through the forks vector array to make the \doxylink{class_semaphore}{Semaphore} property (1).
+
+\texorpdfstring{$<$}{<} can withstand 4 waits before blocking
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00094}{94}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\Hypertarget{main_8cpp_a61d704a6f65c3d915b82ea8a844cc527}\label{main_8cpp_a61d704a6f65c3d915b82ea8a844cc527} 
+\index{main.cpp@{main.cpp}!philosopher@{philosopher}}
+\index{philosopher@{philosopher}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{philosopher()}{philosopher()}}
+{\footnotesize\ttfamily void philosopher (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+runs the dinner service for the philosophers for a set amount of time 
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00083}{83}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\Hypertarget{main_8cpp_a4cec90aab433a1e4df09b9b6662d5c3e}\label{main_8cpp_a4cec90aab433a1e4df09b9b6662d5c3e} 
+\index{main.cpp@{main.cpp}!put\_forks@{put\_forks}}
+\index{put\_forks@{put\_forks}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{put\_forks()}{put\_forks()}}
+{\footnotesize\ttfamily void put\+\_\+forks (\begin{DoxyParamCaption}\item[{int}]{phil\+ID }\end{DoxyParamCaption})}
+
+A philosopher puts down both of their forks, ready for the next philospher process 
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00068}{68}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\Hypertarget{main_8cpp_a995feefa383b82265e681a3fe8c012c2}\label{main_8cpp_a995feefa383b82265e681a3fe8c012c2} 
+\index{main.cpp@{main.cpp}!think@{think}}
+\index{think@{think}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{think()}{think()}}
+{\footnotesize\ttfamily void think (\begin{DoxyParamCaption}\item[{int}]{my\+ID }\end{DoxyParamCaption})}
+
+A philosopher thread is given a random time to think before searching for forks 
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00051}{51}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{main_8cpp_a308572e3937ef7742e8cc93025faf712}\label{main_8cpp_a308572e3937ef7742e8cc93025faf712} 
+\index{main.cpp@{main.cpp}!COUNT@{COUNT}}
+\index{COUNT@{COUNT}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{COUNT}{COUNT}}
+{\footnotesize\ttfamily const int COUNT = 5}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00044}{44}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\Hypertarget{main_8cpp_a92e894dc749f0caa8232e432965090af}\label{main_8cpp_a92e894dc749f0caa8232e432965090af} 
+\index{main.cpp@{main.cpp}!EATTIME@{EATTIME}}
+\index{EATTIME@{EATTIME}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{EATTIME}{EATTIME}}
+{\footnotesize\ttfamily const int EATTIME =5}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00046}{46}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\Hypertarget{main_8cpp_acafd20d0ee2785faac5f73249b6c96a2}\label{main_8cpp_acafd20d0ee2785faac5f73249b6c96a2} 
+\index{main.cpp@{main.cpp}!stopper@{stopper}}
+\index{stopper@{stopper}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{stopper}{stopper}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{class_semaphore}{Semaphore}}$>$ stopper}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00048}{48}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\Hypertarget{main_8cpp_a5a1bc6e8c62cf965547cd9bba4da2448}\label{main_8cpp_a5a1bc6e8c62cf965547cd9bba4da2448} 
+\index{main.cpp@{main.cpp}!THINKTIME@{THINKTIME}}
+\index{THINKTIME@{THINKTIME}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{THINKTIME}{THINKTIME}}
+{\footnotesize\ttfamily const int THINKTIME =3}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00045}{45}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
