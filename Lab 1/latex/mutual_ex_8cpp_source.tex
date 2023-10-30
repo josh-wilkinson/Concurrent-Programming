@@ -1,0 +1,44 @@
+\doxysection{mutual\+Ex.\+cpp}
+\hypertarget{mutual_ex_8cpp_source}{}\label{mutual_ex_8cpp_source}\mbox{\hyperlink{mutual_ex_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00001}00001\ \textcolor{comment}{//\ Name:\ Joshua\ Wilkinson}}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00002}00002\ \textcolor{comment}{//\ Student\ Number:\ C00262503}}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00003}00003\ \textcolor{comment}{//\ Date\ 02/10/2023}}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_semaphore_8h}{Semaphore.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00011}00011\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ num\_threads\ =\ 100;}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00012}\mbox{\hyperlink{mutual_ex_8cpp_a2d5b01367ae1267dfac47c7875aac5e4}{00012}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{mutual_ex_8cpp_a2d5b01367ae1267dfac47c7875aac5e4}{sharedVariable}}=0;}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00022}\mbox{\hyperlink{mutual_ex_8cpp_a3c9683d6a27ab2759968c0378236e661}{00022}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{mutual_ex_8cpp_a3c9683d6a27ab2759968c0378236e661}{updateTask}}(std::shared\_ptr<Semaphore>\ firstSem,\ \textcolor{keywordtype}{int}\ numUpdates)\{}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00024}00024\ \ }
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00025}00025\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i=0;i<numUpdates;i++)\{}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00026}00026\ \ \ \ \ \textcolor{comment}{//UPDATE\ SHARED\ VARIABLE\ HERE!}}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00027}00027\ \ \ \ \ \mbox{\hyperlink{mutual_ex_8cpp_a2d5b01367ae1267dfac47c7875aac5e4}{sharedVariable}}++;}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00028}00028\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00030}00030\ \}}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00033}\mbox{\hyperlink{mutual_ex_8cpp_a840291bc02cba5474a4cb46a9b9566fe}{00033}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{mutual_ex_8cpp_a840291bc02cba5474a4cb46a9b9566fe}{main}}(\textcolor{keywordtype}{void})\{}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00034}00034\ \ \ std::vector<std::thread>\ vt(num\_threads);}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00035}00035\ \ \ std::shared\_ptr<Semaphore>\ aSemaphore(\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_semaphore}{Semaphore}});}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00037}00037\ \ \ \textcolor{keywordtype}{int}\ i=0;}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00038}00038\ \ \ \textcolor{keywordflow}{for}(std::thread\&\ t:\ vt)\{}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00039}00039\ \ \ \ \ t=std::thread(\mbox{\hyperlink{mutual_ex_8cpp_a3c9683d6a27ab2759968c0378236e661}{updateTask}},aSemaphore,1000);}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00040}00040\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00041}00041\ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Launched\ from\ the\ main\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00043}00043\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ v\ :vt)\{}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00044}00044\ \ \ \ \ \ \ v.join();}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00045}00045\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00046}00046\ \ \ std::cout\ <<\ \mbox{\hyperlink{mutual_ex_8cpp_a2d5b01367ae1267dfac47c7875aac5e4}{sharedVariable}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00047}00047\ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{mutual_ex_8cpp_source_l00048}00048\ \}}
+
+\end{DoxyCode}
