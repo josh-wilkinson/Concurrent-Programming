@@ -1,0 +1,72 @@
+\doxysection{main.\+cpp File Reference}
+\hypertarget{main_8cpp}{}\label{main_8cpp}\index{main.cpp@{main.cpp}}
+{\ttfamily \#include "{}Barrier.\+h"{}}\newline
+{\ttfamily \#include "{}Event.\+h"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_buffer}{void}} \mbox{\hyperlink{main_8cpp_a2b63c7faa516bb54f6d98346900864dc}{producer}} (\mbox{\hyperlink{class_buffer_a08f64c6d8abbbffc006fea4f99d6c6ac}{std\+::shared\+\_\+ptr}}$<$ \mbox{\hyperlink{class_buffer}{Safe\+Buffer}}$<$ \mbox{\hyperlink{class_buffer_a08f64c6d8abbbffc006fea4f99d6c6ac}{std\+::shared\+\_\+ptr}}$<$ \mbox{\hyperlink{class_buffer}{Event}} $>$ $>$ \mbox{\hyperlink{class_buffer}{the\+Buffer}}, \mbox{\hyperlink{class_buffer}{int}} \mbox{\hyperlink{class_buffer}{num\+Loops}})
+\begin{DoxyCompactList}\small\item\em Creates events and adds them to buffer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_buffer}{void}} \mbox{\hyperlink{main_8cpp_a0c3ad1f29466ff569055abe586f9ad0a}{consumer}} (\mbox{\hyperlink{class_buffer_a08f64c6d8abbbffc006fea4f99d6c6ac}{std\+::shared\+\_\+ptr}}$<$ \mbox{\hyperlink{class_buffer}{Safe\+Buffer}}$<$ \mbox{\hyperlink{class_buffer_a08f64c6d8abbbffc006fea4f99d6c6ac}{std\+::shared\+\_\+ptr}} \mbox{\hyperlink{class_buffer}{Event}} $>$ $>$ \mbox{\hyperlink{class_buffer}{the\+Buffer}}, \mbox{\hyperlink{class_buffer}{int}} \mbox{\hyperlink{class_buffer}{num\+Loops}})
+\item 
+\mbox{\hyperlink{class_buffer}{int}} \mbox{\hyperlink{main_8cpp_a840291bc02cba5474a4cb46a9b9566fe}{main}} (\mbox{\hyperlink{class_buffer}{void}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_buffer}{const}} \mbox{\hyperlink{class_buffer}{int}} \mbox{\hyperlink{main_8cpp_aab938108caad0d0e47d6885b5ba2d23a}{size}} =20
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8cpp_a0c3ad1f29466ff569055abe586f9ad0a}\label{main_8cpp_a0c3ad1f29466ff569055abe586f9ad0a} 
+\index{main.cpp@{main.cpp}!consumer@{consumer}}
+\index{consumer@{consumer}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{consumer()}{consumer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_buffer}{void}} consumer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_buffer_a08f64c6d8abbbffc006fea4f99d6c6ac}{std\+::shared\+\_\+ptr}}$<$ \mbox{\hyperlink{class_buffer}{Safe\+Buffer}}$<$ \mbox{\hyperlink{class_buffer_a08f64c6d8abbbffc006fea4f99d6c6ac}{std\+::shared\+\_\+ptr}} \mbox{\hyperlink{class_buffer}{Event}} $>$ $>$}]{the\+Buffer,  }\item[{\mbox{\hyperlink{class_buffer}{int}}}]{num\+Loops }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00031}{31}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\Hypertarget{main_8cpp_a840291bc02cba5474a4cb46a9b9566fe}\label{main_8cpp_a840291bc02cba5474a4cb46a9b9566fe} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_buffer}{int}} main (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_buffer}{void}}}]{ }\end{DoxyParamCaption})}
+
+\texorpdfstring{$<$}{<} Launch the threads ~\newline
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00041}{41}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\Hypertarget{main_8cpp_a2b63c7faa516bb54f6d98346900864dc}\label{main_8cpp_a2b63c7faa516bb54f6d98346900864dc} 
+\index{main.cpp@{main.cpp}!producer@{producer}}
+\index{producer@{producer}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{producer()}{producer()}}
+{\footnotesize\ttfamily producer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Creates events and adds them to buffer. 
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00016}{16}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{main_8cpp_aab938108caad0d0e47d6885b5ba2d23a}\label{main_8cpp_aab938108caad0d0e47d6885b5ba2d23a} 
+\index{main.cpp@{main.cpp}!size@{size}}
+\index{size@{size}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{size}{size}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_buffer}{const}} \mbox{\hyperlink{class_buffer}{int}} size =20}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00009}{9}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+

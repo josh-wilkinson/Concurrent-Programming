@@ -1,0 +1,85 @@
+\doxysection{Buffer.\+cpp}
+\hypertarget{_buffer_8cpp_source}{}\label{_buffer_8cpp_source}\mbox{\hyperlink{_buffer_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00003}00003\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00004}00004\ \textcolor{comment}{//\ Buffer\ (Class)}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00005}00005\ \textcolor{comment}{//\ \ \ \ \ The\ buffer\ is\ implemented\ with\ a\ templated\ class\ so}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00006}00006\ \textcolor{comment}{//\ \ \ \ \ the\ buffer\ can\ be\ a\ buffer\ of\ specified\ type.}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00007}00007\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00008}\mbox{\hyperlink{class_buffer}{00008}}\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_buffer}{Buffer}}\{}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00009}00009\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00010}00010\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00011}00011\ \ \ \textcolor{comment}{//\ Buffer\ -\/\ Private\ Member\ Variables}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00012}00012\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00014}00014\ \ \ std::unique\_ptr<T[]>\ buffer;\ \textcolor{comment}{//\ using\ a\ smart\ pointer\ is\ safer\ (no\ need\ to\ implement\ a\ destructor)}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00015}00015\ \ \ \textcolor{keywordtype}{size\_t}\ head\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ size\_t\ is\ an\ unsigned\ long}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00016}00016\ \ \ \textcolor{keywordtype}{size\_t}\ tail\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00017}00017\ \ \ \textcolor{keywordtype}{size\_t}\ max\_size;}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00018}\mbox{\hyperlink{class_buffer_a08f64c6d8abbbffc006fea4f99d6c6ac}{00018}}\ \ \ T\ empty\_item;\ \textcolor{comment}{//\ used\ to\ clear\ data}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00019}00019\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00020}00020\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00021}00021\ \ \ \textcolor{comment}{//\ Buffer\ -\/\ Public\ Methods}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00022}00022\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00024}00024\ \ \ \textcolor{comment}{//\ Create\ a\ new\ Buffer.}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00025}00025\ \ \ \mbox{\hyperlink{class_buffer}{Buffer<T>}}(\textcolor{keywordtype}{size\_t}\ max\_size)}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00026}00026\ \ \ \ \ \ \ :\ buffer(\mbox{\hyperlink{class_buffer}{std}}::\mbox{\hyperlink{class_buffer}{unique\_ptr}}<\mbox{\hyperlink{class_buffer}{T}}[]>(\mbox{\hyperlink{class_buffer}{new}}\ \mbox{\hyperlink{class_buffer}{T}}[max\_size])),\ max\_size(max\_size)\{\};}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00028}00028\ \ \ \textcolor{comment}{//\ Add\ an\ item\ to\ this\ buffer.}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00029}\mbox{\hyperlink{class_buffer_a8f335f364bffad85db1aa12b122928ed}{00029}}\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_buffer_a8f335f364bffad85db1aa12b122928ed}{enqueue}}(\mbox{\hyperlink{class_buffer}{T}}\ \mbox{\hyperlink{class_buffer}{item}})\{}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00030}00030\ \ \ \ \ \textcolor{comment}{//\ if\ buffer\ is\ full,\ throw\ an\ error}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00031}00031\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_buffer_acde5e76b04d478797788e18a6c2da485}{is\_full}}())}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00032}00032\ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{class_buffer_a08f64c6d8abbbffc006fea4f99d6c6ac}{std::runtime\_error}}(\textcolor{stringliteral}{"{}buffer\ is\ full"{}});}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00034}00034\ \ \ \ \ \textcolor{comment}{//\ insert\ item\ at\ back\ of\ buffer}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00035}00035\ \ \ \ \ buffer[tail]\ =\ \mbox{\hyperlink{class_buffer}{item}};}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00037}00037\ \ \ \ \ \textcolor{comment}{//\ increment\ tail}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00038}00038\ \ \ \ \ tail\ =\ (tail\ +\ 1)\ \%\ max\_size;}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00039}00039\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00041}00041\ \ \ \textcolor{comment}{//\ Remove\ an\ item\ from\ this\ buffer\ and\ return\ it.}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00042}\mbox{\hyperlink{class_buffer_ac52eaa7b0b7ec409ce9dfd44bf6e6ba4}{00042}}\ \ \ \mbox{\hyperlink{class_buffer}{T}}\ \mbox{\hyperlink{class_buffer_ac52eaa7b0b7ec409ce9dfd44bf6e6ba4}{dequeue}}()\{}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00043}00043\ \ \ \ \ \textcolor{comment}{//\ if\ buffer\ is\ empty,\ throw\ an\ error}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00044}00044\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_buffer_a9adc2562a0cefc06ba1388ec44bf93e7}{is\_empty}}())}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00045}00045\ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{class_buffer_a08f64c6d8abbbffc006fea4f99d6c6ac}{std::runtime\_error}}(\textcolor{stringliteral}{"{}buffer\ is\ empty"{}});}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00047}00047\ \ \ \ \ \textcolor{comment}{//\ get\ item\ at\ head}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00048}00048\ \ \ \ \ \mbox{\hyperlink{class_buffer}{T}}\ \mbox{\hyperlink{class_buffer}{item}}\ =\ buffer[head];}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00049}00049\ \ \ \ \ \textcolor{comment}{//\ set\ item\ at\ head\ to\ be\ empty}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00050}00050\ \ \ \ \ \mbox{\hyperlink{class_buffer}{T}}\ \mbox{\hyperlink{class_buffer}{empty}};}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00051}00051\ \ \ \ \ buffer[head]\ =\ empty\_item;}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00052}00052\ \ \ \ \ \textcolor{comment}{//\ move\ head\ foward}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00053}00053\ \ \ \ \ head\ =\ (head\ +\ 1)\ \%\ max\_size;}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00055}00055\ \ \ \ \ \textcolor{comment}{//\ return\ item}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00056}00056\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_buffer}{item}};}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00057}00057\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00059}00059\ \ \ \textcolor{comment}{//\ Return\ the\ item\ at\ the\ front\ of\ this\ buffer.}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00060}\mbox{\hyperlink{class_buffer_a7fde5b7220520ecb922c5a3018ede7f6}{00060}}\ \ \ \mbox{\hyperlink{class_buffer}{T}}\ \mbox{\hyperlink{class_buffer_a7fde5b7220520ecb922c5a3018ede7f6}{front}}()\{}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00061}00061\ \ \ \ \ \textcolor{keywordflow}{return}\ buffer[head];}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00062}00062\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00064}00064\ \ \ \textcolor{comment}{//\ Return\ true\ if\ this\ buffer\ is\ empty,\ and\ false\ otherwise.}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00065}\mbox{\hyperlink{class_buffer_a9adc2562a0cefc06ba1388ec44bf93e7}{00065}}\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_buffer_a9adc2562a0cefc06ba1388ec44bf93e7}{is\_empty}}()\{}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00066}00066\ \ \ \ \ \textcolor{keywordflow}{return}\ head\ ==\ tail;}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00067}00067\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00069}00069\ \ \ \textcolor{comment}{//\ Return\ true\ if\ this\ buffer\ is\ full,\ and\ false\ otherwise.}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00070}\mbox{\hyperlink{class_buffer_acde5e76b04d478797788e18a6c2da485}{00070}}\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_buffer_acde5e76b04d478797788e18a6c2da485}{is\_full}}()\{}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00071}00071\ \ \ \ \ \textcolor{keywordflow}{return}\ tail\ ==\ (head\ -\/\ 1)\ \%\ max\_size;}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00072}00072\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00074}00074\ \ \ \textcolor{comment}{//\ Return\ the\ size\ of\ this\ buffer.}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00075}\mbox{\hyperlink{class_buffer_ae86cb4a1c7fc30bde63d19dc2aebf784}{00075}}\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{class_buffer_ae86cb4a1c7fc30bde63d19dc2aebf784}{size}}()\{}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00076}00076\ \ \ \ \ \textcolor{keywordflow}{if}\ (tail\ >=\ head)}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00077}00077\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tail\ -\/\ head;}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00078}00078\ \ \ \ \ \textcolor{keywordflow}{return}\ max\_size\ -\/\ head\ -\/\ tail;}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00079}00079\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_buffer_8cpp_source_l00080}00080\ \};}
+
+\end{DoxyCode}
