@@ -1,0 +1,69 @@
+\doxysection{rendezvous.\+cpp}
+\hypertarget{rendezvous_8cpp_source}{}\label{rendezvous_8cpp_source}\mbox{\hyperlink{rendezvous_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00001}00001\ \textcolor{comment}{//\ Name:\ Joshua\ Wilkinson}}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00002}00002\ \textcolor{comment}{//\ Student\ Number:\ C00262503}}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00003}00003\ \textcolor{comment}{//\ Date:\ 25/09/2023}}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00004}00004\ \textcolor{comment}{//\ Purpose:\ to\ apply\ a\ rendezvous\ barrier\ as\ a\ buffer\ so\ that\ "{}first"{}\ is\ printed\ before\ "{}second"{}}}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_semaphore_8h}{Semaphore.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00012}\mbox{\hyperlink{rendezvous_8cpp_a5ab4582931b6f6c84ee64df8da4688a3}{00012}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{rendezvous_8cpp_a5ab4582931b6f6c84ee64df8da4688a3}{task}}(std::shared\_ptr<Semaphore>\ mutexSem,std::shared\_ptr<Semaphore>\ barrierSem,\ std::shared\_ptr<int>\ threadCount,\ std::shared\_ptr<int>\ firstArrived)\{\ \ }
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00013}00013\ \ \ mutexSem-\/>Wait();}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00014}00014\ \ \ *firstArrived\ +=\ 1;}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00015}00015\ \ \ \textcolor{comment}{//std::cout\ <<\ "{}Arrival\ number:\ "{}\ <<\ *firstArrived\ <<\ std::endl;\ \ }}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00016}00016\ \ \ }
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00017}00017\ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}first\ "{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00018}00018\ \ \ }
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00019}00019\ \ \ \textcolor{comment}{//barrier\ here}}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00020}00020\ \ \ }
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00021}00021\ \ \ \textcolor{keywordflow}{if}\ (*firstArrived\ ==\ *threadCount)\{}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00022}00022\ \ \ \ \ barrierSem-\/>Signal();}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00023}00023\ \ \ \ \ \textcolor{comment}{//\ outerDoor.wait}}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00024}00024\ \ \ \ \ \textcolor{comment}{//\ innerDoor.signal}}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00025}00025\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00026}00026\ \ \ mutexSem-\/>Signal();}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00028}00028\ \ \ barrierSem-\/>Wait();}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00029}00029\ \ \ barrierSem-\/>Signal();}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00030}00030\ \ \ }
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00031}00031\ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}second"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00033}00033\ \ \ \textcolor{comment}{//\ end\ of\ barrier}}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00034}00034\ \ \ }
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00035}00035\ \ \ }
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00036}00036\ \}}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00041}\mbox{\hyperlink{rendezvous_8cpp_a840291bc02cba5474a4cb46a9b9566fe}{00041}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{rendezvous_8cpp_a840291bc02cba5474a4cb46a9b9566fe}{main}}(\textcolor{keywordtype}{void})\{}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00042}00042\ \ \ std::shared\_ptr<Semaphore>\ mutexSem;}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00043}00043\ \ \ std::shared\_ptr<Semaphore>\ barrierSem;}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00045}00045\ \ \ std::shared\_ptr<int>\ firstArrived;}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00046}00046\ \ \ std::shared\_ptr<int>\ secondArrived;}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00047}00047\ \ \ }
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00048}00048\ \ \ std::shared\_ptr<int>\ threadCount;}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00049}00049\ \ \ }
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00050}00050\ \ \ mutexSem=std::make\_shared<Semaphore>(1);}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00051}00051\ \ \ barrierSem=std::make\_shared<Semaphore>(0);}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00052}00052\ \ \ firstArrived=std::make\_shared<int>(0);}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00053}00053\ \ \ secondArrived=std::make\_shared<int>(0);}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00054}00054\ \ \ threadCount=std::make\_shared<int>(5);}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00056}00056\ \ \ std::vector<std::thread>\ threadArray(*threadCount);}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00059}00059\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{long}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i=0;\ i\ <\ threadArray.size();\ i++)\{}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00060}00060\ \ \ \ \ threadArray[i]=std::thread(\mbox{\hyperlink{rendezvous_8cpp_a5ab4582931b6f6c84ee64df8da4688a3}{task}},mutexSem,barrierSem,threadCount,\ firstArrived);}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00061}00061\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00063}00063\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{long}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ threadArray.size();\ i++)\{}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00064}00064\ \ \ \ \ threadArray[i].join();}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00065}00065\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00066}00066\ \ \ }
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00067}00067\ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{rendezvous_8cpp_source_l00068}00068\ \}}
+
+\end{DoxyCode}
