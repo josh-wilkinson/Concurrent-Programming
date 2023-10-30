@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['wait_0',['Wait',['../class_semaphore.html#a72aabebf026e3a8b1f3e4d0fa8ee1eda',1,'Semaphore']]],
-  ['waitforall_1',['waitForAll',['../class_barrier.html#a59b259f25f6acdc5f943398035d2d87a',1,'Barrier']]]
+  ['task_0',['task',['../main_8cpp.html#a96ca7eba915789dab4c11886f423c42b',1,'main.cpp']]],
+  ['totalthreads_1',['TotalThreads',['../main_8cpp.html#a4c0b9bf99fdbe13a37d1fdb890f54681',1,'main.cpp']]]
 ];

@@ -12,15 +12,15 @@
 \DoxyCodeLine{\Hypertarget{_barrier_8h_source_l00015}00015\ \ \ \textcolor{keywordtype}{int}\ count;}
 \DoxyCodeLine{\Hypertarget{_barrier_8h_source_l00016}00016\ \ \ \textcolor{keywordtype}{int}\ threadNum;}
 \DoxyCodeLine{\Hypertarget{_barrier_8h_source_l00017}00017\ \ \ \textcolor{keywordtype}{bool}\ condition;}
-\DoxyCodeLine{\Hypertarget{_barrier_8h_source_l00018}00018\ \ \ std::shared\_ptr<Semaphore>\ mutexSem;}
-\DoxyCodeLine{\Hypertarget{_barrier_8h_source_l00019}00019\ \ \ std::shared\_ptr<Semaphore>\ barrierSem;}
-\DoxyCodeLine{\Hypertarget{_barrier_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_barrier_8h_source_l00018}00018\ \ \ std::shared\_ptr<Semaphore>\ theMutex;}
+\DoxyCodeLine{\Hypertarget{_barrier_8h_source_l00019}00019\ \ \ std::shared\_ptr<Semaphore>\ innerLock;}
+\DoxyCodeLine{\Hypertarget{_barrier_8h_source_l00020}00020\ \ \ std::shared\_ptr<Semaphore>\ outerLock;}
 \DoxyCodeLine{\Hypertarget{_barrier_8h_source_l00021}00021\ }
-\DoxyCodeLine{\Hypertarget{_barrier_8h_source_l00022}00022\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{\Hypertarget{_barrier_8h_source_l00023}00023\ }
-\DoxyCodeLine{\Hypertarget{_barrier_8h_source_l00024}00024\ \ \ \mbox{\hyperlink{class_barrier_a462a2435e07b6fabc0265011f03310ee}{Barrier}}();}
-\DoxyCodeLine{\Hypertarget{_barrier_8h_source_l00025}00025\ \ \ \mbox{\hyperlink{class_barrier_a401f40e73302009b305904ffc7825304}{\string~Barrier}}();}
-\DoxyCodeLine{\Hypertarget{_barrier_8h_source_l00026}00026\ \ \ \mbox{\hyperlink{class_barrier_a462a2435e07b6fabc0265011f03310ee}{Barrier}}(\textcolor{keywordtype}{int}\ count);}
+\DoxyCodeLine{\Hypertarget{_barrier_8h_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_barrier_8h_source_l00023}00023\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_barrier_8h_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_barrier_8h_source_l00025}00025\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_barrier_a401f40e73302009b305904ffc7825304}{\string~Barrier}}();}
+\DoxyCodeLine{\Hypertarget{_barrier_8h_source_l00026}00026\ \ \ \mbox{\hyperlink{class_barrier}{Barrier}}(\textcolor{keywordtype}{int}\ count);}
 \DoxyCodeLine{\Hypertarget{_barrier_8h_source_l00027}00027\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_barrier_ab999e172844330d8b9a1c13f3766959d}{setCount}}(\textcolor{keywordtype}{int}\ count);}
 \DoxyCodeLine{\Hypertarget{_barrier_8h_source_l00028}00028\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_barrier_a471bfe5ce54384baa7dbd195ae3a7b30}{getCount}}();}
 \DoxyCodeLine{\Hypertarget{_barrier_8h_source_l00029}00029\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_barrier_a59b259f25f6acdc5f943398035d2d87a}{waitForAll}}();}

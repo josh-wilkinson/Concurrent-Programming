@@ -12,9 +12,7 @@ An Implementation of a barrier Using Semaphores.
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{class_barrier_a462a2435e07b6fabc0265011f03310ee}{Barrier}} ()
-\item 
-\mbox{\hyperlink{class_barrier_a401f40e73302009b305904ffc7825304}{\texorpdfstring{$\sim$}{\string~}\+Barrier}} ()
+virtual \mbox{\hyperlink{class_barrier_a401f40e73302009b305904ffc7825304}{\texorpdfstring{$\sim$}{\string~}\+Barrier}} ()
 \item 
 \mbox{\hyperlink{class_barrier_a68730c862911d37696957056595aa604}{Barrier}} (int count)
 \item 
@@ -40,35 +38,27 @@ Definition at line \mbox{\hyperlink{_barrier_8h_source_l00011}{11}} of file \mbo
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{class_barrier_a462a2435e07b6fabc0265011f03310ee}\label{class_barrier_a462a2435e07b6fabc0265011f03310ee} 
-\index{Barrier@{Barrier}!Barrier@{Barrier}}
-\index{Barrier@{Barrier}!Barrier@{Barrier}}
-\doxysubsubsection{\texorpdfstring{Barrier()}{Barrier()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily Barrier\+::\+Barrier (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-\doxylink{class_barrier}{Barrier} constructor 
-
-Definition at line \mbox{\hyperlink{_barrier_8cpp_source_l00010}{10}} of file \mbox{\hyperlink{_barrier_8cpp_source}{Barrier.\+cpp}}.
-
 \Hypertarget{class_barrier_a401f40e73302009b305904ffc7825304}\label{class_barrier_a401f40e73302009b305904ffc7825304} 
 \index{Barrier@{Barrier}!````~Barrier@{\texorpdfstring{$\sim$}{\string~}Barrier}}
 \index{````~Barrier@{\texorpdfstring{$\sim$}{\string~}Barrier}!Barrier@{Barrier}}
 \doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Barrier()}{\string~Barrier()}}
-{\footnotesize\ttfamily Barrier\+::\texorpdfstring{$\sim$}{\string~}\+Barrier (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Barrier\+::\texorpdfstring{$\sim$}{\string~}\+Barrier (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+\doxylink{class_barrier}{Barrier} with parameter constructor
 
 \doxylink{class_barrier}{Barrier} deconstructor 
 
-Definition at line \mbox{\hyperlink{_barrier_8cpp_source_l00033}{33}} of file \mbox{\hyperlink{_barrier_8cpp_source}{Barrier.\+cpp}}.
+Definition at line \mbox{\hyperlink{_barrier_8cpp_source_l00029}{29}} of file \mbox{\hyperlink{_barrier_8cpp_source}{Barrier.\+cpp}}.
 
 \Hypertarget{class_barrier_a68730c862911d37696957056595aa604}\label{class_barrier_a68730c862911d37696957056595aa604} 
 \index{Barrier@{Barrier}!Barrier@{Barrier}}
 \index{Barrier@{Barrier}!Barrier@{Barrier}}
-\doxysubsubsection{\texorpdfstring{Barrier()}{Barrier()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily Barrier\+::\+Barrier (\begin{DoxyParamCaption}\item[{int}]{count }\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{Barrier()}{Barrier()}}
+{\footnotesize\ttfamily Barrier\+::\+Barrier (\begin{DoxyParamCaption}\item[{int}]{Num\+Of\+Threads }\end{DoxyParamCaption})}
 
-\doxylink{class_barrier}{Barrier} with parameter constructor 
+\doxylink{class_barrier}{Barrier} constructor 
 
-Definition at line \mbox{\hyperlink{_barrier_8cpp_source_l00023}{23}} of file \mbox{\hyperlink{_barrier_8cpp_source}{Barrier.\+cpp}}.
+Definition at line \mbox{\hyperlink{_barrier_8cpp_source_l00010}{10}} of file \mbox{\hyperlink{_barrier_8cpp_source}{Barrier.\+cpp}}.
 
 
 
@@ -81,7 +71,7 @@ Definition at line \mbox{\hyperlink{_barrier_8cpp_source_l00023}{23}} of file \m
 
 returns count value 
 
-Definition at line \mbox{\hyperlink{_barrier_8cpp_source_l00043}{43}} of file \mbox{\hyperlink{_barrier_8cpp_source}{Barrier.\+cpp}}.
+Definition at line \mbox{\hyperlink{_barrier_8cpp_source_l00038}{38}} of file \mbox{\hyperlink{_barrier_8cpp_source}{Barrier.\+cpp}}.
 
 \Hypertarget{class_barrier_ab999e172844330d8b9a1c13f3766959d}\label{class_barrier_ab999e172844330d8b9a1c13f3766959d} 
 \index{Barrier@{Barrier}!setCount@{setCount}}
@@ -91,7 +81,7 @@ Definition at line \mbox{\hyperlink{_barrier_8cpp_source_l00043}{43}} of file \m
 
 sets count value 
 
-Definition at line \mbox{\hyperlink{_barrier_8cpp_source_l00038}{38}} of file \mbox{\hyperlink{_barrier_8cpp_source}{Barrier.\+cpp}}.
+Definition at line \mbox{\hyperlink{_barrier_8cpp_source_l00034}{34}} of file \mbox{\hyperlink{_barrier_8cpp_source}{Barrier.\+cpp}}.
 
 \Hypertarget{class_barrier_a59b259f25f6acdc5f943398035d2d87a}\label{class_barrier_a59b259f25f6acdc5f943398035d2d87a} 
 \index{Barrier@{Barrier}!waitForAll@{waitForAll}}
@@ -101,7 +91,7 @@ Definition at line \mbox{\hyperlink{_barrier_8cpp_source_l00038}{38}} of file \m
 
 waits for all the threads before starting second half of code 
 
-Definition at line \mbox{\hyperlink{_barrier_8cpp_source_l00049}{49}} of file \mbox{\hyperlink{_barrier_8cpp_source}{Barrier.\+cpp}}.
+Definition at line \mbox{\hyperlink{_barrier_8cpp_source_l00043}{43}} of file \mbox{\hyperlink{_barrier_8cpp_source}{Barrier.\+cpp}}.
 
 
 
