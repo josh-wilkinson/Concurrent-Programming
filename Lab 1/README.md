@@ -6,6 +6,8 @@ Student Number: C00262503
 
 Date: 08/10/2023
 
+GitHub URL: https://github.com/josh-wilkinson/Concurrent-Programming/tree/master/Lab%201
+
 License: GPL-3.0
 
 Purpose: README file for lab 1, the goal of which is to apply a semaphore lock to two threads (task1, task2) and run task2 after task1 has finished.
