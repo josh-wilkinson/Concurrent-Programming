@@ -1,19 +1,19 @@
 /* main.c --- 
  * 
- * Filename: main.c
- * Description: 
+ * Filename: main.cpp
+ * Description: Lab 5 for concurrent programming subject, the philosophers problem.
  * Author: Joseph
- * Maintainer: 
+ * Maintainer: Joshua Wilkinson
  * Created: Wed Oct 11 09:28:12 2023 (+0100)
- * Last-Updated: Wed Oct 11 10:01:39 2023 (+0100)
- *           By: Joseph
- *     Update #: 13
+ * Last-Updated: Thu 19 Oct 11:20:22 BST 2023
+ *           By: Joshua Wilkinson
+ *     Update #: 14
  * 
  */
 
 /* Commentary: 
  * 
- * 
+ * file for lab 5, the goal of which is to solve the philospher's problem.
  * 
  */
 
@@ -46,17 +46,17 @@ const int THINKTIME=3;
 const int EATTIME=5;
 std::vector<std::shared_ptr<Semaphore>> forks(COUNT);
 std::shared_ptr<Semaphore> stopper;
-//std::shared_ptr<Semaphore> dummy;
 
+/*! A philosopher thread is given a random time to think before searching for forks */
 void think(int myID){
-  //stopper->Wait();
   int seconds=rand() % THINKTIME + 1;
   std::cout << myID << " is thinking! "<<std::endl;
   sleep(seconds);
 }
 
+/*! A philosopher searches for a fork to their left and to their right */
 void get_forks(int philID){
-  stopper->Wait();
+  stopper->Wait(); // will block when 4 threads have reached this line
   std::cout << philID << " is getting their forks!" << std::endl; 
   forks[philID]->Wait();
   std::cout << philID << " has gotten their fork!" << std::endl; 
@@ -64,21 +64,24 @@ void get_forks(int philID){
   std::cout << philID << " has gotten their fork!" << std::endl; 
 }
 
+/*! A philosopher puts down both of their forks, ready for the next philospher process */
 void put_forks(int philID){
   std::cout << philID << " is putting their forks down!" << std::endl; 
   forks[philID]->Signal();
   forks[(philID+1)%COUNT]->Signal();
-  stopper->Signal();
+  stopper->Signal(); // will signal when a thread has finished eating, letting other processes go through
 }
 
+/*! The philosopher eats for a random amount of time */
 void eat(int myID){
   int seconds=rand() % EATTIME + 1;
   std::cout << myID << " is chomping! "<<std::endl;
   sleep(seconds);  
 }
 
+/*! runs the dinner service for the philosophers for a set amount of time */
 void philosopher(int id/* other params here*/){
-  int times=1;
+  int times=10; // Number of times the philosphers sit down to eat!
   while(times>0){
     think(id);
     get_forks(id);
@@ -88,17 +91,15 @@ void philosopher(int id/* other params here*/){
   }//while  
 }//philosopher
 
-
-
 int main(void){
-
+  /*!< iterates through the forks vector array to make the Semaphore property (1). */
   for (int i = 0; i < COUNT; ++i){
     forks[i] = std::make_shared<Semaphore>(1);
-  }
-  
+  }  
   srand (time(NULL)); // initialize random seed: 
   std::vector<std::thread> vt(COUNT);
-  stopper = std::make_shared<Semaphore>(4); // can withstand 4 waits before blocking
+  /*!<  can withstand 4 waits before blocking */
+  stopper = std::make_shared<Semaphore>(4);
   int id=0;
   for(std::thread& t: vt){
     t=std::thread(philosopher,id++/*,params*/);
@@ -110,4 +111,4 @@ int main(void){
   return 0;
 }
 
-/* main.c ends here */
+/* main.cpp ends here */
