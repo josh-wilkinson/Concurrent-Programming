@@ -47,3 +47,21 @@
 
 
 /* Event.h ends here */
+
+// basic constructor - val = LCASE
+
+// consume - prints uppercase of val (val - 32 ?) ASCII
+
+#include "Semaphore.h"
+#include <iostream>
+#include <stdio.h>
+
+class Event
+{
+private:
+  char c;
+public:
+  virtual ~Event();  
+  Event();
+  void consume();
+};
