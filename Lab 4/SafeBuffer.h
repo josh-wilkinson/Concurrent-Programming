@@ -47,3 +47,22 @@
 
 
 /* SafeBuffer.h ends here */
+
+#include "Semaphore.h"
+#include <vector>
+#include "Event.h"
+
+class SafeBuffer{
+private:
+  std::vector<Event> items; // contains all the Event objects
+  std::shared_ptr<Semaphore> theMutex;
+  std::shared_ptr<Semaphore> semaphore;
+public:
+  SafeBuffer();
+  void push();
+  Event pop();
+};
+
+/* SafeBuffer.h ends here */
+
+
