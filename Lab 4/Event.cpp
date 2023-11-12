@@ -2,7 +2,7 @@
 #include <iostream>
 #include <stdlib.h>
 
-Event::Event(Buffer<std::shared_ptr Event> theBuffer){
+Event::Event(){
   c = 'a' + rand() % 26; // there are 26 possible letters
 }
 
