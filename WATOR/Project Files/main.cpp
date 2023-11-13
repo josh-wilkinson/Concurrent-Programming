@@ -135,8 +135,12 @@ int main()
 		  
 		}
 		else{
-		  worldData[i][k] = 0;
-		  worldData[i-1][k] = 1;
+		  if (worldData[i-1][k] != 1){
+		    if (worldData[i-1][k] != 2){
+		      worldData[i][k] = 0;
+		      worldData[i-1][k] = 1;
+		    }
+		  }		  
 		}
 	      }
 	      else if (direction == 2){
@@ -144,8 +148,12 @@ int main()
 
 		}
 		else{
-		  worldData[i][k] = 0;
-		  worldData[i+1][k] = 1;
+		  if (worldData[i+1][k] != 1){
+		    if (worldData[i+1][k] != 2){
+		      worldData[i][k] = 0;
+		      worldData[i+1][k] = 1;
+		    }
+		  }
 		}
 	      }
 	      else if (direction == 3){
@@ -153,8 +161,12 @@ int main()
 
 		}
 		else{
-		  worldData[i][k] = 0;
-		  worldData[i][k+1] = 1;
+		  if (worldData[i][k+1] != 1){
+		    if (worldData[i][k+1] != 2){
+		      worldData[i][k] = 0;
+		      worldData[i][k+1] = 1;
+		    }
+		  }
 		}
 	      }
 	      else{
@@ -162,16 +174,73 @@ int main()
 
 		}
 		else{
-		  worldData[i][k] = 0;
-		  worldData[i][k-1] = 1;
+		  if (worldData[i][k-1] != 1){
+		    if (worldData[i][k-1] != 2){
+		      worldData[i][k] = 0;
+		      worldData[i][k-1] = 1;
+		    }
+		  }
+		 
 		}
-	      }
-	      
+	      }	      
 	      break;
 	    case 2:
 	      // shark detected!
-	      
-	      
+	      direction = (rand()%4)+1; // 1(North), 2(South), 3(East), or 4(West).
+
+	      if (direction == 1){
+		if (i == 0){
+		  
+		}
+		else{
+		  if (worldData[i-1][k] != 2){
+		    
+		    worldData[i][k] = 0;
+		    worldData[i-1][k] = 2;
+		    
+		  }		  
+		}
+	      }
+	      else if (direction == 2){
+		if (i == xdim-1){
+
+		}
+		else{
+		  if (worldData[i+1][k] != 2){
+		    
+		    worldData[i][k] = 0;
+		    worldData[i+1][k] = 2;
+		    
+		  }
+		}
+	      }
+	      else if (direction == 3){
+		if (k == ydim-1){
+
+		}
+		else{
+		  if (worldData[i][k+1] != 2){
+		    
+		    worldData[i][k] = 0;
+		    worldData[i][k+1] = 2;
+		    
+		  }
+		}
+	      }
+	      else{
+		if (k == 0){
+
+		}
+		else{
+		  if (worldData[i][k-1] != 1){
+		    
+		    worldData[i][k] = 0;
+		    worldData[i][k-1] = 2;
+		    
+		  }
+		 
+		}
+	      }
 	      break;
 	    }
 	    // update colours
@@ -187,6 +256,7 @@ int main()
 	    
 	  }
 	}
+	 
 
         
 	
