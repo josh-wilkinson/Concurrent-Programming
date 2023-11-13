@@ -41,32 +41,73 @@
 // Code:
 
 #include <SFML/Graphics.hpp>
+#include <stdlib.h> /* srand, rand */
+#include <time.h>
+#include <unistd.h> /* sleep() */
+#include <iostream> /* for debugging */
 
 int main()
 {
+  // rng seed setup
+  unsigned int seed = static_cast<unsigned int>(10);
+  srand(seed);
+  
   int xdim = 100;
   int ydim= 100;
   int WindowXSize=800;
   int WindowYSize=600;
   int cellXSize=WindowXSize/xdim;
   int cellYSize=WindowYSize/ydim;
+
+  int sharkCount = 0;
+  int fishCount = 0;
+  int sharkLimit = 80;
+  int fishLimit = 80;
+  
   //each shape will represent either a fish, shark or empty space
   //e.g. blue for empty, red for shark and green for fish
   sf::RectangleShape recArray[xdim][ydim];
-  int worldData[xdim][ydim]; //containes a 0(nothing), 1(fish) or a 2(shark).
+  
+  int worldData[xdim][ydim]; //contains a 0(nothing), 1(fish) or a 2(shark).
+  
+  // seed initialisation (let's place the sharks and fishes)
+  std::cout << "Placing sharks and fishes..." << std::endl;
+  for (int i = 0; i < xdim; ++i){
+    for (int k = 0; k < ydim; ++k){
+      int randomNumber = rand() % 3; // 0, 1, or 2.
+      std::cout << randomNumber;
+      
+      if (randomNumber == 1){
+	worldData[i][k] = 1;
+	fishCount++;
+      }
+      else if (randomNumber == 2){
+        worldData[i][k] = 2;
+	sharkCount++;	
+      }
+      else{
+	worldData[i][k] = 0;
+      }     
+    }
+    std::cout << std::endl;
+  }
+  
   for(int i=0;i<xdim;++i){
     for(int k=0;k<ydim;++k){//give each one a size, position and color
       recArray[i][k].setSize(sf::Vector2f(cellXSize,cellYSize));
       recArray[i][k].setPosition(i*cellXSize,k*cellYSize);//position is top left corner!
-      int id=i*1-+k;
+      //int id=i*1-+k;
+      
       //put world data stuff here (if 0,1,2)
-      if (id%2==0) recArray[i][k].setFillColor(sf::Color::Green);
-      else recArray[i][k].setFillColor(sf::Color::Blue);
+      if (worldData[i][k]==1)
+	recArray[i][k].setFillColor(sf::Color::Green);
+      else if (worldData[i][k]==2)
+	recArray[i][k].setFillColor(sf::Color::Red);
+      else
+	recArray[i][k].setFillColor(sf::Color::Blue);
     }
   }
     sf::RenderWindow window(sf::VideoMode(WindowXSize,WindowYSize), "SFML Wa-Tor world");
-   
-
 
     while (window.isOpen())
     {
@@ -78,6 +119,77 @@ int main()
         }
 	//game loop here
 	//updates everyones position
+	for (int i = 0; i < xdim; ++i){
+	  for (int k = 0; k < ydim; ++k){
+	    int direction;	    
+	    switch (worldData[i][k]){
+	    case 0:
+	      // water detected
+	      break;
+	    case 1:
+	      // fish detected!
+	      direction = (rand()%4)+1; // 1(North), 2(South), 3(East), or 4(West).
+
+	      if (direction == 1){
+		if (i == 0){
+		  
+		}
+		else{
+		  worldData[i][k] = 0;
+		  worldData[i-1][k] = 1;
+		}
+	      }
+	      else if (direction == 2){
+		if (i == xdim-1){
+
+		}
+		else{
+		  worldData[i][k] = 0;
+		  worldData[i+1][k] = 1;
+		}
+	      }
+	      else if (direction == 3){
+		if (k == ydim-1){
+
+		}
+		else{
+		  worldData[i][k] = 0;
+		  worldData[i][k+1] = 1;
+		}
+	      }
+	      else{
+		if (k == 0){
+
+		}
+		else{
+		  worldData[i][k] = 0;
+		  worldData[i][k-1] = 1;
+		}
+	      }
+	      
+	      break;
+	    case 2:
+	      // shark detected!
+	      
+	      
+	      break;
+	    }
+	    // update colours
+	    if (worldData[i][k]==1)
+	      recArray[i][k].setFillColor(sf::Color::Green);
+	    else if (worldData[i][k]==2)
+	      recArray[i][k].setFillColor(sf::Color::Red);
+	    else
+	      recArray[i][k].setFillColor(sf::Color::Blue);
+
+	    // let's slow it down a bit for testing
+	    sleep(0.01);
+	    
+	  }
+	}
+
+        
+	
 	//loop these three lines to draw frames
         window.clear(sf::Color::Black);
 	for(int i=0;i<xdim;++i){
