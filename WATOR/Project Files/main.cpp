@@ -58,11 +58,17 @@ int main()
   int WindowYSize=600;
   int cellXSize=WindowXSize/xdim;
   int cellYSize=WindowYSize/ydim;
-
-  int sharkCount = 0;
-  int fishCount = 0;
+  
   int sharkLimit = 80;
   int fishLimit = 80;
+
+  // parameters
+  int numShark = 0;
+  int numFish = 0;
+  int fishBreed = 4;
+  int sharkBreed = 6;
+  int starve = 4;
+  
   
   //each shape will represent either a fish, shark or empty space
   //e.g. blue for empty, red for shark and green for fish
@@ -79,11 +85,11 @@ int main()
       
       if (randomNumber == 1){
 	worldData[i][k] = 1;
-	fishCount++;
+	numFish++;
       }
       else if (randomNumber == 2){
         worldData[i][k] = 2;
-	sharkCount++;	
+	numShark++;	
       }
       else{
 	worldData[i][k] = 0;
