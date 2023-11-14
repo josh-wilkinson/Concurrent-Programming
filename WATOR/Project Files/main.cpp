@@ -43,8 +43,13 @@
 #include <SFML/Graphics.hpp>
 #include <stdlib.h> /* srand, rand */
 #include <time.h>
+#include <chrono>
 #include <unistd.h> /* sleep() */
 #include <iostream> /* for debugging */
+
+const unsigned int fishBreed = 3;
+const unsigned int sharkBreed = 6;
+const unsigned int starve = 4;			    
 
 int main()
 {
@@ -53,22 +58,20 @@ int main()
   srand(seed);
   
   int xdim = 100;
-  int ydim= 100;
+  int ydim = 100;
   int WindowXSize=800;
   int WindowYSize=600;
   int cellXSize=WindowXSize/xdim;
   int cellYSize=WindowYSize/ydim;
-  
-  int sharkLimit = 80;
-  int fishLimit = 80;
-
   // parameters
   int numShark = 0;
   int numFish = 0;
-  int fishBreed = 4;
-  int sharkBreed = 6;
-  int starve = 4;
-  
+
+  int movePosition;
+
+  int counter = 0;
+
+  bool paused = false;
   
   //each shape will represent either a fish, shark or empty space
   //e.g. blue for empty, red for shark and green for fish
@@ -81,7 +84,7 @@ int main()
   for (int i = 0; i < xdim; ++i){
     for (int k = 0; k < ydim; ++k){
       int randomNumber = rand() % 3; // 0, 1, or 2.
-      std::cout << randomNumber;
+      //std::cout << randomNumber;
       
       if (randomNumber == 1){
 	worldData[i][k] = 1;
@@ -95,8 +98,9 @@ int main()
 	worldData[i][k] = 0;
       }     
     }
-    std::cout << std::endl;
+    //std::cout << std::endl;
   }
+  
   
   for(int i=0;i<xdim;++i){
     for(int k=0;k<ydim;++k){//give each one a size, position and color
@@ -116,150 +120,170 @@ int main()
     sf::RenderWindow window(sf::VideoMode(WindowXSize,WindowYSize), "SFML Wa-Tor world");
 
     while (window.isOpen())
-    {
-        sf::Event event;
+    {      
+        sf::Event event;	
+	
         while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
+        {	  
+	  if (event.type == sf::Event::Closed || event.key.code == sf::Keyboard::Escape)
+	    window.close();
+	  if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space){}//pause sim
+	  
         }
 	//game loop here
 	//updates everyones position
-	for (int i = 0; i < xdim; ++i){
-	  for (int k = 0; k < ydim; ++k){
-	    int direction;	    
-	    switch (worldData[i][k]){
-	    case 0:
-	      // water detected
-	      break;
-	    case 1:
-	      // fish detected!
-	      direction = (rand()%4)+1; // 1(North), 2(South), 3(East), or 4(West).
-
-	      if (direction == 1){
-		if (i == 0){
-		  
-		}
-		else{
-		  if (worldData[i-1][k] != 1){
-		    if (worldData[i-1][k] != 2){
+	if (!paused){
+	  paused = true;
+	  for (int i = 0; i < xdim; ++i){
+	    for (int k = 0; k < ydim; ++k){
+	      movePosition = rand() % 4; // generates number 0, 1, 2, or 3.
+	      //std::cout << movePosition;
+	      /*
+		North: 0
+		South: 1
+		East: 2
+		West: 3
+	       */
+	      switch (movePosition){
+	      case 0: // go North y-1
+		if (worldData[i][k] == 1){
+		  if (k == 0){
+		    if (worldData[i][ydim-1] < 1){
 		      worldData[i][k] = 0;
-		      worldData[i-1][k] = 1;
+		      worldData[i][ydim-1] = 1;
 		    }
-		  }		  
-		}
-	      }
-	      else if (direction == 2){
-		if (i == xdim-1){
-
-		}
-		else{
-		  if (worldData[i+1][k] != 1){
-		    if (worldData[i+1][k] != 2){
+		  }
+		  else{
+		    if (worldData[i][k-1] < 1){
 		      worldData[i][k] = 0;
-		      worldData[i+1][k] = 1;
+		      worldData[i][k-1] = 1;
 		    }
 		  }
 		}
-	      }
-	      else if (direction == 3){
-		if (k == ydim-1){
-
+		else if (worldData[i][k] == 2){
+		  if (k == ydim-1){
+		    if (worldData[i][ydim-1] != 2){
+		      worldData[i][k] = 0;
+		      worldData[i][ydim-1] = 2;
+		    }
+		  }
+		  else{
+		    if (worldData[i][k-1] != 2){
+		      worldData[i][k] = 0;
+		      worldData[i][k-1] = 2;
+		    }
+		  }
 		}
-		else{
-		  if (worldData[i][k+1] != 1){
-		    if (worldData[i][k+1] != 2){
+		paused = false;		 
+		break;
+	      case 1: // go South y+1
+		if (worldData[i][k] == 1){
+		  if (k == ydim-1){
+		    if (worldData[i][0] < 1){
+		      worldData[i][k] = 0;
+		      worldData[i][0] = 1;
+		    }
+		  }
+		  else{
+		    if (worldData[i][k+1] < 1){
 		      worldData[i][k] = 0;
 		      worldData[i][k+1] = 1;
 		    }
 		  }
 		}
-	      }
-	      else{
-		if (k == 0){
-
-		}
-		else{
-		  if (worldData[i][k-1] != 1){
-		    if (worldData[i][k-1] != 2){
+		else if (worldData[i][k] == 2){
+		  if (k == ydim-1){
+		    if (worldData[i][0] != 2){
 		      worldData[i][k] = 0;
-		      worldData[i][k-1] = 1;
+		      worldData[i][0] = 2;
 		    }
 		  }
-		 
-		}
-	      }	      
-	      break;
-	    case 2:
-	      // shark detected!
-	      direction = (rand()%4)+1; // 1(North), 2(South), 3(East), or 4(West).
-
-	      if (direction == 1){
-		if (i == 0){
-		  
-		}
-		else{
-		  if (worldData[i-1][k] != 2){
-		    
-		    worldData[i][k] = 0;
-		    worldData[i-1][k] = 2;
-		    
-		  }		  
-		}
-	      }
-	      else if (direction == 2){
-		if (i == xdim-1){
-
-		}
-		else{
-		  if (worldData[i+1][k] != 2){
-		    
-		    worldData[i][k] = 0;
-		    worldData[i+1][k] = 2;
-		    
+		  else{
+		    if (worldData[i][k+1] != 2){
+		      worldData[i][k] = 0;
+		      worldData[i][k+1] = 2;
+		    }
 		  }
 		}
-	      }
-	      else if (direction == 3){
-		if (k == ydim-1){
-
-		}
-		else{
-		  if (worldData[i][k+1] != 2){
-		    
-		    worldData[i][k] = 0;
-		    worldData[i][k+1] = 2;
-		    
+		paused = false;
+		break;
+	      case 2: // go East
+		if (worldData[i][k] == 1){
+		  if (i == (xdim-1)){
+		    if (worldData[0][k] < 1){
+		      worldData[i][k] = 0;
+		      worldData[0][k] = 1;
+		    }
+		  }
+		  else{
+		    if (worldData[i+1][k] < 1){
+		      worldData[i][k] = 0;
+		      worldData[i+1][k] = 1;
+		    }
 		  }
 		}
-	      }
-	      else{
-		if (k == 0){
-
-		}
-		else{
-		  if (worldData[i][k-1] != 1){
-		    
-		    worldData[i][k] = 0;
-		    worldData[i][k-1] = 2;
-		    
+		else if (worldData[i][k] == 2){
+		  if (i == (xdim-1)){
+		    if (worldData[0][k] != 2){
+		      worldData[i][k] = 0;
+		      worldData[0][k] = 2;
+		    }
 		  }
-		 
+		  else{
+		    if (worldData[i+1][k] != 2){
+		      worldData[i][k] = 0;
+		      worldData[i+1][k] = 2;
+		    }
+		  }
 		}
+		paused = false;
+		break;
+	      case 3: // go West
+		//std::cout << 'W';
+		if(worldData[i][k] == 1){
+		  if (i == 0){
+		    if (worldData[xdim-1][k] < 1){
+		      worldData[i][k] = 0;
+		      worldData[xdim-1][k] = 1;
+		    }
+		  }
+		  else{
+		    if (worldData[i-1][k] < 1){
+		      worldData[i][k] = 0;
+		      worldData[i-1][k] = 1;
+		    }
+		  }
+		}
+		else if (worldData[i][k] == 2){
+		  if (i == 0){
+		    if (worldData[xdim-1][k] != 2){
+		      worldData[i][k] = 0;
+		      worldData[xdim-1][k] = 2;
+		    }
+		  }
+		  else{
+		    if (worldData[i-1][k] != 2){
+		      worldData[i][k] = 0;
+		      worldData[i-1][k] = 2;
+		    }
+		  }
+		}
+		paused = false;
+		break;
 	      }
-	      break;
-	    }
-	    // update colours
-	    if (worldData[i][k]==1)
-	      recArray[i][k].setFillColor(sf::Color::Green);
-	    else if (worldData[i][k]==2)
-	      recArray[i][k].setFillColor(sf::Color::Red);
-	    else
-	      recArray[i][k].setFillColor(sf::Color::Blue);
-
-	    // let's slow it down a bit for testing
-	    sleep(0.01);
 	    
+	      // update colours
+	      if (worldData[i][k]==1)
+		recArray[i][k].setFillColor(sf::Color::Green);
+	      else if (worldData[i][k]==2)
+		recArray[i][k].setFillColor(sf::Color::Red);
+	      else
+		recArray[i][k].setFillColor(sf::Color::Blue);
+
+	      // let's slow it down a bit for testing
+	      //sleep(0.1f);
+	    
+	    }
 	  }
 	}
 	 
@@ -280,4 +304,4 @@ int main()
 }
 
 // 
-// test.cpp ends here
+// main.cpp ends here
