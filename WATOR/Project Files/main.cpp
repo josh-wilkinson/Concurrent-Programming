@@ -47,37 +47,40 @@
 #include <unistd.h> /* sleep() */
 #include <iostream> /* for debugging */
 
+// window parameters
+const unsigned int xdim = 50;
+const unsigned int ydim = 50;
+// dynamic parameters
 const unsigned int fishBreed = 3;
 const unsigned int sharkBreed = 6;
-const unsigned int starve = 4;			    
+const unsigned int starve = 4;
+//each shape will represent either a fish, shark or empty space
+//e.g. blue for empty, red for shark and green for fish
+sf::RectangleShape recArray[xdim][ydim];  
+int worldData[xdim][ydim]; //contains a 0(nothing), 1(fish) or a 2(shark).
+int WindowXSize=800;
+int WindowYSize=600;
+int cellXSize=WindowXSize/xdim;
+int cellYSize=WindowYSize/ydim;
+// ratio for initial fish/shark population
+const float fishRatio = 0.01;
+const float sharkRatio = 0.005;
+//delay
+const float updateDelay = 1;
+
 
 int main()
 {
   // rng seed setup
   unsigned int seed = static_cast<unsigned int>(10);
   srand(seed);
-  
-  int xdim = 100;
-  int ydim = 100;
-  int WindowXSize=800;
-  int WindowYSize=600;
-  int cellXSize=WindowXSize/xdim;
-  int cellYSize=WindowYSize/ydim;
   // parameters
   int numShark = 0;
   int numFish = 0;
-
   int movePosition;
-
   int counter = 0;
-
   bool paused = false;
-  
-  //each shape will represent either a fish, shark or empty space
-  //e.g. blue for empty, red for shark and green for fish
-  sf::RectangleShape recArray[xdim][ydim];
-  
-  int worldData[xdim][ydim]; //contains a 0(nothing), 1(fish) or a 2(shark).
+  sf::Clock clock;
   
   // seed initialisation (let's place the sharks and fishes)
   std::cout << "Placing sharks and fishes..." << std::endl;
@@ -132,7 +135,7 @@ int main()
         }
 	//game loop here
 	//updates everyones position
-	if (!paused){
+	if (clock.getElapsedTime().asSeconds() > updateDelay){
 	  paused = true;
 	  for (int i = 0; i < xdim; ++i){
 	    for (int k = 0; k < ydim; ++k){
@@ -271,7 +274,7 @@ int main()
 		paused = false;
 		break;
 	      }
-	    
+	      
 	      // update colours
 	      if (worldData[i][k]==1)
 		recArray[i][k].setFillColor(sf::Color::Green);
@@ -281,7 +284,10 @@ int main()
 		recArray[i][k].setFillColor(sf::Color::Blue);
 
 	      // let's slow it down a bit for testing
-	      //sleep(0.1f);
+	      //sleep(0.1);
+	      //counter += 1;
+	      //std::cout << counter << std::endl;
+	      clock.restart(); // restart the clock
 	    
 	    }
 	  }
