@@ -48,8 +48,8 @@
 #include <iostream> /* for debugging */
 
 // window parameters
-const unsigned int xdim = 50;
-const unsigned int ydim = 50;
+const int xdim = 50;
+const int ydim = 50;
 // dynamic parameters
 const unsigned int fishBreed = 3;
 const unsigned int sharkBreed = 6;
@@ -62,12 +62,165 @@ int WindowXSize=800;
 int WindowYSize=600;
 int cellXSize=WindowXSize/xdim;
 int cellYSize=WindowYSize/ydim;
+int movePosition;
+bool paused = false;
 // ratio for initial fish/shark population
 const float fishRatio = 0.01;
 const float sharkRatio = 0.005;
 //delay
 const float updateDelay = 1;
 
+
+void update()
+{
+  for (int i = 0; i < xdim; ++i){
+    for (int k = 0; k < ydim; ++k){
+      // update colours
+      if (worldData[i][k]==1)
+	recArray[i][k].setFillColor(sf::Color::Green);
+      else if (worldData[i][k]==2)
+	recArray[i][k].setFillColor(sf::Color::Red);
+      else
+	recArray[i][k].setFillColor(sf::Color::Blue);
+    }
+  }
+}
+
+void move()
+{
+  for (int i = 0; i < xdim; ++i){
+    for (int k = 0; k < ydim; ++k){
+      movePosition = rand() % 4;
+      switch (movePosition){
+      case 0: // go North y-1
+	if (worldData[i][k] == 1){
+	  if (k == 0){
+	    if (worldData[i][ydim-1] < 1){
+	      worldData[i][k] = 0;
+	      worldData[i][ydim-1] = 1;
+	    }
+	  }
+	  else{
+	    if (worldData[i][k-1] < 1){
+	      worldData[i][k] = 0;
+	      worldData[i][k-1] = 1;
+	    }
+	  }
+	}
+	else if (worldData[i][k] == 2){
+	  if (k == ydim-1){
+	    if (worldData[i][ydim-1] != 2){
+	      worldData[i][k] = 0;
+	      worldData[i][ydim-1] = 2;
+	    }
+	  }
+	  else{
+	    if (worldData[i][k-1] != 2){
+	      worldData[i][k] = 0;
+	      worldData[i][k-1] = 2;
+	    }
+	  }
+	}
+	paused = false;		 
+	break;
+      case 1: // go South y+1
+	if (worldData[i][k] == 1){
+	  if (k == ydim-1){
+	    if (worldData[i][0] < 1){
+	      worldData[i][k] = 0;
+	      worldData[i][0] = 1;
+	    }
+	  }
+	  else{
+	    if (worldData[i][k+1] < 1){
+	      worldData[i][k] = 0;
+	      worldData[i][k+1] = 1;
+	    }
+	  }
+	}
+	else if (worldData[i][k] == 2){
+	  if (k == ydim-1){
+	    if (worldData[i][0] != 2){
+	      worldData[i][k] = 0;
+	      worldData[i][0] = 2;
+	    }
+	  }
+	  else{
+	    if (worldData[i][k+1] != 2){
+	      worldData[i][k] = 0;
+	      worldData[i][k+1] = 2;
+	    }
+	  }
+	}
+	paused = false;
+	break;
+      case 2: // go East
+	if (worldData[i][k] == 1){
+	  if (i == (xdim-1)){
+	    if (worldData[0][k] < 1){
+	      worldData[i][k] = 0;
+	      worldData[0][k] = 1;
+	    }
+	  }
+	  else{
+	    if (worldData[i+1][k] < 1){
+	      worldData[i][k] = 0;
+	      worldData[i+1][k] = 1;
+	    }
+	  }
+	}
+	else if (worldData[i][k] == 2){
+	  if (i == (xdim-1)){
+	    if (worldData[0][k] != 2){
+	      worldData[i][k] = 0;
+	      worldData[0][k] = 2;
+	    }
+	  }
+	  else{
+	    if (worldData[i+1][k] != 2){
+	      worldData[i][k] = 0;
+	      worldData[i+1][k] = 2;
+	    }
+	  }
+	}
+	paused = false;
+	break;
+  case 3: // go West
+    //std::cout << 'W';
+    if(worldData[i][k] == 1){
+      if (i == 0){
+	if (worldData[xdim-1][k] < 1){
+	  worldData[i][k] = 0;
+	  worldData[xdim-1][k] = 1;
+	}
+      }
+      else{
+	if (worldData[i-1][k] < 1){
+	  worldData[i][k] = 0;
+	  worldData[i-1][k] = 1;
+	}
+      }
+    }
+    else if (worldData[i][k] == 2){
+      if (i == 0){
+	if (worldData[xdim-1][k] != 2){
+	  worldData[i][k] = 0;
+	  worldData[xdim-1][k] = 2;
+	}
+      }
+      else{
+	if (worldData[i-1][k] != 2){
+	  worldData[i][k] = 0;
+	  worldData[i-1][k] = 2;
+	}
+      }
+    }
+    paused = false;
+    break;
+      }
+    }
+  }
+}
 
 int main()
 {
@@ -77,9 +230,7 @@ int main()
   // parameters
   int numShark = 0;
   int numFish = 0;
-  int movePosition;
   int counter = 0;
-  bool paused = false;
   sf::Clock clock;
   
   // seed initialisation (let's place the sharks and fishes)
@@ -136,165 +287,12 @@ int main()
 	//game loop here
 	//updates everyones position
 	if (clock.getElapsedTime().asSeconds() > updateDelay){
-	  paused = true;
-	  for (int i = 0; i < xdim; ++i){
-	    for (int k = 0; k < ydim; ++k){
-	      movePosition = rand() % 4; // generates number 0, 1, 2, or 3.
-	      //std::cout << movePosition;
-	      /*
-		North: 0
-		South: 1
-		East: 2
-		West: 3
-	       */
-	      switch (movePosition){
-	      case 0: // go North y-1
-		if (worldData[i][k] == 1){
-		  if (k == 0){
-		    if (worldData[i][ydim-1] < 1){
-		      worldData[i][k] = 0;
-		      worldData[i][ydim-1] = 1;
-		    }
-		  }
-		  else{
-		    if (worldData[i][k-1] < 1){
-		      worldData[i][k] = 0;
-		      worldData[i][k-1] = 1;
-		    }
-		  }
-		}
-		else if (worldData[i][k] == 2){
-		  if (k == ydim-1){
-		    if (worldData[i][ydim-1] != 2){
-		      worldData[i][k] = 0;
-		      worldData[i][ydim-1] = 2;
-		    }
-		  }
-		  else{
-		    if (worldData[i][k-1] != 2){
-		      worldData[i][k] = 0;
-		      worldData[i][k-1] = 2;
-		    }
-		  }
-		}
-		paused = false;		 
-		break;
-	      case 1: // go South y+1
-		if (worldData[i][k] == 1){
-		  if (k == ydim-1){
-		    if (worldData[i][0] < 1){
-		      worldData[i][k] = 0;
-		      worldData[i][0] = 1;
-		    }
-		  }
-		  else{
-		    if (worldData[i][k+1] < 1){
-		      worldData[i][k] = 0;
-		      worldData[i][k+1] = 1;
-		    }
-		  }
-		}
-		else if (worldData[i][k] == 2){
-		  if (k == ydim-1){
-		    if (worldData[i][0] != 2){
-		      worldData[i][k] = 0;
-		      worldData[i][0] = 2;
-		    }
-		  }
-		  else{
-		    if (worldData[i][k+1] != 2){
-		      worldData[i][k] = 0;
-		      worldData[i][k+1] = 2;
-		    }
-		  }
-		}
-		paused = false;
-		break;
-	      case 2: // go East
-		if (worldData[i][k] == 1){
-		  if (i == (xdim-1)){
-		    if (worldData[0][k] < 1){
-		      worldData[i][k] = 0;
-		      worldData[0][k] = 1;
-		    }
-		  }
-		  else{
-		    if (worldData[i+1][k] < 1){
-		      worldData[i][k] = 0;
-		      worldData[i+1][k] = 1;
-		    }
-		  }
-		}
-		else if (worldData[i][k] == 2){
-		  if (i == (xdim-1)){
-		    if (worldData[0][k] != 2){
-		      worldData[i][k] = 0;
-		      worldData[0][k] = 2;
-		    }
-		  }
-		  else{
-		    if (worldData[i+1][k] != 2){
-		      worldData[i][k] = 0;
-		      worldData[i+1][k] = 2;
-		    }
-		  }
-		}
-		paused = false;
-		break;
-	      case 3: // go West
-		//std::cout << 'W';
-		if(worldData[i][k] == 1){
-		  if (i == 0){
-		    if (worldData[xdim-1][k] < 1){
-		      worldData[i][k] = 0;
-		      worldData[xdim-1][k] = 1;
-		    }
-		  }
-		  else{
-		    if (worldData[i-1][k] < 1){
-		      worldData[i][k] = 0;
-		      worldData[i-1][k] = 1;
-		    }
-		  }
-		}
-		else if (worldData[i][k] == 2){
-		  if (i == 0){
-		    if (worldData[xdim-1][k] != 2){
-		      worldData[i][k] = 0;
-		      worldData[xdim-1][k] = 2;
-		    }
-		  }
-		  else{
-		    if (worldData[i-1][k] != 2){
-		      worldData[i][k] = 0;
-		      worldData[i-1][k] = 2;
-		    }
-		  }
-		}
-		paused = false;
-		break;
-	      }
-	      
-	      // update colours
-	      if (worldData[i][k]==1)
-		recArray[i][k].setFillColor(sf::Color::Green);
-	      else if (worldData[i][k]==2)
-		recArray[i][k].setFillColor(sf::Color::Red);
-	      else
-		recArray[i][k].setFillColor(sf::Color::Blue);
-
-	      // let's slow it down a bit for testing
-	      //sleep(0.1);
-	      //counter += 1;
-	      //std::cout << counter << std::endl;
-	      clock.restart(); // restart the clock
-	    
-	    }
-	  }
-	}
-	 
-
-        
+	  clock.restart();	  
+	  //paused = false;	  
+	  move();
+	  update();	  
+	  counter+=1; // use for stavation/re-populating
+	}        
 	
 	//loop these three lines to draw frames
         window.clear(sf::Color::Black);
