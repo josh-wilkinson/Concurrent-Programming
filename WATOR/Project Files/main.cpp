@@ -47,9 +47,11 @@
 #include <unistd.h> /* sleep() */
 #include <iostream> /* for debugging */
 
+/* Variables */
+
 // window parameters
-const int xdim = 50;
-const int ydim = 50;
+const int xdim = 100;
+const int ydim = 100;
 // dynamic parameters
 const unsigned int fishBreed = 3;
 const unsigned int sharkBreed = 6;
@@ -63,6 +65,8 @@ int WindowYSize=600;
 int cellXSize=WindowXSize/xdim;
 int cellYSize=WindowYSize/ydim;
 int movePosition;
+int numShark = 0;
+int numFish = 0;
 bool paused = false;
 // ratio for initial fish/shark population
 const float fishRatio = 0.01;
@@ -70,6 +74,32 @@ const float sharkRatio = 0.005;
 //delay
 const float updateDelay = 1;
 
+/* Methods */
+
+void populate()
+{
+  numFish = 0;
+  numShark = 0;
+  std::cout << "Placing sharks and fishes..." << std::endl;
+  for (int i = 0; i < xdim; ++i){
+    for (int k = 0; k < ydim; ++k){
+      float randomNumber = rand() % 3; // 0, 1, or 2.
+      //std::cout << randomNumber;      
+      if (randomNumber == 1){
+	worldData[i][k] = 1;
+	numFish++;
+      }
+      else if (randomNumber == 2){
+        worldData[i][k] = 2;
+	numShark++;	
+      }
+      else{
+	worldData[i][k] = 0;
+      }     
+    }
+    //std::cout << std::endl;
+  }
+}
 
 void update()
 {
@@ -228,40 +258,17 @@ int main()
   unsigned int seed = static_cast<unsigned int>(10);
   srand(seed);
   // parameters
-  int numShark = 0;
-  int numFish = 0;
   int counter = 0;
   sf::Clock clock;
-  
-  // seed initialisation (let's place the sharks and fishes)
-  std::cout << "Placing sharks and fishes..." << std::endl;
-  for (int i = 0; i < xdim; ++i){
-    for (int k = 0; k < ydim; ++k){
-      int randomNumber = rand() % 3; // 0, 1, or 2.
-      //std::cout << randomNumber;
-      
-      if (randomNumber == 1){
-	worldData[i][k] = 1;
-	numFish++;
-      }
-      else if (randomNumber == 2){
-        worldData[i][k] = 2;
-	numShark++;	
-      }
-      else{
-	worldData[i][k] = 0;
-      }     
-    }
-    //std::cout << std::endl;
-  }
-  
+
+  // populate all the sharks and fishes
+  populate();  
   
   for(int i=0;i<xdim;++i){
     for(int k=0;k<ydim;++k){//give each one a size, position and color
       recArray[i][k].setSize(sf::Vector2f(cellXSize,cellYSize));
       recArray[i][k].setPosition(i*cellXSize,k*cellYSize);//position is top left corner!
-      //int id=i*1-+k;
-      
+      //int id=i*1-+k;      
       //put world data stuff here (if 0,1,2)
       if (worldData[i][k]==1)
 	recArray[i][k].setFillColor(sf::Color::Green);
@@ -281,18 +288,27 @@ int main()
         {	  
 	  if (event.type == sf::Event::Closed || event.key.code == sf::Keyboard::Escape)
 	    window.close();
-	  if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space){}//pause sim
-	  
+	  if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space){//pause sim
+	    paused = !paused;
+	    if (paused)
+	      std::cout << "Paused" << std::endl;
+	    else
+	      std::cout << "Unpaused" << std::endl;
+	  }
+	  if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P){
+	    populate();
+	    update();
+	  }	  
         }
 	//game loop here
 	//updates everyones position
-	if (clock.getElapsedTime().asSeconds() > updateDelay){
+	if (clock.getElapsedTime().asSeconds() > updateDelay && !paused){
 	  clock.restart();	  
 	  //paused = false;	  
 	  move();
 	  update();	  
 	  counter+=1; // use for stavation/re-populating
-	}        
+	}
 	
 	//loop these three lines to draw frames
         window.clear(sf::Color::Black);
