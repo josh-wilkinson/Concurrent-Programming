@@ -82,14 +82,14 @@ void populate()
   numShark = 0;
   std::cout << "Placing sharks and fishes..." << std::endl;
   for (int i = 0; i < xdim; ++i){
-    for (int k = 0; k < ydim; ++k){
-      float randomNumber = rand() % 3; // 0, 1, or 2.
+    for (int k = 0; k < ydim; ++k){      
+      float randomNumber = (rand() % 10000) / 10000.0; // random number between 0 and 1 (fish or shark)      
       //std::cout << randomNumber;      
-      if (randomNumber == 1){
+      if (randomNumber <= fishRatio){
 	worldData[i][k] = 1;
 	numFish++;
       }
-      else if (randomNumber == 2){
+      else if (randomNumber > fishRatio && randomNumber < fishRatio + sharkRatio){
         worldData[i][k] = 2;
 	numShark++;	
       }
