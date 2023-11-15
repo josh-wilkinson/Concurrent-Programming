@@ -60,6 +60,7 @@ const unsigned int starve = 4;
 //e.g. blue for empty, red for shark and green for fish
 sf::RectangleShape recArray[xdim][ydim];  
 int worldData[xdim][ydim]; //contains a 0(nothing), 1(fish) or a 2(shark).
+int restartData[xdim][ydim];
 int WindowXSize=800;
 int WindowYSize=600;
 int cellXSize=WindowXSize/xdim;
@@ -98,6 +99,22 @@ void populate()
       }     
     }
     //std::cout << std::endl;
+  }
+}
+
+void copyArray(int array[xdim][ydim], int copyArray[xdim][ydim]){
+  for (int i = 0; i < xdim; ++i){
+    for (int k = 0; k < ydim; ++k){
+      copyArray[i][k] = array[i][k];
+    }
+  }
+}
+
+void restart(){
+  for (int i = 0; i < xdim; ++i){
+    for (int k = 0; k < ydim; ++k){
+      worldData[i][k] = restartData[i][k];
+    }
   }
 }
 
@@ -262,7 +279,9 @@ int main()
   sf::Clock clock;
 
   // populate all the sharks and fishes
-  populate();  
+  populate();
+  // make a copy for restarts
+  copyArray(worldData, restartData);
   
   for(int i=0;i<xdim;++i){
     for(int k=0;k<ydim;++k){//give each one a size, position and color
@@ -294,6 +313,12 @@ int main()
 	      std::cout << "Paused" << std::endl;
 	    else
 	      std::cout << "Unpaused" << std::endl;
+	  }
+	  if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::C)
+	    copyArray(worldData, restartData);
+	  if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::R){
+	    restart();
+	    update();
 	  }
 	  if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P){
 	    populate();
