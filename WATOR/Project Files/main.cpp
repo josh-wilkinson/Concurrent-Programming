@@ -68,6 +68,8 @@ int cellYSize=WindowYSize/ydim;
 int movePosition;
 int numShark = 0;
 int numFish = 0;
+int fishCounter = 0;
+int sharkCounter = 0;
 bool paused = false;
 // ratio for initial fish/shark population
 const float fishRatio = 0.01;
@@ -75,12 +77,20 @@ const float sharkRatio = 0.005;
 //delay
 const float updateDelay = 1;
 
+/* Struct */
+struct Square
+{
+  int value; // 0 = ocean, 1 = fish, 2 = shark.
+  int starveProgress = 0;
+};
+
 /* Methods */
 
 void populate()
 {
   numFish = 0;
   numShark = 0;
+  Square data;
   std::cout << "Placing sharks and fishes..." << std::endl;
   for (int i = 0; i < xdim; ++i){
     for (int k = 0; k < ydim; ++k){      
@@ -135,6 +145,21 @@ void update()
 
 void move()
 {
+  fishCounter+=1; 
+  sharkCounter+=1;
+  bool makeMoreFish = false;
+  bool makeMoreSharks = false;
+  std::cout << fishCounter;
+
+  if (fishCounter == fishBreed){
+    makeMoreFish = true;
+    fishCounter = 0;
+  }
+  if (sharkCounter == sharkBreed){
+    makeMoreSharks = true;
+    sharkCounter = 0;
+  }
+  
   for (int i = 0; i < xdim; ++i){
     for (int k = 0; k < ydim; ++k){
       movePosition = rand() % 4;
@@ -143,13 +168,19 @@ void move()
 	if (worldData[i][k] == 1){
 	  if (k == 0){
 	    if (worldData[i][ydim-1] < 1){
-	      worldData[i][k] = 0;
+	      if (makeMoreFish)
+		worldData[i][k] = 1;
+	      else
+		worldData[i][k] = 0;
 	      worldData[i][ydim-1] = 1;
 	    }
 	  }
 	  else{
 	    if (worldData[i][k-1] < 1){
-	      worldData[i][k] = 0;
+	      if (makeMoreFish)
+		worldData[i][k] = 1;
+	      else
+		worldData[i][k] = 0;
 	      worldData[i][k-1] = 1;
 	    }
 	  }
@@ -157,13 +188,19 @@ void move()
 	else if (worldData[i][k] == 2){
 	  if (k == ydim-1){
 	    if (worldData[i][ydim-1] != 2){
-	      worldData[i][k] = 0;
+	      if (makeMoreSharks)
+		worldData[i][k] = 2;
+	      else
+		worldData[i][k] = 0;
 	      worldData[i][ydim-1] = 2;
 	    }
 	  }
 	  else{
 	    if (worldData[i][k-1] != 2){
-	      worldData[i][k] = 0;
+	      if (makeMoreSharks)
+		worldData[i][k] = 2;
+	      else
+		worldData[i][k] = 0;
 	      worldData[i][k-1] = 2;
 	    }
 	  }
@@ -174,13 +211,19 @@ void move()
 	if (worldData[i][k] == 1){
 	  if (k == ydim-1){
 	    if (worldData[i][0] < 1){
-	      worldData[i][k] = 0;
+	      if (makeMoreFish)
+		worldData[i][k] = 1;
+	      else
+		worldData[i][k] = 0;
 	      worldData[i][0] = 1;
 	    }
 	  }
 	  else{
 	    if (worldData[i][k+1] < 1){
-	      worldData[i][k] = 0;
+	      if (makeMoreFish)
+		worldData[i][k] = 1;
+	      else
+		worldData[i][k] = 0;
 	      worldData[i][k+1] = 1;
 	    }
 	  }
@@ -188,13 +231,19 @@ void move()
 	else if (worldData[i][k] == 2){
 	  if (k == ydim-1){
 	    if (worldData[i][0] != 2){
-	      worldData[i][k] = 0;
+	      if (makeMoreSharks)
+		worldData[i][k] = 2;
+	      else
+		worldData[i][k] = 0;
 	      worldData[i][0] = 2;
 	    }
 	  }
 	  else{
 	    if (worldData[i][k+1] != 2){
-	      worldData[i][k] = 0;
+	      if (makeMoreSharks)
+		worldData[i][k] = 2;
+	      else
+		worldData[i][k] = 0;
 	      worldData[i][k+1] = 2;
 	    }
 	  }
@@ -205,13 +254,19 @@ void move()
 	if (worldData[i][k] == 1){
 	  if (i == (xdim-1)){
 	    if (worldData[0][k] < 1){
-	      worldData[i][k] = 0;
+	      if (makeMoreFish)
+		worldData[i][k] = 1;
+	      else
+		worldData[i][k] = 0;
 	      worldData[0][k] = 1;
 	    }
 	  }
 	  else{
 	    if (worldData[i+1][k] < 1){
-	      worldData[i][k] = 0;
+	      if (makeMoreFish)
+		worldData[i][k] = 1;
+	      else
+		worldData[i][k] = 0;
 	      worldData[i+1][k] = 1;
 	    }
 	  }
@@ -219,51 +274,69 @@ void move()
 	else if (worldData[i][k] == 2){
 	  if (i == (xdim-1)){
 	    if (worldData[0][k] != 2){
-	      worldData[i][k] = 0;
+	      if (makeMoreSharks)
+		worldData[i][k] = 2;
+	      else
+		worldData[i][k] = 0;
 	      worldData[0][k] = 2;
 	    }
 	  }
 	  else{
 	    if (worldData[i+1][k] != 2){
-	      worldData[i][k] = 0;
+	      if (makeMoreSharks)
+		worldData[i][k] = 2;
+	      else
+		worldData[i][k] = 0;
 	      worldData[i+1][k] = 2;
 	    }
 	  }
 	}
 	paused = false;
 	break;
-  case 3: // go West
-    //std::cout << 'W';
-    if(worldData[i][k] == 1){
-      if (i == 0){
-	if (worldData[xdim-1][k] < 1){
-	  worldData[i][k] = 0;
-	  worldData[xdim-1][k] = 1;
+      case 3: // go West
+	//std::cout << 'W';
+	if(worldData[i][k] == 1){
+	  if (i == 0){
+	    if (worldData[xdim-1][k] < 1){
+	      if (makeMoreFish)
+		worldData[i][k] = 1;
+	      else
+		worldData[i][k] = 0;
+	      worldData[xdim-1][k] = 1;
+	    }
+	  }
+	  else{
+	    if (worldData[i-1][k] < 1){
+	      if (makeMoreFish)
+		worldData[i][k] = 1;
+	      else
+		worldData[i][k] = 0;
+	      worldData[i-1][k] = 1;
+	    }
+	  }
 	}
-      }
-      else{
-	if (worldData[i-1][k] < 1){
-	  worldData[i][k] = 0;
-	  worldData[i-1][k] = 1;
+	else if (worldData[i][k] == 2){
+	  if (i == 0){
+	    if (worldData[xdim-1][k] != 2){
+	      if (makeMoreSharks)
+		worldData[i][k] = 2;
+	      else
+		worldData[i][k] = 0;
+	      worldData[xdim-1][k] = 2;
+	    }
+	  }
+	  else{
+	    if (worldData[i-1][k] != 2){
+	      if (makeMoreSharks)
+		worldData[i][k] = 2;
+	      else
+		worldData[i][k] = 0;
+	      worldData[i-1][k] = 2;
+	    }
+	  }
 	}
-      }
-    }
-    else if (worldData[i][k] == 2){
-      if (i == 0){
-	if (worldData[xdim-1][k] != 2){
-	  worldData[i][k] = 0;
-	  worldData[xdim-1][k] = 2;
-	}
-      }
-      else{
-	if (worldData[i-1][k] != 2){
-	  worldData[i][k] = 0;
-	  worldData[i-1][k] = 2;
-	}
-      }
-    }
-    paused = false;
-    break;
+	paused = false;
+	break;
       }
     }
   }
@@ -274,8 +347,6 @@ int main()
   // rng seed setup
   unsigned int seed = static_cast<unsigned int>(10);
   srand(seed);
-  // parameters
-  int counter = 0;
   sf::Clock clock;
 
   // populate all the sharks and fishes
@@ -317,8 +388,10 @@ int main()
 	  if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::C)
 	    copyArray(worldData, restartData);
 	  if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::R){
+	    std::cout << "Restarting..." << std::endl;
 	    restart();
 	    update();
+	    std::cout << "Done!" << std::endl;
 	  }
 	  if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P){
 	    populate();
@@ -331,8 +404,7 @@ int main()
 	  clock.restart();	  
 	  //paused = false;	  
 	  move();
-	  update();	  
-	  counter+=1; // use for stavation/re-populating
+	  update();
 	}
 	
 	//loop these three lines to draw frames
