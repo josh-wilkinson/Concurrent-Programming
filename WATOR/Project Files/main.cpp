@@ -51,8 +51,8 @@
 struct Square
 {
   int value; // 0 = ocean, 1 = fish, 2 = shark.
-  int sharkStarveProgress = 1;
-  int age = 1;
+  int sharkStarveProgress = 0;
+  int age = 0;
 };
 
 /* Variables */
@@ -62,7 +62,7 @@ const int xdim = 50;
 const int ydim = 50;
 // dynamic parameters
 const unsigned int fishBreed = 3;
-const unsigned int sharkBreed = 6;
+const unsigned int sharkBreed = 10;
 const int starve = 4;
 //each shape will represent either a fish, shark or empty space
 //e.g. blue for empty, red for shark and green for fish
@@ -232,30 +232,168 @@ void moveFish(int x, int y)
   
 }
 
+void moveShark(int x, int y)
+{
+  // check for shark
+  if (worldData[x][y].value != 2)
+    return;
+
+  // Arrays to store empty blocks
+  int xFree[8] = {0};
+  int yFree[8] = {0};
+
+  // Arrays to store fish blocks
+  int xFish[8] = {0};
+  int yFish[8] = {0};
+
+  int xIndex = 0;
+  int yIndex = 0;
+
+  int oldPositionAge = 0;
+  int newPositionAge = 0;
+
+  int freeBlocksCounter = 0; // to count all the free adjacent blocks
+  int fishBlocksCounter = 0; // to count all the adjacent fish occupied blocks (mmm... tasty)
+
+  bool breeding = false;
+  
+  // shark age / breeding condition
+  if (worldData[x][y].age >= sharkBreed){
+    oldPositionAge = 1;
+    newPositionAge = 1;
+    breeding = true;
+  }
+  else{
+    oldPositionAge = 0;
+    newPositionAge = worldData[x][y].age + 1;
+  }
+    
+  // nested for loop to go through all neighbouring blocks
+  for (int i = -1; i < 2; i++){
+    for (int k = -1; k < 2; k++){
+      // avoid itself
+      if (i*i + k*k != 0){
+
+	xIndex = x + i;
+	yIndex = y + k;
+
+	// boundary check
+	if (xIndex < 0)
+	  xIndex = xdim-1;
+	if (xIndex >= xdim)
+	  xIndex = 0;
+	if (yIndex < 0)
+	  yIndex = ydim-1;
+	if (yIndex >= ydim)
+	  yIndex = 0;
+
+	// record fish blocks
+	if (worldData[xIndex][yIndex].value == 0){
+	  xFish[fishBlocksCounter] = xIndex;
+	  yFish[fishBlocksCounter] = yIndex;
+	  fishBlocksCounter += 1;
+	  //std::cout << fishBlocksCounter;
+	}
+	
+	// record position of empty block
+	if (worldData[xIndex][yIndex].value == 0){
+	  // fill the 2 different arrays with the x & y positions of the empty block location (sea)
+	  xFree[freeBlocksCounter] = xIndex;
+	  yFree[freeBlocksCounter] = yIndex;
+	  freeBlocksCounter += 1;
+	}
+	
+      }
+    }
+  }
+
+  // check here to see if we found any adjacent fish blocks
+  if (fishBlocksCounter != 0){
+    std::cout << "Found fish" << std::endl;
+    int randomFishBlockNumber = rand() % fishBlocksCounter; // get the indexes
+    std::cout << randomFishBlockNumber;
+
+    unsigned int xpos = xFree[randomFishBlockNumber];
+    unsigned int ypos = yFree[randomFishBlockNumber];
+
+    //std::cout << xpos << " " << ypos << std::endl;
+
+    worldData[xpos][ypos].value = 0; // kill fish
+
+    // move shark
+    worldData[xpos][ypos].value = 2;
+    if (breeding){
+      // new shark
+      worldData[x][y].value = 2;
+      worldData[x][y].sharkStarveProgress = 1;
+    }
+    else{
+      worldData[x][y].value = 0;
+      worldData[x][y].sharkStarveProgress = 0;
+    }
+
+    // starvation stuff
+    worldData[xpos][ypos].sharkStarveProgress = 1;
+        
+    // age stuff
+    worldData[xpos][ypos].age = newPositionAge;
+    worldData[x][y].age = oldPositionAge;
+  }  
+  // check here if we cannot find any fish but there's an empty block adjacent
+  if (freeBlocksCounter != 0 && fishBlocksCounter == 0){
+    int randomFreeBlockNumber = rand() % freeBlocksCounter; // get the index for xFree & yFree
+
+    unsigned int xpos = xFree[randomFreeBlockNumber];
+    unsigned int ypos = yFree[randomFreeBlockNumber];
+
+    // move shark
+    worldData[xpos][ypos].value = 2;
+
+    // starvation stuff
+    worldData[xpos][ypos].sharkStarveProgress = worldData[x][y].sharkStarveProgress + 1;
+    
+    if (breeding){
+      // new shark
+      worldData[x][y].value = 2;
+      worldData[x][y].sharkStarveProgress = 1;
+    }
+    else{
+      worldData[x][y].value = 0;
+      worldData[x][y].sharkStarveProgress = 0;
+    }
+        
+    // age stuff
+    worldData[xpos][ypos].age = newPositionAge;
+    worldData[x][y].age = oldPositionAge;
+    
+    if (worldData[x][y].sharkStarveProgress >= starve){
+      worldData[x][y].value = 0; // RIP goodnight sweet prince
+      worldData[x][y].sharkStarveProgress = 0; // reset starve progress
+      worldData[x][y].age = 0; // reset age
+    }
+  }  
+  // check if nothing is found
+  if (fishBlocksCounter == 0 && freeBlocksCounter == 0){
+    // no movement
+    worldData[x][y].age = newPositionAge;
+    // increase shark starve progress
+    worldData[x][y].sharkStarveProgress += 1;
+    // now check to see if the shark dies
+    if (worldData[x][y].sharkStarveProgress >= starve){
+      worldData[x][y].value = 0; // RIP goodnight sweet prince
+      worldData[x][y].sharkStarveProgress = 0; // reset starve progress
+      worldData[x][y].age = 0; // reset age
+    }
+  }
+  
+}  
+
+
 void move()
 {
-  fishCounter+=1; 
-  sharkCounter+=1;
-  makeMoreFish = false;
-  makeMoreSharks = false;
-  //std::cout << fishCounter;
-  /*
-  if (fishCounter == fishBreed){
-    makeMoreFish = true;
-    fishCounter = 0;
-  }
-  if (sharkCounter == sharkBreed){
-    makeMoreSharks = true;
-    sharkCounter = 0;
-  }
-  */
   for (int i = 0; i < xdim; ++i){
-    for (int k = 0; k < ydim; ++k){
-      
-      
-      // now move fish or shark value into a random square
-      movePosition = rand() % 4;
-      moveFish(i, k);
+    for (int k = 0; k < ydim; ++k){      
+      moveShark(i, k);
     }
   }
 }
