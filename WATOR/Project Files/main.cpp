@@ -47,20 +47,28 @@
 #include <unistd.h> /* sleep() */
 #include <iostream> /* for debugging */
 
+/* Struct */
+struct Square
+{
+  int value; // 0 = ocean, 1 = fish, 2 = shark.
+  int sharkStarveProgress = 1;
+  int age = 1;
+};
+
 /* Variables */
 
 // window parameters
-const int xdim = 100;
-const int ydim = 100;
+const int xdim = 50;
+const int ydim = 50;
 // dynamic parameters
 const unsigned int fishBreed = 3;
 const unsigned int sharkBreed = 6;
-const unsigned int starve = 4;
+const int starve = 4;
 //each shape will represent either a fish, shark or empty space
 //e.g. blue for empty, red for shark and green for fish
 sf::RectangleShape recArray[xdim][ydim];  
-int worldData[xdim][ydim]; //contains a 0(nothing), 1(fish) or a 2(shark).
-int restartData[xdim][ydim];
+Square worldData[xdim][ydim]; //contains a 0(nothing), 1(fish) or a 2(shark).
+Square restartData[xdim][ydim];
 int WindowXSize=800;
 int WindowYSize=600;
 int cellXSize=WindowXSize/xdim;
@@ -71,18 +79,13 @@ int numFish = 0;
 int fishCounter = 0;
 int sharkCounter = 0;
 bool paused = false;
+bool makeMoreFish = false;
+bool makeMoreSharks = false;
 // ratio for initial fish/shark population
 const float fishRatio = 0.01;
 const float sharkRatio = 0.005;
 //delay
 const float updateDelay = 1;
-
-/* Struct */
-struct Square
-{
-  int value; // 0 = ocean, 1 = fish, 2 = shark.
-  int starveProgress = 0;
-};
 
 /* Methods */
 
@@ -90,29 +93,29 @@ void populate()
 {
   numFish = 0;
   numShark = 0;
-  Square data;
   std::cout << "Placing sharks and fishes..." << std::endl;
   for (int i = 0; i < xdim; ++i){
     for (int k = 0; k < ydim; ++k){      
       float randomNumber = (rand() % 10000) / 10000.0; // random number between 0 and 1 (fish or shark)      
       //std::cout << randomNumber;      
       if (randomNumber <= fishRatio){
-	worldData[i][k] = 1;
+	worldData[i][k].value = 1;
 	numFish++;
       }
       else if (randomNumber > fishRatio && randomNumber < fishRatio + sharkRatio){
-        worldData[i][k] = 2;
+        worldData[i][k].value = 2;
 	numShark++;	
       }
       else{
-	worldData[i][k] = 0;
-      }     
+	worldData[i][k].value = 0;
+      }
+      worldData[i][k].sharkStarveProgress = 0;
     }
     //std::cout << std::endl;
   }
 }
 
-void copyArray(int array[xdim][ydim], int copyArray[xdim][ydim]){
+void copyArray(Square array[xdim][ydim], Square copyArray[xdim][ydim]){
   for (int i = 0; i < xdim; ++i){
     for (int k = 0; k < ydim; ++k){
       copyArray[i][k] = array[i][k];
@@ -133,9 +136,9 @@ void update()
   for (int i = 0; i < xdim; ++i){
     for (int k = 0; k < ydim; ++k){
       // update colours
-      if (worldData[i][k]==1)
+      if (worldData[i][k].value == 1)
 	recArray[i][k].setFillColor(sf::Color::Green);
-      else if (worldData[i][k]==2)
+      else if (worldData[i][k].value == 2)
 	recArray[i][k].setFillColor(sf::Color::Red);
       else
 	recArray[i][k].setFillColor(sf::Color::Blue);
@@ -143,14 +146,100 @@ void update()
   }
 }
 
+void moveFish(int x, int y)
+{
+  // check for fish
+  if (worldData[x][y].value != 1)
+    return;
+  
+  int xFree[8] = {0};
+  int yFree[8] = {0};
+
+  int xIndex = 0;
+  int yIndex = 0;
+
+  int oldPositionAge = 0;
+  int newPositionAge = 0;
+
+  int freeBlocksCounter = 0; // to count all the free adjacent blocks
+
+  bool breeding = false;
+  
+  // fish age / breeding condition
+  if (worldData[x][y].age >= fishBreed){
+    oldPositionAge = 1;
+    newPositionAge = 1;
+    breeding = true;
+  }
+  else{
+    oldPositionAge = 0;
+    newPositionAge = worldData[x][y].age + 1;
+  }
+    
+  // nested for loop to go through all neighbouring blocks
+  for (int i = -1; i < 2; i++){
+    for (int k = -1; k < 2; k++){
+      // avoid itself
+      if (i*i + k*k != 0){
+
+	xIndex = x + i;
+	yIndex = y + k;
+
+	// boundary check
+	if (xIndex < 0)
+	  xIndex = xdim-1;
+	if (xIndex >= xdim)
+	  xIndex = 0;
+	if (yIndex < 0)
+	  yIndex = ydim-1;
+	if (yIndex >= ydim)
+	  yIndex = 0;
+
+	// record position of empty block
+	if (worldData[xIndex][yIndex].value == 0){
+	  // fill the 2 different arrays with an empty block location (sea)
+	  xFree[freeBlocksCounter] = xIndex;
+	  yFree[freeBlocksCounter] = yIndex;
+	  freeBlocksCounter += 1;
+	}
+	
+      }
+    }
+  }
+
+  // now check here if we found any free neighbouring blocks
+  if (freeBlocksCounter != 0){
+    int randomFreeBlockNumber = rand() % freeBlocksCounter; // get the index for xFree & yFree
+
+    unsigned int xpos = xFree[randomFreeBlockNumber];
+    unsigned int ypos = yFree[randomFreeBlockNumber];
+
+    // now update worldData
+    worldData[xpos][ypos].value = 1; // move fish
+    if (breeding)
+      worldData[x][y].value = 1;
+    else
+      worldData[x][y].value = 0;
+    
+    // age stuff
+    worldData[xpos][ypos].age = newPositionAge;
+    worldData[x][y].age = oldPositionAge;
+  }
+  else{
+    // the fish has not found an empty block, so only the age should be updated
+    worldData[x][y].age = newPositionAge;
+  }
+  
+}
+
 void move()
 {
   fishCounter+=1; 
   sharkCounter+=1;
-  bool makeMoreFish = false;
-  bool makeMoreSharks = false;
-  std::cout << fishCounter;
-
+  makeMoreFish = false;
+  makeMoreSharks = false;
+  //std::cout << fishCounter;
+  /*
   if (fishCounter == fishBreed){
     makeMoreFish = true;
     fishCounter = 0;
@@ -159,185 +248,14 @@ void move()
     makeMoreSharks = true;
     sharkCounter = 0;
   }
-  
+  */
   for (int i = 0; i < xdim; ++i){
     for (int k = 0; k < ydim; ++k){
+      
+      
+      // now move fish or shark value into a random square
       movePosition = rand() % 4;
-      switch (movePosition){
-      case 0: // go North y-1
-	if (worldData[i][k] == 1){
-	  if (k == 0){
-	    if (worldData[i][ydim-1] < 1){
-	      if (makeMoreFish)
-		worldData[i][k] = 1;
-	      else
-		worldData[i][k] = 0;
-	      worldData[i][ydim-1] = 1;
-	    }
-	  }
-	  else{
-	    if (worldData[i][k-1] < 1){
-	      if (makeMoreFish)
-		worldData[i][k] = 1;
-	      else
-		worldData[i][k] = 0;
-	      worldData[i][k-1] = 1;
-	    }
-	  }
-	}
-	else if (worldData[i][k] == 2){
-	  if (k == ydim-1){
-	    if (worldData[i][ydim-1] != 2){
-	      if (makeMoreSharks)
-		worldData[i][k] = 2;
-	      else
-		worldData[i][k] = 0;
-	      worldData[i][ydim-1] = 2;
-	    }
-	  }
-	  else{
-	    if (worldData[i][k-1] != 2){
-	      if (makeMoreSharks)
-		worldData[i][k] = 2;
-	      else
-		worldData[i][k] = 0;
-	      worldData[i][k-1] = 2;
-	    }
-	  }
-	}
-	paused = false;		 
-	break;
-      case 1: // go South y+1
-	if (worldData[i][k] == 1){
-	  if (k == ydim-1){
-	    if (worldData[i][0] < 1){
-	      if (makeMoreFish)
-		worldData[i][k] = 1;
-	      else
-		worldData[i][k] = 0;
-	      worldData[i][0] = 1;
-	    }
-	  }
-	  else{
-	    if (worldData[i][k+1] < 1){
-	      if (makeMoreFish)
-		worldData[i][k] = 1;
-	      else
-		worldData[i][k] = 0;
-	      worldData[i][k+1] = 1;
-	    }
-	  }
-	}
-	else if (worldData[i][k] == 2){
-	  if (k == ydim-1){
-	    if (worldData[i][0] != 2){
-	      if (makeMoreSharks)
-		worldData[i][k] = 2;
-	      else
-		worldData[i][k] = 0;
-	      worldData[i][0] = 2;
-	    }
-	  }
-	  else{
-	    if (worldData[i][k+1] != 2){
-	      if (makeMoreSharks)
-		worldData[i][k] = 2;
-	      else
-		worldData[i][k] = 0;
-	      worldData[i][k+1] = 2;
-	    }
-	  }
-	}
-	paused = false;
-	break;
-      case 2: // go East
-	if (worldData[i][k] == 1){
-	  if (i == (xdim-1)){
-	    if (worldData[0][k] < 1){
-	      if (makeMoreFish)
-		worldData[i][k] = 1;
-	      else
-		worldData[i][k] = 0;
-	      worldData[0][k] = 1;
-	    }
-	  }
-	  else{
-	    if (worldData[i+1][k] < 1){
-	      if (makeMoreFish)
-		worldData[i][k] = 1;
-	      else
-		worldData[i][k] = 0;
-	      worldData[i+1][k] = 1;
-	    }
-	  }
-	}
-	else if (worldData[i][k] == 2){
-	  if (i == (xdim-1)){
-	    if (worldData[0][k] != 2){
-	      if (makeMoreSharks)
-		worldData[i][k] = 2;
-	      else
-		worldData[i][k] = 0;
-	      worldData[0][k] = 2;
-	    }
-	  }
-	  else{
-	    if (worldData[i+1][k] != 2){
-	      if (makeMoreSharks)
-		worldData[i][k] = 2;
-	      else
-		worldData[i][k] = 0;
-	      worldData[i+1][k] = 2;
-	    }
-	  }
-	}
-	paused = false;
-	break;
-      case 3: // go West
-	//std::cout << 'W';
-	if(worldData[i][k] == 1){
-	  if (i == 0){
-	    if (worldData[xdim-1][k] < 1){
-	      if (makeMoreFish)
-		worldData[i][k] = 1;
-	      else
-		worldData[i][k] = 0;
-	      worldData[xdim-1][k] = 1;
-	    }
-	  }
-	  else{
-	    if (worldData[i-1][k] < 1){
-	      if (makeMoreFish)
-		worldData[i][k] = 1;
-	      else
-		worldData[i][k] = 0;
-	      worldData[i-1][k] = 1;
-	    }
-	  }
-	}
-	else if (worldData[i][k] == 2){
-	  if (i == 0){
-	    if (worldData[xdim-1][k] != 2){
-	      if (makeMoreSharks)
-		worldData[i][k] = 2;
-	      else
-		worldData[i][k] = 0;
-	      worldData[xdim-1][k] = 2;
-	    }
-	  }
-	  else{
-	    if (worldData[i-1][k] != 2){
-	      if (makeMoreSharks)
-		worldData[i][k] = 2;
-	      else
-		worldData[i][k] = 0;
-	      worldData[i-1][k] = 2;
-	    }
-	  }
-	}
-	paused = false;
-	break;
-      }
+      moveFish(i, k);
     }
   }
 }
@@ -360,9 +278,9 @@ int main()
       recArray[i][k].setPosition(i*cellXSize,k*cellYSize);//position is top left corner!
       //int id=i*1-+k;      
       //put world data stuff here (if 0,1,2)
-      if (worldData[i][k]==1)
+      if (worldData[i][k].value == 1)
 	recArray[i][k].setFillColor(sf::Color::Green);
-      else if (worldData[i][k]==2)
+      else if (worldData[i][k].value == 2)
 	recArray[i][k].setFillColor(sf::Color::Red);
       else
 	recArray[i][k].setFillColor(sf::Color::Blue);
