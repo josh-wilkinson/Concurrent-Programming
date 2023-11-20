@@ -58,11 +58,11 @@ struct Square
 /* Variables */
 
 // window parameters
-const int xdim = 50;
-const int ydim = 50;
+const int xdim = 100;
+const int ydim = 100;
 // dynamic parameters
 const unsigned int fishBreed = 3;
-const unsigned int sharkBreed = 10;
+const unsigned int sharkBreed = 6;
 const int starve = 4;
 //each shape will represent either a fish, shark or empty space
 //e.g. blue for empty, red for shark and green for fish
@@ -78,14 +78,14 @@ int numShark = 0;
 int numFish = 0;
 int fishCounter = 0;
 int sharkCounter = 0;
-bool paused = false;
+bool paused = true;
 bool makeMoreFish = false;
 bool makeMoreSharks = false;
 // ratio for initial fish/shark population
-const float fishRatio = 0.01;
+const float fishRatio = 0.05;
 const float sharkRatio = 0.005;
 //delay
-const float updateDelay = 1;
+const float updateDelay = 0.1;
 
 /* Methods */
 
@@ -118,7 +118,9 @@ void populate()
 void copyArray(Square array[xdim][ydim], Square copyArray[xdim][ydim]){
   for (int i = 0; i < xdim; ++i){
     for (int k = 0; k < ydim; ++k){
-      copyArray[i][k] = array[i][k];
+      copyArray[i][k].value = array[i][k].value;
+      copyArray[i][k].age = array[i][k].age;
+      copyArray[i][k].sharkStarveProgress = array[i][k].sharkStarveProgress;
     }
   }
 }
@@ -288,7 +290,7 @@ void moveShark(int x, int y)
 	  yIndex = 0;
 
 	// record fish blocks
-	if (worldData[xIndex][yIndex].value == 0){
+	if (worldData[xIndex][yIndex].value == 1){
 	  xFish[fishBlocksCounter] = xIndex;
 	  yFish[fishBlocksCounter] = yIndex;
 	  fishBlocksCounter += 1;
@@ -313,8 +315,8 @@ void moveShark(int x, int y)
     int randomFishBlockNumber = rand() % fishBlocksCounter; // get the indexes
     std::cout << randomFishBlockNumber;
 
-    unsigned int xpos = xFree[randomFishBlockNumber];
-    unsigned int ypos = yFree[randomFishBlockNumber];
+    unsigned int xpos = xFish[randomFishBlockNumber];
+    unsigned int ypos = yFish[randomFishBlockNumber];
 
     //std::cout << xpos << " " << ypos << std::endl;
 
@@ -366,10 +368,10 @@ void moveShark(int x, int y)
     worldData[xpos][ypos].age = newPositionAge;
     worldData[x][y].age = oldPositionAge;
     
-    if (worldData[x][y].sharkStarveProgress >= starve){
-      worldData[x][y].value = 0; // RIP goodnight sweet prince
-      worldData[x][y].sharkStarveProgress = 0; // reset starve progress
-      worldData[x][y].age = 0; // reset age
+    if (worldData[xpos][ypos].sharkStarveProgress == starve){
+      worldData[xpos][ypos].value = 0; // RIP goodnight sweet prince
+      worldData[xpos][ypos].sharkStarveProgress = 0; // reset starve progress
+      worldData[xpos][ypos].age = 0; // reset age
     }
   }  
   // check if nothing is found
@@ -392,8 +394,14 @@ void moveShark(int x, int y)
 void move()
 {
   for (int i = 0; i < xdim; ++i){
-    for (int k = 0; k < ydim; ++k){      
-      moveShark(i, k);
+    for (int k = 0; k < ydim; ++k){
+      switch(worldData[i][k].value){
+      case 1:
+	moveFish(i, k);
+	break;
+      case 2:
+	moveShark(i, k);	
+      }
     }
   }
 }
@@ -458,7 +466,6 @@ int main()
 	//updates everyones position
 	if (clock.getElapsedTime().asSeconds() > updateDelay && !paused){
 	  clock.restart();	  
-	  //paused = false;	  
 	  move();
 	  update();
 	}
