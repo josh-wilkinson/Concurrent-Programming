@@ -1,13 +1,10 @@
-#include "Barrier.h"
 #include "SafeBuffer.h"
 #include "Event.h"
-#include <iostream>
 #include <thread>
 #include <vector>
 
-
-static const int num_threads = 100;
-const int size=20;
+// choosing one thread prints 10 characters on seperate lines
+static const int num_threads = 1;
 
 /*! \fn producer
     \brief Creates events and adds them to buffer
@@ -39,6 +36,8 @@ void consumer(std::shared_ptr<SafeBuffer> theBuffer, int numLoops){
 }
 
 int main(void){
+  /**< Create the Producers, Consumers, and the SafeBuffer */
+  
   std::vector<std::thread> producers(num_threads);
   std::vector<std::thread> consumers(num_threads);
   std::shared_ptr<SafeBuffer> aBuffer(new SafeBuffer());

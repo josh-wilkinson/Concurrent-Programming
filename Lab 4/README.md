@@ -12,17 +12,17 @@ License: GPL-3.0
 
 Purpose: README file for lab 4, the goal of which is to solve the consumer producer problem.
 
-Extra Note: I made a buffer class, however did not get around to figure out how to implement Event.h or SafeBuffer.h yet.
-
-Install: g++
+Install: g++, Make, Doxygen.
 
 Required Libraries (c++): thread
 
 Files:
-- makefile
-- README.md
-- rendezvous.cpp 
-- Semaphore.cpp
-- Makefile1
 - Semaphore.h
+- Semaphore.cpp
+- SafeBuffer.cpp 
+- SafeBuffer.h
+- main.cpp
+- makefile
+- Doxyfile
+- README.md
 
