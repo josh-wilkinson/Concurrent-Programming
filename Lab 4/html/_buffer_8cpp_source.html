@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Lab 4<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">Lab 4<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">Documentation for Concurrent Programming Lab 2. Created using Doxygen.</div>
+   <div id="projectbrief">Lab 4 documentation</div>
   </td>
  </tr>
  </tbody>
@@ -98,110 +98,74 @@ $(document).ready(function(){initNavTree('_buffer_8cpp_source.html',''); initRes
   <div class="headertitle"><div class="title">Buffer.cpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="_buffer_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<a href="_buffer_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="_buffer_8h.html">Buffer.h</a>&quot;</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//-------------------------------------------------------------------</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// Buffer (Class)</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">//     The buffer is implemented with a templated class so</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//     the buffer can be a buffer of specified type.</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//-------------------------------------------------------------------</span></div>
-<div class="foldopen" id="foldopen00008" data-start="{" data-end="};">
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="class_buffer.html">    8</a></span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keyword">class </span><a class="code hl_class" href="class_buffer.html">Buffer</a>{</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>  <span class="comment">//---------------------------------------------------------------</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>  <span class="comment">// Buffer - Private Member Variables</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>  <span class="comment">//---------------------------------------------------------------</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  std::unique_ptr&lt;T[]&gt; buffer; <span class="comment">// using a smart pointer is safer (no need to implement a destructor)</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  <span class="keywordtype">size_t</span> head = 0;             <span class="comment">// size_t is an unsigned long</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <span class="keywordtype">size_t</span> tail = 0;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  <span class="keywordtype">size_t</span> max_size;</div>
-<div class="foldopen" id="foldopen00018" data-start="{" data-end="}">
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="class_buffer.html#a08f64c6d8abbbffc006fea4f99d6c6ac">   18</a></span>  T empty_item; <span class="comment">// used to clear data</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  <span class="comment">//---------------------------------------------------------------</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  <span class="comment">// Buffer - Public Methods</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <span class="comment">//---------------------------------------------------------------</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <span class="comment">// Create a new Buffer.</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  <a class="code hl_class" href="class_buffer.html">Buffer&lt;T&gt;</a>(<span class="keywordtype">size_t</span> max_size)</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>      : buffer(<a class="code hl_class" href="class_buffer.html">std</a>::<a class="code hl_class" href="class_buffer.html">unique_ptr</a>&lt;<a class="code hl_class" href="class_buffer.html">T</a>[]&gt;(<a class="code hl_class" href="class_buffer.html">new</a> <a class="code hl_class" href="class_buffer.html">T</a>[max_size])), max_size(max_size){};</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">// constructor</span></div>
+<div class="foldopen" id="foldopen00010" data-start="{" data-end="}">
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="class_buffer.html#a333d860d0ad57527f0df0ab400faa23a">   10</a></span><a class="code hl_function" href="class_buffer.html#a333d860d0ad57527f0df0ab400faa23a">Buffer::Buffer</a>(<span class="keywordtype">int</span> maxSize){</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>  this-&gt;head = 0;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>  this-&gt;tail = 0;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  this-&gt;maxSize = maxSize;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  this-&gt;buffer = <span class="keyword">new</span> char(maxSize);</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>}</div>
 </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  <span class="comment">// Add an item to this buffer.</span></div>
-<div class="foldopen" id="foldopen00029" data-start="{" data-end="}">
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="class_buffer.html#a8f335f364bffad85db1aa12b122928ed">   29</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_buffer.html#a8f335f364bffad85db1aa12b122928ed">enqueue</a>(<a class="code hl_class" href="class_buffer.html">T</a> <a class="code hl_class" href="class_buffer.html">item</a>){</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="comment">// if buffer is full, throw an error</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="class_buffer.html#acde5e76b04d478797788e18a6c2da485">is_full</a>())</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>      <span class="keywordflow">throw</span> <a class="code hl_function" href="class_buffer.html#a08f64c6d8abbbffc006fea4f99d6c6ac">std::runtime_error</a>(<span class="stringliteral">&quot;buffer is full&quot;</span>);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="comment">// insert item at back of buffer</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    buffer[tail] = <a class="code hl_class" href="class_buffer.html">item</a>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="comment">// increment tail</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    tail = (tail + 1) % max_size;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  }</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// add item to buffer</span></div>
+<div class="foldopen" id="foldopen00017" data-start="{" data-end="}">
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="class_buffer.html#a06cb8574a465f03a559a874d22c8518f">   17</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_buffer.html#a06cb8574a465f03a559a874d22c8518f">Buffer::add</a>(<span class="keywordtype">char</span> item){</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="class_buffer.html#ac42b91fb82190c7d87b924e89bda80ac">isFull</a>())</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  buffer[tail] = item;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  tail = (tail + 1) % maxSize;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>}</div>
 </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="comment">// Remove an item from this buffer and return it.</span></div>
-<div class="foldopen" id="foldopen00042" data-start="{" data-end="}">
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="class_buffer.html#ac52eaa7b0b7ec409ce9dfd44bf6e6ba4">   42</a></span>  <a class="code hl_class" href="class_buffer.html">T</a> <a class="code hl_function" href="class_buffer.html#ac52eaa7b0b7ec409ce9dfd44bf6e6ba4">dequeue</a>(){</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="comment">// if buffer is empty, throw an error</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="class_buffer.html#a9adc2562a0cefc06ba1388ec44bf93e7">is_empty</a>())</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>      <span class="keywordflow">throw</span> <a class="code hl_function" href="class_buffer.html#a08f64c6d8abbbffc006fea4f99d6c6ac">std::runtime_error</a>(<span class="stringliteral">&quot;buffer is empty&quot;</span>);</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="comment">// get item at head</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <a class="code hl_class" href="class_buffer.html">T</a> <a class="code hl_class" href="class_buffer.html">item</a> = buffer[head];</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="comment">// set item at head to be empty</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <a class="code hl_class" href="class_buffer.html">T</a> <a class="code hl_class" href="class_buffer.html">empty</a>;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    buffer[head] = empty_item;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="comment">// move head foward</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    head = (head + 1) % max_size;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="comment">// return item</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="class_buffer.html">item</a>;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  }</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">// remove item from buffer and return it</span></div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="}">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="class_buffer.html#aa89c5daec905807cf93e4086ca350edc">   24</a></span><span class="keywordtype">char</span> <a class="code hl_function" href="class_buffer.html#aa89c5daec905807cf93e4086ca350edc">Buffer::pop</a>(){</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="class_buffer.html#aabff42b64faa9337e50286a0aab97a96">isEmpty</a>())</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    std::runtime_error(<span class="stringliteral">&quot;Buffer is empty!!&quot;</span>);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  <span class="keywordtype">char</span> item = buffer[head];</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  <span class="keywordtype">char</span> empty;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  buffer[head] = emptyItem;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  head = (head + 1) % maxSize;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="keywordflow">return</span> item;    </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>}</div>
 </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <span class="comment">// Return the item at the front of this buffer.</span></div>
-<div class="foldopen" id="foldopen00060" data-start="{" data-end="}">
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="class_buffer.html#a7fde5b7220520ecb922c5a3018ede7f6">   60</a></span>  <a class="code hl_class" href="class_buffer.html">T</a> <a class="code hl_function" href="class_buffer.html#a7fde5b7220520ecb922c5a3018ede7f6">front</a>(){</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordflow">return</span> buffer[head];</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  }</div>
+<div class="foldopen" id="foldopen00033" data-start="{" data-end="}">
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="class_buffer.html#a3ba2588f521763f6975a8436cf3bfb57">   33</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="class_buffer.html#a3ba2588f521763f6975a8436cf3bfb57">Buffer::size</a>(){</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="keywordflow">if</span> (tail &gt;= head)</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordflow">return</span> (head - tail);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="keywordflow">return</span> (maxSize - head - tail);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>}</div>
 </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <span class="comment">// Return true if this buffer is empty, and false otherwise.</span></div>
-<div class="foldopen" id="foldopen00065" data-start="{" data-end="}">
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="class_buffer.html#a9adc2562a0cefc06ba1388ec44bf93e7">   65</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="class_buffer.html#a9adc2562a0cefc06ba1388ec44bf93e7">is_empty</a>(){</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordflow">return</span> head == tail;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  }</div>
+<div class="foldopen" id="foldopen00038" data-start="{" data-end="}">
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="class_buffer.html#aabff42b64faa9337e50286a0aab97a96">   38</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_buffer.html#aabff42b64faa9337e50286a0aab97a96">Buffer::isEmpty</a>(){</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <span class="keywordflow">return</span> head == tail;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>}</div>
 </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="comment">// Return true if this buffer is full, and false otherwise.</span></div>
-<div class="foldopen" id="foldopen00070" data-start="{" data-end="}">
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="class_buffer.html#acde5e76b04d478797788e18a6c2da485">   70</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="class_buffer.html#acde5e76b04d478797788e18a6c2da485">is_full</a>(){</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordflow">return</span> tail == (head - 1) % max_size;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  }</div>
+<div class="foldopen" id="foldopen00041" data-start="{" data-end="}">
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="class_buffer.html#ac42b91fb82190c7d87b924e89bda80ac">   41</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_buffer.html#ac42b91fb82190c7d87b924e89bda80ac">Buffer::isFull</a>(){</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="keywordflow">return</span> tail == (head - 1) % maxSize;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>}</div>
 </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  <span class="comment">// Return the size of this buffer.</span></div>
-<div class="foldopen" id="foldopen00075" data-start="{" data-end="}">
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="class_buffer.html#ae86cb4a1c7fc30bde63d19dc2aebf784">   75</a></span>  <span class="keywordtype">size_t</span> <a class="code hl_function" href="class_buffer.html#ae86cb4a1c7fc30bde63d19dc2aebf784">size</a>(){</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordflow">if</span> (tail &gt;= head)</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>      <span class="keywordflow">return</span> tail - head;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordflow">return</span> max_size - head - tail;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  }</div>
+<div class="foldopen" id="foldopen00044" data-start="{" data-end="}">
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="class_buffer.html#a35bb03d5a5f26a47a8d9b85579648539">   44</a></span><span class="keywordtype">char</span> <a class="code hl_function" href="class_buffer.html#a35bb03d5a5f26a47a8d9b85579648539">Buffer::getFront</a>(){</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  <span class="keywordflow">return</span> buffer[head];</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>}</div>
 </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>};</div>
-</div>
-<div class="ttc" id="aclass_buffer_html"><div class="ttname"><a href="class_buffer.html">Buffer</a></div><div class="ttdef"><b>Definition</b> <a href="_buffer_8cpp_source.html#l00008">Buffer.cpp:8</a></div></div>
-<div class="ttc" id="aclass_buffer_html_a08f64c6d8abbbffc006fea4f99d6c6ac"><div class="ttname"><a href="class_buffer.html#a08f64c6d8abbbffc006fea4f99d6c6ac">Buffer::Buffer</a></div><div class="ttdeci">Buffer(size_t max_size)</div><div class="ttdef"><b>Definition</b> <a href="_buffer_8cpp_source.html#l00018">Buffer.cpp:25</a></div></div>
-<div class="ttc" id="aclass_buffer_html_a7fde5b7220520ecb922c5a3018ede7f6"><div class="ttname"><a href="class_buffer.html#a7fde5b7220520ecb922c5a3018ede7f6">Buffer::front</a></div><div class="ttdeci">T front()</div><div class="ttdef"><b>Definition</b> <a href="_buffer_8cpp_source.html#l00060">Buffer.cpp:60</a></div></div>
-<div class="ttc" id="aclass_buffer_html_a8f335f364bffad85db1aa12b122928ed"><div class="ttname"><a href="class_buffer.html#a8f335f364bffad85db1aa12b122928ed">Buffer::enqueue</a></div><div class="ttdeci">void enqueue(T item)</div><div class="ttdef"><b>Definition</b> <a href="_buffer_8cpp_source.html#l00029">Buffer.cpp:29</a></div></div>
-<div class="ttc" id="aclass_buffer_html_a9adc2562a0cefc06ba1388ec44bf93e7"><div class="ttname"><a href="class_buffer.html#a9adc2562a0cefc06ba1388ec44bf93e7">Buffer::is_empty</a></div><div class="ttdeci">bool is_empty()</div><div class="ttdef"><b>Definition</b> <a href="_buffer_8cpp_source.html#l00065">Buffer.cpp:65</a></div></div>
-<div class="ttc" id="aclass_buffer_html_ac52eaa7b0b7ec409ce9dfd44bf6e6ba4"><div class="ttname"><a href="class_buffer.html#ac52eaa7b0b7ec409ce9dfd44bf6e6ba4">Buffer::dequeue</a></div><div class="ttdeci">T dequeue()</div><div class="ttdef"><b>Definition</b> <a href="_buffer_8cpp_source.html#l00042">Buffer.cpp:42</a></div></div>
-<div class="ttc" id="aclass_buffer_html_acde5e76b04d478797788e18a6c2da485"><div class="ttname"><a href="class_buffer.html#acde5e76b04d478797788e18a6c2da485">Buffer::is_full</a></div><div class="ttdeci">bool is_full()</div><div class="ttdef"><b>Definition</b> <a href="_buffer_8cpp_source.html#l00070">Buffer.cpp:70</a></div></div>
-<div class="ttc" id="aclass_buffer_html_ae86cb4a1c7fc30bde63d19dc2aebf784"><div class="ttname"><a href="class_buffer.html#ae86cb4a1c7fc30bde63d19dc2aebf784">Buffer::size</a></div><div class="ttdeci">size_t size()</div><div class="ttdef"><b>Definition</b> <a href="_buffer_8cpp_source.html#l00075">Buffer.cpp:75</a></div></div>
+<div class="ttc" id="a_buffer_8h_html"><div class="ttname"><a href="_buffer_8h.html">Buffer.h</a></div></div>
+<div class="ttc" id="aclass_buffer_html_a06cb8574a465f03a559a874d22c8518f"><div class="ttname"><a href="class_buffer.html#a06cb8574a465f03a559a874d22c8518f">Buffer::add</a></div><div class="ttdeci">void add(char item)</div><div class="ttdef"><b>Definition</b> <a href="_buffer_8cpp_source.html#l00017">Buffer.cpp:17</a></div></div>
+<div class="ttc" id="aclass_buffer_html_a333d860d0ad57527f0df0ab400faa23a"><div class="ttname"><a href="class_buffer.html#a333d860d0ad57527f0df0ab400faa23a">Buffer::Buffer</a></div><div class="ttdeci">Buffer(int maxSize)</div><div class="ttdef"><b>Definition</b> <a href="_buffer_8cpp_source.html#l00010">Buffer.cpp:10</a></div></div>
+<div class="ttc" id="aclass_buffer_html_a35bb03d5a5f26a47a8d9b85579648539"><div class="ttname"><a href="class_buffer.html#a35bb03d5a5f26a47a8d9b85579648539">Buffer::getFront</a></div><div class="ttdeci">char getFront()</div><div class="ttdef"><b>Definition</b> <a href="_buffer_8cpp_source.html#l00044">Buffer.cpp:44</a></div></div>
+<div class="ttc" id="aclass_buffer_html_a3ba2588f521763f6975a8436cf3bfb57"><div class="ttname"><a href="class_buffer.html#a3ba2588f521763f6975a8436cf3bfb57">Buffer::size</a></div><div class="ttdeci">int size()</div><div class="ttdef"><b>Definition</b> <a href="_buffer_8cpp_source.html#l00033">Buffer.cpp:33</a></div></div>
+<div class="ttc" id="aclass_buffer_html_aa89c5daec905807cf93e4086ca350edc"><div class="ttname"><a href="class_buffer.html#aa89c5daec905807cf93e4086ca350edc">Buffer::pop</a></div><div class="ttdeci">char pop()</div><div class="ttdef"><b>Definition</b> <a href="_buffer_8cpp_source.html#l00024">Buffer.cpp:24</a></div></div>
+<div class="ttc" id="aclass_buffer_html_aabff42b64faa9337e50286a0aab97a96"><div class="ttname"><a href="class_buffer.html#aabff42b64faa9337e50286a0aab97a96">Buffer::isEmpty</a></div><div class="ttdeci">bool isEmpty()</div><div class="ttdef"><b>Definition</b> <a href="_buffer_8cpp_source.html#l00038">Buffer.cpp:38</a></div></div>
+<div class="ttc" id="aclass_buffer_html_ac42b91fb82190c7d87b924e89bda80ac"><div class="ttname"><a href="class_buffer.html#ac42b91fb82190c7d87b924e89bda80ac">Buffer::isFull</a></div><div class="ttdeci">bool isFull()</div><div class="ttdef"><b>Definition</b> <a href="_buffer_8cpp_source.html#l00041">Buffer.cpp:41</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

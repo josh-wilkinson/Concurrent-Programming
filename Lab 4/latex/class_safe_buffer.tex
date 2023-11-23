@@ -1,0 +1,73 @@
+\doxysection{Safe\+Buffer Class Reference}
+\hypertarget{class_safe_buffer}{}\label{class_safe_buffer}\index{SafeBuffer@{SafeBuffer}}
+
+
+A thread safe implementation of a buffer.  
+
+
+
+
+{\ttfamily \#include $<$Safe\+Buffer.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_safe_buffer_af835d8d08c4dcd3326f21ae2e9988699}{Safe\+Buffer}} ()
+\item 
+void \mbox{\hyperlink{class_safe_buffer_a67bccc2159acb139af89e6dddba00ef8}{push}} (\mbox{\hyperlink{class_event}{Event}} the\+Event)
+\item 
+\mbox{\hyperlink{class_event}{Event}} \mbox{\hyperlink{class_safe_buffer_a90a33fca4d838f7c0eef6e8557f3c281}{pop}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A thread safe implementation of a buffer. 
+
+Stores a random char 
+
+Definition at line \mbox{\hyperlink{_safe_buffer_8h_source_l00058}{58}} of file \mbox{\hyperlink{_safe_buffer_8h_source}{Safe\+Buffer.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_safe_buffer_af835d8d08c4dcd3326f21ae2e9988699}\label{class_safe_buffer_af835d8d08c4dcd3326f21ae2e9988699} 
+\index{SafeBuffer@{SafeBuffer}!SafeBuffer@{SafeBuffer}}
+\index{SafeBuffer@{SafeBuffer}!SafeBuffer@{SafeBuffer}}
+\doxysubsubsection{\texorpdfstring{SafeBuffer()}{SafeBuffer()}}
+{\footnotesize\ttfamily Safe\+Buffer\+::\+Safe\+Buffer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Mutex variable the\+Mutex provides exclusive access to the buffer.
+
+semaphore variable When semaphore is positive, it indicates the number of items in the buffer. When it is negative, it indicates the number of consumer threads in the queue.
+
+Definition at line \mbox{\hyperlink{_safe_buffer_8cpp_source_l00015}{15}} of file \mbox{\hyperlink{_safe_buffer_8cpp_source}{Safe\+Buffer.\+cpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_safe_buffer_a90a33fca4d838f7c0eef6e8557f3c281}\label{class_safe_buffer_a90a33fca4d838f7c0eef6e8557f3c281} 
+\index{SafeBuffer@{SafeBuffer}!pop@{pop}}
+\index{pop@{pop}!SafeBuffer@{SafeBuffer}}
+\doxysubsubsection{\texorpdfstring{pop()}{pop()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_event}{Event}} Safe\+Buffer\+::pop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_safe_buffer_8cpp_source_l00043}{43}} of file \mbox{\hyperlink{_safe_buffer_8cpp_source}{Safe\+Buffer.\+cpp}}.
+
+\Hypertarget{class_safe_buffer_a67bccc2159acb139af89e6dddba00ef8}\label{class_safe_buffer_a67bccc2159acb139af89e6dddba00ef8} 
+\index{SafeBuffer@{SafeBuffer}!push@{push}}
+\index{push@{push}!SafeBuffer@{SafeBuffer}}
+\doxysubsubsection{\texorpdfstring{push()}{push()}}
+{\footnotesize\ttfamily void Safe\+Buffer\+::push (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_event}{Event}}}]{the\+Event }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_safe_buffer_8cpp_source_l00032}{32}} of file \mbox{\hyperlink{_safe_buffer_8cpp_source}{Safe\+Buffer.\+cpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_safe_buffer_8h}{Safe\+Buffer.\+h}}\item 
+\mbox{\hyperlink{_safe_buffer_8cpp}{Safe\+Buffer.\+cpp}}\end{DoxyCompactItemize}

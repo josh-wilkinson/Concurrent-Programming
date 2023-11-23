@@ -4,16 +4,16 @@
 \DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00001}00001\ \textcolor{comment}{/*\ SafeBuffer.h\ -\/-\/-\/\ }}
 \DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00002}00002\ \textcolor{comment}{\ *\ }}
 \DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Filename:\ SafeBuffer.h}}
-\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00004}00004\ \textcolor{comment}{\ *\ Description:\ }}
+\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00004}00004\ \textcolor{comment}{\ *\ Description:\ This\ file\ contains\ the\ headers\ for\ SafeBuffer.cpp}}
 \DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00005}00005\ \textcolor{comment}{\ *\ Author:\ Joseph}}
-\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00006}00006\ \textcolor{comment}{\ *\ Maintainer:\ }}
+\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00006}00006\ \textcolor{comment}{\ *\ Maintainer:\ Joshua\ Wilkinson}}
 \DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00007}00007\ \textcolor{comment}{\ *\ Created:\ Tue\ Jan\ \ 8\ 12:30:23\ 2019\ (+0000)}}
-\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00008}00008\ \textcolor{comment}{\ *\ Version:\ }}
+\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00008}00008\ \textcolor{comment}{\ *\ Version:\ 1}}
 \DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00009}00009\ \textcolor{comment}{\ *\ Package-\/Requires:\ ()}}
 \DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00010}00010\ \textcolor{comment}{\ *\ Last-\/Updated:\ Tue\ Jan\ \ 8\ 12:30:25\ 2019\ (+0000)}}
 \DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00011}00011\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ By:\ Joseph}}
 \DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00012}00012\ \textcolor{comment}{\ *\ \ \ \ \ Update\ \#:\ 1}}
-\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00013}00013\ \textcolor{comment}{\ *\ URL:\ }}
+\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00013}00013\ \textcolor{comment}{\ *\ URL:\ https://github.com/josh-\/wilkinson/Concurrent-\/Programming/blob/master/Lab\%204/SafeBuffer.h}}
 \DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00014}00014\ \textcolor{comment}{\ *\ Doc\ URL:\ }}
 \DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00015}00015\ \textcolor{comment}{\ *\ Keywords:\ }}
 \DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00016}00016\ \textcolor{comment}{\ *\ Compatibility:\ }}
@@ -22,13 +22,13 @@
 \DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00019}00019\ }
 \DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00020}00020\ \textcolor{comment}{/*\ Commentary:\ }}
 \DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00021}00021\ \textcolor{comment}{\ *\ }}
-\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00022}00022\ \textcolor{comment}{\ *\ }}
+\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00022}00022\ \textcolor{comment}{\ *\ Came\ to\ the\ conclusion\ that\ there\ is\ no\ need\ to\ make\ this\ class\ templated,\ since\ we're\ only\ using\ Event\ objects}}
 \DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00023}00023\ \textcolor{comment}{\ *\ }}
 \DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00024}00024\ \textcolor{comment}{\ */}}
 \DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00025}00025\ }
 \DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00026}00026\ \textcolor{comment}{/*\ Change\ Log:}}
-\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00027}00027\ \textcolor{comment}{\ *\ }}
-\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00028}00028\ \textcolor{comment}{\ *\ }}
+\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00027}00027\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00028}00028\ \textcolor{comment}{\ *\ Added\ headers\ to\ be\ used\ in\ SafeBuffer.cpp}}
 \DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00029}00029\ \textcolor{comment}{\ */}}
 \DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00030}00030\ }
 \DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00031}00031\ \textcolor{comment}{/*\ This\ program\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
@@ -47,8 +47,23 @@
 \DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00044}00044\ }
 \DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00045}00045\ \textcolor{comment}{/*\ Code:\ */}}
 \DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00046}00046\ }
-\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00047}00047\ }
-\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00048}00048\ }
-\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00049}00049\ \textcolor{comment}{/*\ SafeBuffer.h\ ends\ here\ */}}
+\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00054}00054\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_semaphore_8h}{Semaphore.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00055}00055\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00056}00056\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_event_8h}{Event.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00058}\mbox{\hyperlink{class_safe_buffer}{00058}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_safe_buffer}{SafeBuffer}}\{}
+\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00059}00059\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00060}00060\ \ \ std::vector<Event>\ items;\ }
+\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00061}00061\ \ \ std::shared\_ptr<Semaphore>\ theMutex;}
+\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00062}00062\ \ \ std::shared\_ptr<Semaphore>\ semaphore;}
+\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00063}00063\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00064}00064\ \ \ \mbox{\hyperlink{class_safe_buffer_af835d8d08c4dcd3326f21ae2e9988699}{SafeBuffer}}();}
+\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00065}00065\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_safe_buffer_a67bccc2159acb139af89e6dddba00ef8}{push}}(\mbox{\hyperlink{class_event}{Event}}\ theEvent);}
+\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00066}00066\ \ \ \mbox{\hyperlink{class_event}{Event}}\ \mbox{\hyperlink{class_safe_buffer_a90a33fca4d838f7c0eef6e8557f3c281}{pop}}();}
+\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00067}00067\ \};}
+\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00069}00069\ \textcolor{comment}{/*\ SafeBuffer.h\ ends\ here\ */}}
+\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_safe_buffer_8h_source_l00071}00071\ }
 
 \end{DoxyCode}

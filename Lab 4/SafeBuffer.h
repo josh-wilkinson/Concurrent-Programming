@@ -46,6 +46,8 @@
 
 /*! \class SafeBuffer
     \brief A thread safe implementation of a buffer
+
+    
 */
 
 #include "Semaphore.h"

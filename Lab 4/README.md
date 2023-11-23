@@ -10,7 +10,7 @@
 ***
 **License**: GPL-3.0
 ***
-**Purpose**: README file for lab 4, the goal of which is to solve the ***consumer producer problem***. A number
+**Purpose**: To solve the ***producer consumer problem***. A number
 of Producer and Consumer threads are created which add and remove an Event from the SafeBuffer.
 ***
 **Install**: g++ (or any suitable compiler for c++ code), Make, Doxygen (to generate documention).
@@ -18,12 +18,10 @@ of Producer and Consumer threads are created which add and remove an Event from 
 **Required Libraries (c++)**: thread
 ***
 **Steps to Run**:
-- type 'make -k' in the project folder
+- type 'make -k' into your terminal in the project folder
 - type './ProducerConsumer' to run the executable.
-
 ***
 **Files**:
-***
 - *Semaphore.h*
 - *Semaphore.cpp*
 - *SafeBuffer.cpp*

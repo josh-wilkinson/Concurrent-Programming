@@ -1,50 +1,56 @@
 \doxysection{main.\+cpp}
 \hypertarget{main_8cpp_source}{}\label{main_8cpp_source}\mbox{\hyperlink{main_8cpp}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_barrier_8h}{Barrier.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_safe_buffer_8h}{SafeBuffer.h}}"{}}}
 \DoxyCodeLine{\Hypertarget{main_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_event_8h}{Event.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <iostream>}}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <thread>}}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <vector>}}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00006}00006\ }
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00007}00007\ }
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00008}00008\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ num\_threads\ =\ 100;}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00009}\mbox{\hyperlink{main_8cpp_aab938108caad0d0e47d6885b5ba2d23a}{00009}}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{main_8cpp_aab938108caad0d0e47d6885b5ba2d23a}{size}}=20;}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00010}00010\ }
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00011}00011\ }
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00016}\mbox{\hyperlink{main_8cpp_a2b63c7faa516bb54f6d98346900864dc}{00016}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_a2b63c7faa516bb54f6d98346900864dc}{producer}}(\mbox{\hyperlink{class_buffer_a08f64c6d8abbbffc006fea4f99d6c6ac}{std::shared\_ptr}}<\mbox{\hyperlink{class_buffer}{SafeBuffer}}<\mbox{\hyperlink{class_buffer_a08f64c6d8abbbffc006fea4f99d6c6ac}{std::shared\_ptr<Event>}}>\ \mbox{\hyperlink{class_buffer}{theBuffer}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_buffer}{numLoops}})\{}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00017}00017\ }
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00018}00018\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_buffer}{i}}\ =\ 0;\ \mbox{\hyperlink{class_buffer}{i}}\ <\ \mbox{\hyperlink{class_buffer}{numLoops}};\ ++\mbox{\hyperlink{class_buffer}{i}})\{}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00019}00019\ \ \ \ \ \textcolor{comment}{//Produce\ event\ and\ add\ to\ buffer}}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00020}00020\ \ \ \ \ \textcolor{comment}{//buffer.push(i);}}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00021}00021\ \ \ \ \ \mbox{\hyperlink{class_buffer_a08f64c6d8abbbffc006fea4f99d6c6ac}{std::shared\_ptr<Event>}}\ \mbox{\hyperlink{class_buffer}{e}}\ =\ \mbox{\hyperlink{class_buffer_a08f64c6d8abbbffc006fea4f99d6c6ac}{std::make\_shared<Event>}}(\mbox{\hyperlink{class_buffer}{i}});}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00022}00022\ \ \ \ \ \mbox{\hyperlink{class_buffer}{theBuffer}}.put(\mbox{\hyperlink{class_buffer}{e}});}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00023}00023\ \ \ \}\ }
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00024}00024\ }
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00025}00025\ \}}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00026}00026\ }
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00031}\mbox{\hyperlink{main_8cpp_a0c3ad1f29466ff569055abe586f9ad0a}{00031}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_a0c3ad1f29466ff569055abe586f9ad0a}{consumer}}(\mbox{\hyperlink{class_buffer_a08f64c6d8abbbffc006fea4f99d6c6ac}{std::shared\_ptr}}<\mbox{\hyperlink{class_buffer}{SafeBuffer<std::shared\_ptr\ Event>}}>\ \mbox{\hyperlink{class_buffer}{theBuffer}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_buffer}{numLoops}})\{}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00032}00032\ }
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00033}00033\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_buffer}{i}}\ =\ 0;\ \mbox{\hyperlink{class_buffer}{i}}\ <\ \mbox{\hyperlink{class_buffer}{numLoops}};\ ++\mbox{\hyperlink{class_buffer}{i}})\{}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00034}00034\ \ \ \ \ \textcolor{comment}{//Produce\ event\ and\ add\ to\ buffer}}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00035}00035\ \ \ \ \ \mbox{\hyperlink{class_buffer_a08f64c6d8abbbffc006fea4f99d6c6ac}{std::shared\_ptr<Event>}}\ \mbox{\hyperlink{class_buffer}{e}}=\ \mbox{\hyperlink{class_buffer}{theBuffer}}-\/>get();}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00036}00036\ \ \ \ \ \mbox{\hyperlink{class_buffer}{e}}-\/>consume();}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00037}00037\ \ \ \}\ \ }
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00038}00038\ }
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00039}00039\ \}}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00040}00040\ }
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00041}\mbox{\hyperlink{main_8cpp_a840291bc02cba5474a4cb46a9b9566fe}{00041}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{main_8cpp_a840291bc02cba5474a4cb46a9b9566fe}{main}}(\textcolor{keywordtype}{void})\{}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00042}00042\ \ \ \mbox{\hyperlink{class_buffer_a08f64c6d8abbbffc006fea4f99d6c6ac}{std::vector<std::thread>}}\ \mbox{\hyperlink{class_buffer}{vt}}(num\_threads);}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00043}00043\ \ \ \mbox{\hyperlink{class_buffer_a08f64c6d8abbbffc006fea4f99d6c6ac}{std::shared\_ptr<SafeBuffer<std::shared\_ptr<Event>}}>\ \mbox{\hyperlink{class_buffer}{aBuffer}}(\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_buffer}{Buffer<std::shared\_ptr\ Event>}}(\mbox{\hyperlink{main_8cpp_aab938108caad0d0e47d6885b5ba2d23a}{size}}));}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00045}00045\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_buffer}{i}}=0;}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00046}00046\ \ \ \textcolor{keywordflow}{for}(\mbox{\hyperlink{class_buffer_a08f64c6d8abbbffc006fea4f99d6c6ac}{std::thread}}\&\ \mbox{\hyperlink{class_buffer}{t}}:\ \mbox{\hyperlink{class_buffer}{vt}})\{}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00047}00047\ \ \ \ \ \mbox{\hyperlink{class_buffer}{t}}\ =\ \mbox{\hyperlink{class_buffer_a08f64c6d8abbbffc006fea4f99d6c6ac}{std::thread}}(\mbox{\hyperlink{class_buffer}{updateTask}},\mbox{\hyperlink{class_buffer}{aBarrier}},10);}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00048}00048\ \ \ \}}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00050}00050\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ \mbox{\hyperlink{class_buffer}{v}}\ :\mbox{\hyperlink{class_buffer}{vt}})\{}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00051}00051\ \ \ \ \ \ \ \mbox{\hyperlink{class_buffer}{v}}.join();}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00006}00006\ \textcolor{comment}{//\ choosing\ one\ thread\ prints\ 10\ characters\ on\ seperate\ lines}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00007}00007\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ num\_threads\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00013}\mbox{\hyperlink{main_8cpp_a3d0719b4bcba12452a2f7b9b40c6c6d9}{00013}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_a3d0719b4bcba12452a2f7b9b40c6c6d9}{producer}}(std::shared\_ptr<SafeBuffer>\ theBuffer,\ \textcolor{keywordtype}{int}\ numLoops)\{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00015}00015\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ numLoops;\ ++i)\{\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00016}00016\ \ \ \ \ \textcolor{comment}{//Produce\ event\ and\ add\ to\ buffer}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00017}00017\ \ \ \ \ \mbox{\hyperlink{class_event}{Event}}\ e;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00018}00018\ \ \ \ \ theBuffer-\/>push(e);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00019}00019\ \ \ \}\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00021}00021\ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00027}\mbox{\hyperlink{main_8cpp_a279a06d7a4fa4c1a824324bbd87e848d}{00027}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_a279a06d7a4fa4c1a824324bbd87e848d}{consumer}}(std::shared\_ptr<SafeBuffer>\ theBuffer,\ \textcolor{keywordtype}{int}\ numLoops)\{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00029}00029\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ numLoops;\ ++i)\{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00030}00030\ \ \ \ \ \textcolor{comment}{//Produce\ event\ and\ add\ to\ buffer}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00031}00031\ \ \ \ \ \mbox{\hyperlink{class_event}{Event}}\ e;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00032}00032\ \ \ \ \ e\ =\ theBuffer-\/>pop();}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00033}00033\ \ \ \ \ e.\mbox{\hyperlink{class_event_ab57583f1d8975c19bd1c6448482d958d}{consume}}();}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00034}00034\ \ \ \}\ \ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00036}00036\ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00038}\mbox{\hyperlink{main_8cpp_a840291bc02cba5474a4cb46a9b9566fe}{00038}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{main_8cpp_a840291bc02cba5474a4cb46a9b9566fe}{main}}(\textcolor{keywordtype}{void})\{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00041}00041\ \ \ std::vector<std::thread>\ producers(num\_threads);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00042}00042\ \ \ std::vector<std::thread>\ consumers(num\_threads);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00043}00043\ \ \ std::shared\_ptr<SafeBuffer>\ aBuffer(\textcolor{keyword}{new}\ \mbox{\hyperlink{class_safe_buffer}{SafeBuffer}}());}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00044}00044\ \ \ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00047}00047\ \ \ \textcolor{keywordflow}{for}(std::thread\&\ p:\ producers)\{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00048}00048\ \ \ \ \ p\ =\ std::thread(\mbox{\hyperlink{main_8cpp_a3d0719b4bcba12452a2f7b9b40c6c6d9}{producer}},aBuffer,10);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00049}00049\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00050}00050\ \ \ \textcolor{keywordflow}{for}(std::thread\&\ c:\ consumers)\{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00051}00051\ \ \ \ \ c\ =\ std::thread(\mbox{\hyperlink{main_8cpp_a279a06d7a4fa4c1a824324bbd87e848d}{consumer}},aBuffer,10);}
 \DoxyCodeLine{\Hypertarget{main_8cpp_source_l00052}00052\ \ \ \}}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00053}00053\ \ \ \textcolor{comment}{//std::cout\ <<\ sharedVariable\ <<\ std::endl;}}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00054}00054\ \ \ \textcolor{keywordflow}{return}\ 0;}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00055}00055\ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00053}00053\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00056}00056\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ p\ :producers)\{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00057}00057\ \ \ \ \ \ \ p.join();}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00058}00058\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00059}00059\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ c\ :consumers)\{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00060}00060\ \ \ \ \ \ \ c.join();}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00061}00061\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00062}00062\ \ \ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00063}00063\ \ \ \textcolor{comment}{//std::cout\ <<\ std::endl;}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00064}00064\ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00065}00065\ \}}
 
 \end{DoxyCode}

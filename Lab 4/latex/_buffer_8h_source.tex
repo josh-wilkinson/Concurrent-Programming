@@ -1,0 +1,25 @@
+\doxysection{Buffer.\+h}
+\hypertarget{_buffer_8h_source}{}\label{_buffer_8h_source}\mbox{\hyperlink{_buffer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00004}\mbox{\hyperlink{class_buffer}{00004}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_buffer}{Buffer}}\{}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00005}00005\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00006}00006\ \ \ std::shared\_ptr<char[]>\ buffer;}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00007}00007\ \ \ \textcolor{keywordtype}{int}\ head;}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00008}00008\ \ \ \textcolor{keywordtype}{int}\ tail;}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00009}00009\ \ \ \textcolor{keywordtype}{int}\ maxSize;}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00010}00010\ \ \ \textcolor{keywordtype}{char}\ emptyItem;}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00011}00011\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00012}00012\ \ \ \mbox{\hyperlink{class_buffer}{Buffer}}(\textcolor{keywordtype}{int}\ maxSize);}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00013}00013\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_buffer_a06cb8574a465f03a559a874d22c8518f}{add}}(\textcolor{keywordtype}{char}\ item);}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00014}00014\ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{class_buffer_aa89c5daec905807cf93e4086ca350edc}{pop}}();}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00015}00015\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_buffer_a3ba2588f521763f6975a8436cf3bfb57}{size}}();}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00016}00016\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_buffer_aabff42b64faa9337e50286a0aab97a96}{isEmpty}}();}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00017}00017\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_buffer_ac42b91fb82190c7d87b924e89bda80ac}{isFull}}();}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00018}00018\ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{class_buffer_a35bb03d5a5f26a47a8d9b85579648539}{getFront}}();}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00019}00019\ \};}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00020}00020\ }
+
+\end{DoxyCode}

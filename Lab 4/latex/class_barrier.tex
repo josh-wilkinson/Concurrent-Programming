@@ -12,15 +12,15 @@ An Implementation of a barrier Using Semaphores.
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{class_buffer}{virtual}} \mbox{\hyperlink{class_barrier_a401f40e73302009b305904ffc7825304}{\texorpdfstring{$\sim$}{\string~}\+Barrier}} ()
+virtual \mbox{\hyperlink{class_barrier_a401f40e73302009b305904ffc7825304}{\texorpdfstring{$\sim$}{\string~}\+Barrier}} ()
 \item 
-\mbox{\hyperlink{class_barrier_a68730c862911d37696957056595aa604}{Barrier}} (\mbox{\hyperlink{class_buffer}{int}} count)
+\mbox{\hyperlink{class_barrier_a68730c862911d37696957056595aa604}{Barrier}} (int count)
 \item 
-\mbox{\hyperlink{class_buffer}{void}} \mbox{\hyperlink{class_barrier_ab999e172844330d8b9a1c13f3766959d}{set\+Count}} (\mbox{\hyperlink{class_buffer}{int}} count)
+void \mbox{\hyperlink{class_barrier_ab999e172844330d8b9a1c13f3766959d}{set\+Count}} (int count)
 \item 
-\mbox{\hyperlink{class_buffer}{int}} \mbox{\hyperlink{class_barrier_a471bfe5ce54384baa7dbd195ae3a7b30}{get\+Count}} ()
+int \mbox{\hyperlink{class_barrier_a471bfe5ce54384baa7dbd195ae3a7b30}{get\+Count}} ()
 \item 
-\mbox{\hyperlink{class_buffer}{void}} \mbox{\hyperlink{class_barrier_a59b259f25f6acdc5f943398035d2d87a}{wait\+For\+All}} ()
+void \mbox{\hyperlink{class_barrier_a59b259f25f6acdc5f943398035d2d87a}{wait\+For\+All}} ()
 \end{DoxyCompactItemize}
 
 
@@ -54,7 +54,7 @@ Definition at line \mbox{\hyperlink{_barrier_8cpp_source_l00029}{29}} of file \m
 \index{Barrier@{Barrier}!Barrier@{Barrier}}
 \index{Barrier@{Barrier}!Barrier@{Barrier}}
 \doxysubsubsection{\texorpdfstring{Barrier()}{Barrier()}}
-{\footnotesize\ttfamily Barrier\+::\+Barrier (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_buffer}{int}}}]{Num\+Of\+Threads }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Barrier\+::\+Barrier (\begin{DoxyParamCaption}\item[{int}]{Num\+Of\+Threads }\end{DoxyParamCaption})}
 
 \doxylink{class_barrier}{Barrier} constructor 
 
@@ -67,7 +67,7 @@ Definition at line \mbox{\hyperlink{_barrier_8cpp_source_l00010}{10}} of file \m
 \index{Barrier@{Barrier}!getCount@{getCount}}
 \index{getCount@{getCount}!Barrier@{Barrier}}
 \doxysubsubsection{\texorpdfstring{getCount()}{getCount()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_buffer}{int}} Barrier\+::get\+Count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int Barrier\+::get\+Count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 returns count value 
 
@@ -77,7 +77,7 @@ Definition at line \mbox{\hyperlink{_barrier_8cpp_source_l00038}{38}} of file \m
 \index{Barrier@{Barrier}!setCount@{setCount}}
 \index{setCount@{setCount}!Barrier@{Barrier}}
 \doxysubsubsection{\texorpdfstring{setCount()}{setCount()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_buffer}{void}} Barrier\+::set\+Count (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_buffer}{int}}}]{x }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Barrier\+::set\+Count (\begin{DoxyParamCaption}\item[{int}]{x }\end{DoxyParamCaption})}
 
 sets count value 
 
@@ -87,7 +87,7 @@ Definition at line \mbox{\hyperlink{_barrier_8cpp_source_l00034}{34}} of file \m
 \index{Barrier@{Barrier}!waitForAll@{waitForAll}}
 \index{waitForAll@{waitForAll}!Barrier@{Barrier}}
 \doxysubsubsection{\texorpdfstring{waitForAll()}{waitForAll()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_buffer}{void}} Barrier\+::wait\+For\+All (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Barrier\+::wait\+For\+All (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 waits for all the threads before starting second half of code 
 

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['is_5fempty_0',['is_empty',['../class_buffer.html#a9adc2562a0cefc06ba1388ec44bf93e7',1,'Buffer']]],
-  ['is_5ffull_1',['is_full',['../class_buffer.html#acde5e76b04d478797788e18a6c2da485',1,'Buffer']]]
+  ['wait_0',['wait',['../class_semaphore.html#a72aabebf026e3a8b1f3e4d0fa8ee1eda',1,'Semaphore::Wait()'],['../class_semaphore.html#a7f700173ae86ae623684109066e07656',1,'Semaphore::Wait(const std::chrono::duration&lt; R, P &gt; &amp;crRelTime)']]]
 ];

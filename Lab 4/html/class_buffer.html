@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Lab 4: Buffer&lt; T &gt; Class Template Reference</title>
+<title>Lab 4: Buffer Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Lab 4<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">Lab 4<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">Documentation for Concurrent Programming Lab 2. Created using Doxygen.</div>
+   <div id="projectbrief">Lab 4 documentation</div>
   </td>
  </tr>
  </tbody>
@@ -93,239 +93,171 @@ $(document).ready(function(){initNavTree('class_buffer.html',''); initResizable(
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="class_buffer-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">Buffer&lt; T &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">Buffer Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_buffer_8h_source.html">Buffer.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a08f64c6d8abbbffc006fea4f99d6c6ac" id="r_a08f64c6d8abbbffc006fea4f99d6c6ac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_buffer.html#a08f64c6d8abbbffc006fea4f99d6c6ac">Buffer</a> (<a class="el" href="class_buffer.html">size_t</a> max_size)</td></tr>
-<tr class="separator:a08f64c6d8abbbffc006fea4f99d6c6ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f335f364bffad85db1aa12b122928ed" id="r_a8f335f364bffad85db1aa12b122928ed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_buffer.html#a8f335f364bffad85db1aa12b122928ed">enqueue</a> (<a class="el" href="class_buffer.html">T</a> <a class="el" href="class_buffer.html">item</a>)</td></tr>
-<tr class="separator:a8f335f364bffad85db1aa12b122928ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac52eaa7b0b7ec409ce9dfd44bf6e6ba4" id="r_ac52eaa7b0b7ec409ce9dfd44bf6e6ba4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_buffer.html">T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_buffer.html#ac52eaa7b0b7ec409ce9dfd44bf6e6ba4">dequeue</a> ()</td></tr>
-<tr class="separator:ac52eaa7b0b7ec409ce9dfd44bf6e6ba4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7fde5b7220520ecb922c5a3018ede7f6" id="r_a7fde5b7220520ecb922c5a3018ede7f6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_buffer.html">T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_buffer.html#a7fde5b7220520ecb922c5a3018ede7f6">front</a> ()</td></tr>
-<tr class="separator:a7fde5b7220520ecb922c5a3018ede7f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9adc2562a0cefc06ba1388ec44bf93e7" id="r_a9adc2562a0cefc06ba1388ec44bf93e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_buffer.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_buffer.html#a9adc2562a0cefc06ba1388ec44bf93e7">is_empty</a> ()</td></tr>
-<tr class="separator:a9adc2562a0cefc06ba1388ec44bf93e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acde5e76b04d478797788e18a6c2da485" id="r_acde5e76b04d478797788e18a6c2da485"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_buffer.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_buffer.html#acde5e76b04d478797788e18a6c2da485">is_full</a> ()</td></tr>
-<tr class="separator:acde5e76b04d478797788e18a6c2da485"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae86cb4a1c7fc30bde63d19dc2aebf784" id="r_ae86cb4a1c7fc30bde63d19dc2aebf784"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_buffer.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_buffer.html#ae86cb4a1c7fc30bde63d19dc2aebf784">size</a> ()</td></tr>
-<tr class="separator:ae86cb4a1c7fc30bde63d19dc2aebf784"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a333d860d0ad57527f0df0ab400faa23a" id="r_a333d860d0ad57527f0df0ab400faa23a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_buffer.html#a333d860d0ad57527f0df0ab400faa23a">Buffer</a> (int maxSize)</td></tr>
+<tr class="separator:a333d860d0ad57527f0df0ab400faa23a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06cb8574a465f03a559a874d22c8518f" id="r_a06cb8574a465f03a559a874d22c8518f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_buffer.html#a06cb8574a465f03a559a874d22c8518f">add</a> (char item)</td></tr>
+<tr class="separator:a06cb8574a465f03a559a874d22c8518f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa89c5daec905807cf93e4086ca350edc" id="r_aa89c5daec905807cf93e4086ca350edc"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_buffer.html#aa89c5daec905807cf93e4086ca350edc">pop</a> ()</td></tr>
+<tr class="separator:aa89c5daec905807cf93e4086ca350edc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ba2588f521763f6975a8436cf3bfb57" id="r_a3ba2588f521763f6975a8436cf3bfb57"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_buffer.html#a3ba2588f521763f6975a8436cf3bfb57">size</a> ()</td></tr>
+<tr class="separator:a3ba2588f521763f6975a8436cf3bfb57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabff42b64faa9337e50286a0aab97a96" id="r_aabff42b64faa9337e50286a0aab97a96"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_buffer.html#aabff42b64faa9337e50286a0aab97a96">isEmpty</a> ()</td></tr>
+<tr class="separator:aabff42b64faa9337e50286a0aab97a96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac42b91fb82190c7d87b924e89bda80ac" id="r_ac42b91fb82190c7d87b924e89bda80ac"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_buffer.html#ac42b91fb82190c7d87b924e89bda80ac">isFull</a> ()</td></tr>
+<tr class="separator:ac42b91fb82190c7d87b924e89bda80ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35bb03d5a5f26a47a8d9b85579648539" id="r_a35bb03d5a5f26a47a8d9b85579648539"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_buffer.html#a35bb03d5a5f26a47a8d9b85579648539">getFront</a> ()</td></tr>
+<tr class="separator:a35bb03d5a5f26a47a8d9b85579648539"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;class T&gt;<br />
-class Buffer&lt; T &gt;</div>
-<p class="definition">Definition at line <a class="el" href="_buffer_8cpp_source.html#l00008">8</a> of file <a class="el" href="_buffer_8cpp_source.html">Buffer.cpp</a>.</p>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="_buffer_8h_source.html#l00004">4</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a08f64c6d8abbbffc006fea4f99d6c6ac" name="a08f64c6d8abbbffc006fea4f99d6c6ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08f64c6d8abbbffc006fea4f99d6c6ac">&#9670;&#160;</a></span>Buffer()</h2>
+<a id="a333d860d0ad57527f0df0ab400faa23a" name="a333d860d0ad57527f0df0ab400faa23a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a333d860d0ad57527f0df0ab400faa23a">&#9670;&#160;</a></span>Buffer()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;<a class="el" href="class_buffer.html">class</a> <a class="el" href="class_buffer.html">T</a> &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_buffer.html">Buffer</a>&lt; <a class="el" href="class_buffer.html">T</a> &gt;<a class="el" href="class_buffer.html">::Buffer</a> </td>
+          <td class="memname">Buffer::Buffer </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_buffer.html">size_t</a>&#160;</td>
-          <td class="paramname"><em>max_size</em></td><td>)</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>maxSize</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_buffer_8cpp_source.html#l00018">18</a> of file <a class="el" href="_buffer_8cpp_source.html">Buffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_buffer_8cpp_source.html#l00010">10</a> of file <a class="el" href="_buffer_8cpp_source.html">Buffer.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ac52eaa7b0b7ec409ce9dfd44bf6e6ba4" name="ac52eaa7b0b7ec409ce9dfd44bf6e6ba4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac52eaa7b0b7ec409ce9dfd44bf6e6ba4">&#9670;&#160;</a></span>dequeue()</h2>
+<a id="a06cb8574a465f03a559a874d22c8518f" name="a06cb8574a465f03a559a874d22c8518f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06cb8574a465f03a559a874d22c8518f">&#9670;&#160;</a></span>add()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;<a class="el" href="class_buffer.html">class</a> <a class="el" href="class_buffer.html">T</a> &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_buffer.html">T</a> <a class="el" href="class_buffer.html">Buffer</a>&lt; <a class="el" href="class_buffer.html">T</a> &gt;::dequeue </td>
+          <td class="memname">void Buffer::add </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_buffer_8cpp_source.html#l00042">42</a> of file <a class="el" href="_buffer_8cpp_source.html">Buffer.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a8f335f364bffad85db1aa12b122928ed" name="a8f335f364bffad85db1aa12b122928ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f335f364bffad85db1aa12b122928ed">&#9670;&#160;</a></span>enqueue()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;<a class="el" href="class_buffer.html">class</a> <a class="el" href="class_buffer.html">T</a> &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_buffer.html">void</a> <a class="el" href="class_buffer.html">Buffer</a>&lt; <a class="el" href="class_buffer.html">T</a> &gt;::enqueue </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_buffer.html">T</a>&#160;</td>
+          <td class="paramtype">char&#160;</td>
           <td class="paramname"><em>item</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_buffer_8cpp_source.html#l00029">29</a> of file <a class="el" href="_buffer_8cpp_source.html">Buffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_buffer_8cpp_source.html#l00017">17</a> of file <a class="el" href="_buffer_8cpp_source.html">Buffer.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a7fde5b7220520ecb922c5a3018ede7f6" name="a7fde5b7220520ecb922c5a3018ede7f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7fde5b7220520ecb922c5a3018ede7f6">&#9670;&#160;</a></span>front()</h2>
+<a id="a35bb03d5a5f26a47a8d9b85579648539" name="a35bb03d5a5f26a47a8d9b85579648539"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35bb03d5a5f26a47a8d9b85579648539">&#9670;&#160;</a></span>getFront()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;<a class="el" href="class_buffer.html">class</a> <a class="el" href="class_buffer.html">T</a> &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_buffer.html">T</a> <a class="el" href="class_buffer.html">Buffer</a>&lt; <a class="el" href="class_buffer.html">T</a> &gt;::front </td>
+          <td class="memname">char Buffer::getFront </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_buffer_8cpp_source.html#l00060">60</a> of file <a class="el" href="_buffer_8cpp_source.html">Buffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_buffer_8cpp_source.html#l00044">44</a> of file <a class="el" href="_buffer_8cpp_source.html">Buffer.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a9adc2562a0cefc06ba1388ec44bf93e7" name="a9adc2562a0cefc06ba1388ec44bf93e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9adc2562a0cefc06ba1388ec44bf93e7">&#9670;&#160;</a></span>is_empty()</h2>
+<a id="aabff42b64faa9337e50286a0aab97a96" name="aabff42b64faa9337e50286a0aab97a96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabff42b64faa9337e50286a0aab97a96">&#9670;&#160;</a></span>isEmpty()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;<a class="el" href="class_buffer.html">class</a> <a class="el" href="class_buffer.html">T</a> &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_buffer.html">bool</a> <a class="el" href="class_buffer.html">Buffer</a>&lt; <a class="el" href="class_buffer.html">T</a> &gt;::is_empty </td>
+          <td class="memname">bool Buffer::isEmpty </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_buffer_8cpp_source.html#l00065">65</a> of file <a class="el" href="_buffer_8cpp_source.html">Buffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_buffer_8cpp_source.html#l00038">38</a> of file <a class="el" href="_buffer_8cpp_source.html">Buffer.cpp</a>.</p>
 
 </div>
 </div>
-<a id="acde5e76b04d478797788e18a6c2da485" name="acde5e76b04d478797788e18a6c2da485"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acde5e76b04d478797788e18a6c2da485">&#9670;&#160;</a></span>is_full()</h2>
+<a id="ac42b91fb82190c7d87b924e89bda80ac" name="ac42b91fb82190c7d87b924e89bda80ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac42b91fb82190c7d87b924e89bda80ac">&#9670;&#160;</a></span>isFull()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;<a class="el" href="class_buffer.html">class</a> <a class="el" href="class_buffer.html">T</a> &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_buffer.html">bool</a> <a class="el" href="class_buffer.html">Buffer</a>&lt; <a class="el" href="class_buffer.html">T</a> &gt;::is_full </td>
+          <td class="memname">bool Buffer::isFull </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_buffer_8cpp_source.html#l00070">70</a> of file <a class="el" href="_buffer_8cpp_source.html">Buffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_buffer_8cpp_source.html#l00041">41</a> of file <a class="el" href="_buffer_8cpp_source.html">Buffer.cpp</a>.</p>
 
 </div>
 </div>
-<a id="ae86cb4a1c7fc30bde63d19dc2aebf784" name="ae86cb4a1c7fc30bde63d19dc2aebf784"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae86cb4a1c7fc30bde63d19dc2aebf784">&#9670;&#160;</a></span>size()</h2>
+<a id="aa89c5daec905807cf93e4086ca350edc" name="aa89c5daec905807cf93e4086ca350edc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa89c5daec905807cf93e4086ca350edc">&#9670;&#160;</a></span>pop()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;<a class="el" href="class_buffer.html">class</a> <a class="el" href="class_buffer.html">T</a> &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_buffer.html">size_t</a> <a class="el" href="class_buffer.html">Buffer</a>&lt; <a class="el" href="class_buffer.html">T</a> &gt;::size </td>
+          <td class="memname">char Buffer::pop </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_buffer_8cpp_source.html#l00075">75</a> of file <a class="el" href="_buffer_8cpp_source.html">Buffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_buffer_8cpp_source.html#l00024">24</a> of file <a class="el" href="_buffer_8cpp_source.html">Buffer.cpp</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a id="a3ba2588f521763f6975a8436cf3bfb57" name="a3ba2588f521763f6975a8436cf3bfb57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ba2588f521763f6975a8436cf3bfb57">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Buffer::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_buffer_8cpp_source.html#l00033">33</a> of file <a class="el" href="_buffer_8cpp_source.html">Buffer.cpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="_buffer_8h_source.html">Buffer.h</a></li>
 <li><a class="el" href="_buffer_8cpp_source.html">Buffer.cpp</a></li>
 </ul>
 </div><!-- contents -->

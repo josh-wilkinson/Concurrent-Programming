@@ -12,13 +12,13 @@ A \doxylink{class_semaphore}{Semaphore} Implementation.
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{class_semaphore_a0d9290d316636875ca85d1d78950a817}{Semaphore}} (\mbox{\hyperlink{class_buffer}{unsigned}} \mbox{\hyperlink{class_buffer}{int}} \mbox{\hyperlink{class_buffer}{ui\+Count}}=0)
+\mbox{\hyperlink{class_semaphore_a0d9290d316636875ca85d1d78950a817}{Semaphore}} (unsigned int ui\+Count=0)
 \item 
-\mbox{\hyperlink{class_buffer}{void}} \mbox{\hyperlink{class_semaphore_a72aabebf026e3a8b1f3e4d0fa8ee1eda}{Wait}} ()
+void \mbox{\hyperlink{class_semaphore_a72aabebf026e3a8b1f3e4d0fa8ee1eda}{Wait}} ()
 \item 
-{\footnotesize template$<$\mbox{\hyperlink{class_buffer}{typename}} \mbox{\hyperlink{class_buffer}{R}} , \mbox{\hyperlink{class_buffer}{typename}} \mbox{\hyperlink{class_buffer}{P}} $>$ }\\\mbox{\hyperlink{class_buffer}{bool}} \mbox{\hyperlink{class_semaphore_a7f700173ae86ae623684109066e07656}{Wait}} (\mbox{\hyperlink{class_buffer}{const}} std\+::chrono\+::duration$<$ \mbox{\hyperlink{class_buffer}{R}}, \mbox{\hyperlink{class_buffer}{P}} $>$ \&\mbox{\hyperlink{class_buffer}{cr\+Rel\+Time}})
+{\footnotesize template$<$typename R , typename P $>$ }\\bool \mbox{\hyperlink{class_semaphore_a7f700173ae86ae623684109066e07656}{Wait}} (const std\+::chrono\+::duration$<$ R, P $>$ \&cr\+Rel\+Time)
 \item 
-\mbox{\hyperlink{class_buffer}{void}} \mbox{\hyperlink{class_semaphore_a86f92f738b4486439b296d8e235895f2}{Signal}} ()
+void \mbox{\hyperlink{class_semaphore_a86f92f738b4486439b296d8e235895f2}{Signal}} ()
 \end{DoxyCompactItemize}
 
 
@@ -36,7 +36,7 @@ Definition at line \mbox{\hyperlink{_semaphore_8h_source_l00014}{14}} of file \m
 \index{Semaphore@{Semaphore}!Semaphore@{Semaphore}}
 \index{Semaphore@{Semaphore}!Semaphore@{Semaphore}}
 \doxysubsubsection{\texorpdfstring{Semaphore()}{Semaphore()}}
-{\footnotesize\ttfamily Semaphore\+::\+Semaphore (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_buffer}{unsigned}} \mbox{\hyperlink{class_buffer}{int}}}]{ui\+Count = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily Semaphore\+::\+Semaphore (\begin{DoxyParamCaption}\item[{unsigned int}]{ui\+Count = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -49,7 +49,7 @@ Definition at line \mbox{\hyperlink{_semaphore_8h_source_l00022}{22}} of file \m
 \index{Semaphore@{Semaphore}!Signal@{Signal}}
 \index{Signal@{Signal}!Semaphore@{Semaphore}}
 \doxysubsubsection{\texorpdfstring{Signal()}{Signal()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_buffer}{void}} Semaphore\+::\+Signal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Semaphore\+::\+Signal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -59,7 +59,7 @@ Definition at line \mbox{\hyperlink{_semaphore_8cpp_source_l00030}{30}} of file 
 \index{Semaphore@{Semaphore}!Wait@{Wait}}
 \index{Wait@{Wait}!Semaphore@{Semaphore}}
 \doxysubsubsection{\texorpdfstring{Wait()}{Wait()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_buffer}{void}} Semaphore\+::\+Wait (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Semaphore\+::\+Wait (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -69,8 +69,8 @@ Definition at line \mbox{\hyperlink{_semaphore_8cpp_source_l00012}{12}} of file 
 \index{Semaphore@{Semaphore}!Wait@{Wait}}
 \index{Wait@{Wait}!Semaphore@{Semaphore}}
 \doxysubsubsection{\texorpdfstring{Wait()}{Wait()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$\mbox{\hyperlink{class_buffer}{typename}} \mbox{\hyperlink{class_buffer}{R}} , \mbox{\hyperlink{class_buffer}{typename}} \mbox{\hyperlink{class_buffer}{P}} $>$ \\
-\mbox{\hyperlink{class_buffer}{bool}} Semaphore\+::\+Wait (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_buffer}{const}} std\+::chrono\+::duration$<$ \mbox{\hyperlink{class_buffer}{R}}, \mbox{\hyperlink{class_buffer}{P}} $>$ \&}]{cr\+Rel\+Time }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$typename R , typename P $>$ \\
+bool Semaphore\+::\+Wait (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::duration$<$ R, P $>$ \&}]{cr\+Rel\+Time }\end{DoxyParamCaption})}
 
 
 

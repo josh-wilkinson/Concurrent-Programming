@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['semaphore_0',['Semaphore',['../class_semaphore.html#a0d9290d316636875ca85d1d78950a817',1,'Semaphore']]],
-  ['setcount_1',['setCount',['../class_barrier.html#ab999e172844330d8b9a1c13f3766959d',1,'Barrier']]],
-  ['signal_2',['Signal',['../class_semaphore.html#a86f92f738b4486439b296d8e235895f2',1,'Semaphore']]],
-  ['size_3',['size',['../class_buffer.html#ae86cb4a1c7fc30bde63d19dc2aebf784',1,'Buffer']]]
+  ['wait_0',['wait',['../class_semaphore.html#a72aabebf026e3a8b1f3e4d0fa8ee1eda',1,'Semaphore::Wait()'],['../class_semaphore.html#a7f700173ae86ae623684109066e07656',1,'Semaphore::Wait(const std::chrono::duration&lt; R, P &gt; &amp;crRelTime)']]],
+  ['waitforall_1',['waitForAll',['../class_barrier.html#a59b259f25f6acdc5f943398035d2d87a',1,'Barrier']]]
 ];

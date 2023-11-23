@@ -1,7 +1,8 @@
 # Name: Joshua Wilkinson
 # Updated Make file
 # Date: 12/10/2023                                                              
-# Purpose: Make file for lab 4, producer consumer problem.                               
+# Purpose: Make file for lab 4, producer consumer problem.     
+# See http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/ for info on make files.                          
 
 CC=g++
 CPPFILES=SafeBuffer.cpp Event.cpp Semaphore.cpp main.cpp

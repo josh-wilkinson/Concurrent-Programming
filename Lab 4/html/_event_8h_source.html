@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Lab 4<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">Lab 4<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">Documentation for Concurrent Programming Lab 2. Created using Doxygen.</div>
+   <div id="projectbrief">Lab 4 documentation</div>
   </td>
  </tr>
  </tbody>
@@ -144,13 +144,33 @@ $(document).ready(function(){initNavTree('_event_8h_source.html',''); initResiza
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">/* Code: */</span></div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">/* Event.h ends here */</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">// basic constructor - val = LCASE</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">// consume - prints uppercase of val (val - 32 ?) ASCII</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">// basic constructor - val = LCASE</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">// consume - prints uppercase of val (val - 32 ?) ASCII</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#include &quot;<a class="code" href="_semaphore_8h.html">Semaphore.h</a>&quot;</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="preprocessor">#pragma once</span></div>
+<div class="foldopen" id="foldopen00063" data-start="{" data-end="};">
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="class_event.html">   63</a></span><span class="keyword">class </span><a class="code hl_class" href="class_event.html">Event</a></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>{</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keywordtype">char</span> c;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keyword">virtual</span> <a class="code hl_function" href="class_event.html#a7704ec01ce91e673885792054214b3d2">~Event</a>();  </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <a class="code hl_function" href="class_event.html#a5a40dd4708297f7031e29b39e039ae10">Event</a>();</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_event.html#ab57583f1d8975c19bd1c6448482d958d">consume</a>();</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>};</div>
+</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">/* Event.h ends here */</span></div>
+<div class="ttc" id="a_semaphore_8h_html"><div class="ttname"><a href="_semaphore_8h.html">Semaphore.h</a></div></div>
+<div class="ttc" id="aclass_event_html"><div class="ttname"><a href="class_event.html">Event</a></div><div class="ttdoc">An implementation of Event.</div><div class="ttdef"><b>Definition</b> <a href="_event_8h_source.html#l00063">Event.h:64</a></div></div>
+<div class="ttc" id="aclass_event_html_a5a40dd4708297f7031e29b39e039ae10"><div class="ttname"><a href="class_event.html#a5a40dd4708297f7031e29b39e039ae10">Event::Event</a></div><div class="ttdeci">Event()</div><div class="ttdef"><b>Definition</b> <a href="_event_8cpp_source.html#l00012">Event.cpp:12</a></div></div>
+<div class="ttc" id="aclass_event_html_a7704ec01ce91e673885792054214b3d2"><div class="ttname"><a href="class_event.html#a7704ec01ce91e673885792054214b3d2">Event::~Event</a></div><div class="ttdeci">virtual ~Event()</div><div class="ttdef"><b>Definition</b> <a href="_event_8cpp_source.html#l00017">Event.cpp:17</a></div></div>
+<div class="ttc" id="aclass_event_html_ab57583f1d8975c19bd1c6448482d958d"><div class="ttname"><a href="class_event.html#ab57583f1d8975c19bd1c6448482d958d">Event::consume</a></div><div class="ttdeci">void consume()</div><div class="ttdef"><b>Definition</b> <a href="_event_8cpp_source.html#l00023">Event.cpp:23</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

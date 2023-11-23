@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Lab 4<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">Lab 4<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">Documentation for Concurrent Programming Lab 2. Created using Doxygen.</div>
+   <div id="projectbrief">Lab 4 documentation</div>
   </td>
  </tr>
  </tbody>
@@ -108,25 +108,23 @@ $(document).ready(function(){initNavTree('_semaphore_8h_source.html',''); initRe
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>{</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">private</span>:</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> m_uiCount; </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a class="code hl_function" href="class_buffer.html#a08f64c6d8abbbffc006fea4f99d6c6ac">std::mutex</a> m_mutex;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_function" href="class_buffer.html#a08f64c6d8abbbffc006fea4f99d6c6ac">std::condition_variable</a> m_condition;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    std::mutex m_mutex;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    std::condition_variable m_condition;</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">public</span>:</div>
 <div class="foldopen" id="foldopen00022" data-start="{" data-end="}">
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="class_semaphore.html#a0d9290d316636875ca85d1d78950a817">   22</a></span>    <a class="code hl_function" href="class_semaphore.html#a0d9290d316636875ca85d1d78950a817">Semaphore</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code hl_class" href="class_buffer.html">uiCount</a>=0)</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>          : m_uiCount(<a class="code hl_class" href="class_buffer.html">uiCount</a>) { };</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="class_semaphore.html#a0d9290d316636875ca85d1d78950a817">   22</a></span>    <a class="code hl_function" href="class_semaphore.html#a0d9290d316636875ca85d1d78950a817">Semaphore</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> uiCount=0)</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>          : m_uiCount(uiCount) { };</div>
 </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_semaphore.html#a72aabebf026e3a8b1f3e4d0fa8ee1eda">Wait</a>();</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">template</span>&lt; <span class="keyword">typename</span> R,<span class="keyword">typename</span> P &gt;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_semaphore.html#a72aabebf026e3a8b1f3e4d0fa8ee1eda">Wait</a>(<span class="keyword">const</span> std::chrono::duration&lt;R,P&gt;&amp; <a class="code hl_class" href="class_buffer.html">crRelTime</a>);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_semaphore.html#a72aabebf026e3a8b1f3e4d0fa8ee1eda">Wait</a>(<span class="keyword">const</span> std::chrono::duration&lt;R,P&gt;&amp; crRelTime);</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_semaphore.html#a86f92f738b4486439b296d8e235895f2">Signal</a>();</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>};</div>
 </div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclass_buffer_html"><div class="ttname"><a href="class_buffer.html">Buffer</a></div><div class="ttdef"><b>Definition</b> <a href="_buffer_8cpp_source.html#l00008">Buffer.cpp:8</a></div></div>
-<div class="ttc" id="aclass_buffer_html_a08f64c6d8abbbffc006fea4f99d6c6ac"><div class="ttname"><a href="class_buffer.html#a08f64c6d8abbbffc006fea4f99d6c6ac">Buffer::Buffer</a></div><div class="ttdeci">Buffer(size_t max_size)</div><div class="ttdef"><b>Definition</b> <a href="_buffer_8cpp_source.html#l00018">Buffer.cpp:25</a></div></div>
 <div class="ttc" id="aclass_semaphore_html"><div class="ttname"><a href="class_semaphore.html">Semaphore</a></div><div class="ttdoc">A Semaphore Implementation.</div><div class="ttdef"><b>Definition</b> <a href="_semaphore_8h_source.html#l00014">Semaphore.h:15</a></div></div>
 <div class="ttc" id="aclass_semaphore_html_a0d9290d316636875ca85d1d78950a817"><div class="ttname"><a href="class_semaphore.html#a0d9290d316636875ca85d1d78950a817">Semaphore::Semaphore</a></div><div class="ttdeci">Semaphore(unsigned int uiCount=0)</div><div class="ttdef"><b>Definition</b> <a href="_semaphore_8h_source.html#l00022">Semaphore.h:22</a></div></div>
 <div class="ttc" id="aclass_semaphore_html_a72aabebf026e3a8b1f3e4d0fa8ee1eda"><div class="ttname"><a href="class_semaphore.html#a72aabebf026e3a8b1f3e4d0fa8ee1eda">Semaphore::Wait</a></div><div class="ttdeci">void Wait()</div><div class="ttdef"><b>Definition</b> <a href="_semaphore_8cpp_source.html#l00012">Semaphore.cpp:12</a></div></div>

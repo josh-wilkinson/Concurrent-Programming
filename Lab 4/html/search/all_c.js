@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7ebarrier_0',['~Barrier',['../class_barrier.html#a401f40e73302009b305904ffc7825304',1,'Barrier']]]
+  ['https_3a_20github_20com_20josh_20wilkinson_20concurrent_20programming_20tree_20master_20lab_20204_0',['&lt;strong&gt;GitHub URL&lt;/strong&gt;: https://github.com/josh-wilkinson/Concurrent-Programming/tree/master/Lab%204',['../md__r_e_a_d_m_e.html#autotoc_md4',1,'']]]
 ];
