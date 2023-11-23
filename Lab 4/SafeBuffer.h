@@ -1,16 +1,16 @@
 /* SafeBuffer.h --- 
  * 
  * Filename: SafeBuffer.h
- * Description: 
+ * Description: This file contains the headers for SafeBuffer.cpp
  * Author: Joseph
- * Maintainer: 
+ * Maintainer: Joshua Wilkinson
  * Created: Tue Jan  8 12:30:23 2019 (+0000)
- * Version: 
+ * Version: 1
  * Package-Requires: ()
  * Last-Updated: Tue Jan  8 12:30:25 2019 (+0000)
  *           By: Joseph
  *     Update #: 1
- * URL: 
+ * URL: https://github.com/josh-wilkinson/Concurrent-Programming/blob/master/Lab%204/SafeBuffer.h
  * Doc URL: 
  * Keywords: 
  * Compatibility: 
@@ -19,13 +19,13 @@
 
 /* Commentary: 
  * 
- * 
+ * Came to the conclusion that there is no need to make this class templated, since we're only using Event objects
  * 
  */
 
 /* Change Log:
- * 
- * 
+ *
+ * Added headers to be used in SafeBuffer.cpp
  */
 
 /* This program is free software: you can redistribute it and/or modify
@@ -44,22 +44,18 @@
 
 /* Code: */
 
-
-
-/* SafeBuffer.h ends here */
-
 #include "Semaphore.h"
 #include <vector>
 #include "Event.h"
 
 class SafeBuffer{
 private:
-  std::vector<Event> items; // contains all the Event objects
+  std::vector<Event> items; /**< contains all the Event objects */
   std::shared_ptr<Semaphore> theMutex;
   std::shared_ptr<Semaphore> semaphore;
 public:
   SafeBuffer();
-  void push();
+  void push(Event theEvent);
   Event pop();
 };
 
