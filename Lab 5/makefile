@@ -3,14 +3,18 @@
 #Purpose: Make file for lab 5
 #See http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/ for info on make files.
 
-
 CC=g++
-CFLAGS= -std=c++11 -pthread
+CFLAGS= -std=c++11 -Wall -pthread -I.
 CPPFILES=main.cpp Semaphore.cpp
 
-SIMPLE: $(CPPFILES)
-	g++ -std=c++11 -pthread $(CPPFILES)
+%.o: %.cpp
+	$(CC) -c -o $@ $< $(CFLAGS) $(DEBUGFLAGS)
 
+SIMPLE: $(CPPFILES)
+	$(CC) -o DiningPhilosophers $(CFLAGS) $(CPPFILES)
+
+doc:
+	doxygen Doxyfile
 
 CLEAN:
-	rm *.o
+	rm *.o *.out

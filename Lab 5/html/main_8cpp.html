@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Lab 5<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">Lab 5<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">Documentation for Concurrent Programming Lab 3. Created using Doxygen.</div>
+   <div id="projectbrief">Lab 5 documentation</div>
   </td>
  </tr>
  </tbody>
@@ -153,6 +153,14 @@ Variables</h2></td></tr>
 <p>The philosopher eats for a random amount of time </p>
 
 <p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00076">76</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   76</span>                  {</div>
+<div class="line"><span class="lineno">   77</span>  <span class="keywordtype">int</span> seconds=rand() % <a class="code hl_variable" href="main_8cpp.html#a92e894dc749f0caa8232e432965090af">EATTIME</a> + 1;</div>
+<div class="line"><span class="lineno">   78</span>  std::cout &lt;&lt; myID &lt;&lt; <span class="stringliteral">&quot; is chomping! &quot;</span>&lt;&lt;std::endl;</div>
+<div class="line"><span class="lineno">   79</span>  sleep(seconds);  </div>
+<div class="line"><span class="lineno">   80</span>}</div>
+<div class="ttc" id="amain_8cpp_html_a92e894dc749f0caa8232e432965090af"><div class="ttname"><a href="main_8cpp.html#a92e894dc749f0caa8232e432965090af">EATTIME</a></div><div class="ttdeci">const int EATTIME</div><div class="ttdef"><b>Definition</b> <a href="main_8cpp_source.html#l00046">main.cpp:46</a></div></div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00083">philosopher()</a>.</p>
 
 </div>
 </div>
@@ -171,6 +179,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00058">get_forks()</a>, <a class="el" href="main_8cpp_source.html#l00094">main()</a>, and <a class="el" href="main_8cpp_source.html#l00068">put_forks()</a>.</p>
 
 </div>
 </div>
@@ -192,6 +202,19 @@ Variables</h2></td></tr>
 <p>A philosopher searches for a fork to their left and to their right </p>
 
 <p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00058">58</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   58</span>                          {</div>
+<div class="line"><span class="lineno">   59</span>  <a class="code hl_variable" href="main_8cpp.html#acafd20d0ee2785faac5f73249b6c96a2">stopper</a>-&gt;Wait(); <span class="comment">// will block when 4 threads have reached this line</span></div>
+<div class="line"><span class="lineno">   60</span>  std::cout &lt;&lt; philID &lt;&lt; <span class="stringliteral">&quot; is getting their forks!&quot;</span> &lt;&lt; std::endl; </div>
+<div class="line"><span class="lineno">   61</span>  <a class="code hl_function" href="main_8cpp.html#ad71e682f90c04e62ef16d8d720da488e">forks</a>[philID]-&gt;Wait();</div>
+<div class="line"><span class="lineno">   62</span>  std::cout &lt;&lt; philID &lt;&lt; <span class="stringliteral">&quot; has gotten their fork!&quot;</span> &lt;&lt; std::endl; </div>
+<div class="line"><span class="lineno">   63</span>  <a class="code hl_function" href="main_8cpp.html#ad71e682f90c04e62ef16d8d720da488e">forks</a>[(philID+1)%<a class="code hl_variable" href="main_8cpp.html#a308572e3937ef7742e8cc93025faf712">COUNT</a>]-&gt;Wait();</div>
+<div class="line"><span class="lineno">   64</span>  std::cout &lt;&lt; philID &lt;&lt; <span class="stringliteral">&quot; has gotten their fork!&quot;</span> &lt;&lt; std::endl; </div>
+<div class="line"><span class="lineno">   65</span>}</div>
+<div class="ttc" id="amain_8cpp_html_a308572e3937ef7742e8cc93025faf712"><div class="ttname"><a href="main_8cpp.html#a308572e3937ef7742e8cc93025faf712">COUNT</a></div><div class="ttdeci">const int COUNT</div><div class="ttdef"><b>Definition</b> <a href="main_8cpp_source.html#l00044">main.cpp:44</a></div></div>
+<div class="ttc" id="amain_8cpp_html_acafd20d0ee2785faac5f73249b6c96a2"><div class="ttname"><a href="main_8cpp.html#acafd20d0ee2785faac5f73249b6c96a2">stopper</a></div><div class="ttdeci">std::shared_ptr&lt; Semaphore &gt; stopper</div><div class="ttdef"><b>Definition</b> <a href="main_8cpp_source.html#l00048">main.cpp:48</a></div></div>
+<div class="ttc" id="amain_8cpp_html_ad71e682f90c04e62ef16d8d720da488e"><div class="ttname"><a href="main_8cpp.html#ad71e682f90c04e62ef16d8d720da488e">forks</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; Semaphore &gt; &gt; forks(COUNT)</div></div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00083">philosopher()</a>.</p>
 
 </div>
 </div>
@@ -214,7 +237,24 @@ Variables</h2></td></tr>
 <p>&lt; can withstand 4 waits before blocking</p>
 
 <p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00094">94</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-
+<div class="fragment"><div class="line"><span class="lineno">   94</span>              {</div>
+<div class="line"><span class="lineno">   96</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_variable" href="main_8cpp.html#a308572e3937ef7742e8cc93025faf712">COUNT</a>; ++i){</div>
+<div class="line"><span class="lineno">   97</span>    <a class="code hl_function" href="main_8cpp.html#ad71e682f90c04e62ef16d8d720da488e">forks</a>[i] = std::make_shared&lt;Semaphore&gt;(1);</div>
+<div class="line"><span class="lineno">   98</span>  }  </div>
+<div class="line"><span class="lineno">   99</span>  srand (time(NULL)); <span class="comment">// initialize random seed: </span></div>
+<div class="line"><span class="lineno">  100</span>  std::vector&lt;std::thread&gt; vt(<a class="code hl_variable" href="main_8cpp.html#a308572e3937ef7742e8cc93025faf712">COUNT</a>);</div>
+<div class="line"><span class="lineno">  102</span>  <a class="code hl_variable" href="main_8cpp.html#acafd20d0ee2785faac5f73249b6c96a2">stopper</a> = std::make_shared&lt;Semaphore&gt;(4);</div>
+<div class="line"><span class="lineno">  103</span>  <span class="keywordtype">int</span> <span class="keywordtype">id</span>=0;</div>
+<div class="line"><span class="lineno">  104</span>  <span class="keywordflow">for</span>(std::thread&amp; t: vt){</div>
+<div class="line"><span class="lineno">  105</span>    t=std::thread(<a class="code hl_function" href="main_8cpp.html#a61d704a6f65c3d915b82ea8a844cc527">philosopher</a>,<span class="keywordtype">id</span>++<span class="comment">/*,params*/</span>);</div>
+<div class="line"><span class="lineno">  106</span>  }</div>
+<div class="line"><span class="lineno">  108</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; v :vt){</div>
+<div class="line"><span class="lineno">  109</span>      v.join();</div>
+<div class="line"><span class="lineno">  110</span>  }</div>
+<div class="line"><span class="lineno">  111</span>  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  112</span>}</div>
+<div class="ttc" id="amain_8cpp_html_a61d704a6f65c3d915b82ea8a844cc527"><div class="ttname"><a href="main_8cpp.html#a61d704a6f65c3d915b82ea8a844cc527">philosopher</a></div><div class="ttdeci">void philosopher(int id)</div><div class="ttdef"><b>Definition</b> <a href="main_8cpp_source.html#l00083">main.cpp:83</a></div></div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a61d704a6f65c3d915b82ea8a844cc527" name="a61d704a6f65c3d915b82ea8a844cc527"></a>
@@ -235,6 +275,22 @@ Variables</h2></td></tr>
 <p>runs the dinner service for the philosophers for a set amount of time </p>
 
 <p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00083">83</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   83</span>                         {</div>
+<div class="line"><span class="lineno">   84</span>  <span class="keywordtype">int</span> times=10; <span class="comment">// Number of times the philosphers sit down to eat!</span></div>
+<div class="line"><span class="lineno">   85</span>  <span class="keywordflow">while</span>(times&gt;0){</div>
+<div class="line"><span class="lineno">   86</span>    <a class="code hl_function" href="main_8cpp.html#a995feefa383b82265e681a3fe8c012c2">think</a>(<span class="keywordtype">id</span>);</div>
+<div class="line"><span class="lineno">   87</span>    <a class="code hl_function" href="main_8cpp.html#a21a9defcc14025ebcaa9484d47622b9d">get_forks</a>(<span class="keywordtype">id</span>);</div>
+<div class="line"><span class="lineno">   88</span>    <a class="code hl_function" href="main_8cpp.html#a228fa031b8deb86a9df2eea2892c3241">eat</a>(<span class="keywordtype">id</span>);</div>
+<div class="line"><span class="lineno">   89</span>    <a class="code hl_function" href="main_8cpp.html#a4cec90aab433a1e4df09b9b6662d5c3e">put_forks</a>(<span class="keywordtype">id</span>);</div>
+<div class="line"><span class="lineno">   90</span>    times--;</div>
+<div class="line"><span class="lineno">   91</span>  }<span class="comment">//while  </span></div>
+<div class="line"><span class="lineno">   92</span>}<span class="comment">//philosopher</span></div>
+<div class="ttc" id="amain_8cpp_html_a21a9defcc14025ebcaa9484d47622b9d"><div class="ttname"><a href="main_8cpp.html#a21a9defcc14025ebcaa9484d47622b9d">get_forks</a></div><div class="ttdeci">void get_forks(int philID)</div><div class="ttdef"><b>Definition</b> <a href="main_8cpp_source.html#l00058">main.cpp:58</a></div></div>
+<div class="ttc" id="amain_8cpp_html_a228fa031b8deb86a9df2eea2892c3241"><div class="ttname"><a href="main_8cpp.html#a228fa031b8deb86a9df2eea2892c3241">eat</a></div><div class="ttdeci">void eat(int myID)</div><div class="ttdef"><b>Definition</b> <a href="main_8cpp_source.html#l00076">main.cpp:76</a></div></div>
+<div class="ttc" id="amain_8cpp_html_a4cec90aab433a1e4df09b9b6662d5c3e"><div class="ttname"><a href="main_8cpp.html#a4cec90aab433a1e4df09b9b6662d5c3e">put_forks</a></div><div class="ttdeci">void put_forks(int philID)</div><div class="ttdef"><b>Definition</b> <a href="main_8cpp_source.html#l00068">main.cpp:68</a></div></div>
+<div class="ttc" id="amain_8cpp_html_a995feefa383b82265e681a3fe8c012c2"><div class="ttname"><a href="main_8cpp.html#a995feefa383b82265e681a3fe8c012c2">think</a></div><div class="ttdeci">void think(int myID)</div><div class="ttdef"><b>Definition</b> <a href="main_8cpp_source.html#l00051">main.cpp:51</a></div></div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00094">main()</a>.</p>
 
 </div>
 </div>
@@ -256,6 +312,14 @@ Variables</h2></td></tr>
 <p>A philosopher puts down both of their forks, ready for the next philospher process </p>
 
 <p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00068">68</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   68</span>                          {</div>
+<div class="line"><span class="lineno">   69</span>  std::cout &lt;&lt; philID &lt;&lt; <span class="stringliteral">&quot; is putting their forks down!&quot;</span> &lt;&lt; std::endl; </div>
+<div class="line"><span class="lineno">   70</span>  <a class="code hl_function" href="main_8cpp.html#ad71e682f90c04e62ef16d8d720da488e">forks</a>[philID]-&gt;Signal();</div>
+<div class="line"><span class="lineno">   71</span>  <a class="code hl_function" href="main_8cpp.html#ad71e682f90c04e62ef16d8d720da488e">forks</a>[(philID+1)%<a class="code hl_variable" href="main_8cpp.html#a308572e3937ef7742e8cc93025faf712">COUNT</a>]-&gt;Signal();</div>
+<div class="line"><span class="lineno">   72</span>  <a class="code hl_variable" href="main_8cpp.html#acafd20d0ee2785faac5f73249b6c96a2">stopper</a>-&gt;Signal(); <span class="comment">// will signal when a thread has finished eating, letting other processes go through</span></div>
+<div class="line"><span class="lineno">   73</span>}</div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00083">philosopher()</a>.</p>
 
 </div>
 </div>
@@ -277,6 +341,14 @@ Variables</h2></td></tr>
 <p>A philosopher thread is given a random time to think before searching for forks </p>
 
 <p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00051">51</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   51</span>                    {</div>
+<div class="line"><span class="lineno">   52</span>  <span class="keywordtype">int</span> seconds=rand() % <a class="code hl_variable" href="main_8cpp.html#a5a1bc6e8c62cf965547cd9bba4da2448">THINKTIME</a> + 1;</div>
+<div class="line"><span class="lineno">   53</span>  std::cout &lt;&lt; myID &lt;&lt; <span class="stringliteral">&quot; is thinking! &quot;</span>&lt;&lt;std::endl;</div>
+<div class="line"><span class="lineno">   54</span>  sleep(seconds);</div>
+<div class="line"><span class="lineno">   55</span>}</div>
+<div class="ttc" id="amain_8cpp_html_a5a1bc6e8c62cf965547cd9bba4da2448"><div class="ttname"><a href="main_8cpp.html#a5a1bc6e8c62cf965547cd9bba4da2448">THINKTIME</a></div><div class="ttdeci">const int THINKTIME</div><div class="ttdef"><b>Definition</b> <a href="main_8cpp_source.html#l00045">main.cpp:45</a></div></div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00083">philosopher()</a>.</p>
 
 </div>
 </div>
@@ -295,6 +367,8 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00044">44</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
+<p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00058">get_forks()</a>, <a class="el" href="main_8cpp_source.html#l00094">main()</a>, and <a class="el" href="main_8cpp_source.html#l00068">put_forks()</a>.</p>
+
 </div>
 </div>
 <a id="a92e894dc749f0caa8232e432965090af" name="a92e894dc749f0caa8232e432965090af"></a>
@@ -310,6 +384,8 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00046">46</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00076">eat()</a>.</p>
 
 </div>
 </div>
@@ -327,6 +403,8 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00048">48</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
+<p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00058">get_forks()</a>, <a class="el" href="main_8cpp_source.html#l00094">main()</a>, and <a class="el" href="main_8cpp_source.html#l00068">put_forks()</a>.</p>
+
 </div>
 </div>
 <a id="a5a1bc6e8c62cf965547cd9bba4da2448" name="a5a1bc6e8c62cf965547cd9bba4da2448"></a>
@@ -342,6 +420,8 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00045">45</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00051">think()</a>.</p>
 
 </div>
 </div>
