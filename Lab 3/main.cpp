@@ -1,3 +1,8 @@
+// Name: Joshua Wilkinson
+// Student Number: C00262503
+// 08/10/2023
+// Purpose: driver to run Lab 3 and check if the barrier is working properly
+
 #include "Barrier.h"
 #include <thread>
 #include <vector>
@@ -19,11 +24,11 @@ int main(void){
   std::shared_ptr<Barrier> barrierObj( new Barrier(5));
 
   barrierObj->setCount(5);
-
+  /*!< Setting up array of threads*/
   for(int i=0; i < threadArray.size(); ++i){
     threadArray[i]=std::thread(task,barrierObj);
   }
-
+  /*!< Joining threads*/
   for(int i = 0; i < threadArray.size(); i++){
     threadArray[i].join();
   }

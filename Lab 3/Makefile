@@ -17,5 +17,8 @@ ALL: $(OBJFILES) $(HFILES)
 DEBUG: DEBUGFLAGS = -g -O0
 DEBUG: ALL
 
+doc:
+	doxygen Doxyfile
+
 CLEAN:
 	rm *.o

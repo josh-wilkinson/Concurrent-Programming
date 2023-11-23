@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Lab 3<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">Lab 3<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">Documentation for Concurrent Programming Lab 3. Created using Doxygen.</div>
+   <div id="projectbrief">Lab 3 documentation</div>
   </td>
  </tr>
  </tbody>
@@ -149,7 +149,10 @@ Public Member Functions</h2></td></tr>
 <p><a class="el" href="class_barrier.html" title="An Implementation of a barrier Using Semaphores.">Barrier</a> deconstructor </p>
 
 <p class="definition">Definition at line <a class="el" href="_barrier_8cpp_source.html#l00029">29</a> of file <a class="el" href="_barrier_8cpp_source.html">Barrier.cpp</a>.</p>
-
+<div class="fragment"><div class="line"><span class="lineno">   29</span>                 {</div>
+<div class="line"><span class="lineno">   30</span>    <span class="comment">// nothing to do</span></div>
+<div class="line"><span class="lineno">   31</span>}</div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a68730c862911d37696957056595aa604" name="a68730c862911d37696957056595aa604"></a>
@@ -170,7 +173,15 @@ Public Member Functions</h2></td></tr>
 <p><a class="el" href="class_barrier.html" title="An Implementation of a barrier Using Semaphores.">Barrier</a> constructor </p>
 
 <p class="definition">Definition at line <a class="el" href="_barrier_8cpp_source.html#l00010">10</a> of file <a class="el" href="_barrier_8cpp_source.html">Barrier.cpp</a>.</p>
-
+<div class="fragment"><div class="line"><span class="lineno">   10</span>                                {</div>
+<div class="line"><span class="lineno">   11</span>  this-&gt;count = NumOfThreads;</div>
+<div class="line"><span class="lineno">   12</span>  threadNum = 0;</div>
+<div class="line"><span class="lineno">   13</span>  condition = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   14</span>  theMutex=std::make_shared&lt;Semaphore&gt;(1);</div>
+<div class="line"><span class="lineno">   15</span>  innerLock=std::make_shared&lt;Semaphore&gt;(0);</div>
+<div class="line"><span class="lineno">   16</span>  outerLock=std::make_shared&lt;Semaphore&gt;(1);</div>
+<div class="line"><span class="lineno">   17</span>}</div>
+</div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -191,7 +202,10 @@ Public Member Functions</h2></td></tr>
 <p>returns count value </p>
 
 <p class="definition">Definition at line <a class="el" href="_barrier_8cpp_source.html#l00038">38</a> of file <a class="el" href="_barrier_8cpp_source.html">Barrier.cpp</a>.</p>
-
+<div class="fragment"><div class="line"><span class="lineno">   38</span>                     {</div>
+<div class="line"><span class="lineno">   39</span>  <span class="keywordflow">return</span> this-&gt;count;</div>
+<div class="line"><span class="lineno">   40</span>}</div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="ab999e172844330d8b9a1c13f3766959d" name="ab999e172844330d8b9a1c13f3766959d"></a>
@@ -212,7 +226,10 @@ Public Member Functions</h2></td></tr>
 <p>sets count value </p>
 
 <p class="definition">Definition at line <a class="el" href="_barrier_8cpp_source.html#l00034">34</a> of file <a class="el" href="_barrier_8cpp_source.html">Barrier.cpp</a>.</p>
-
+<div class="fragment"><div class="line"><span class="lineno">   34</span>                           {</div>
+<div class="line"><span class="lineno">   35</span>  this-&gt;count = x;</div>
+<div class="line"><span class="lineno">   36</span>}</div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a59b259f25f6acdc5f943398035d2d87a" name="a59b259f25f6acdc5f943398035d2d87a"></a>
@@ -232,7 +249,30 @@ Public Member Functions</h2></td></tr>
 <p>waits for all the threads before starting second half of code </p>
 
 <p class="definition">Definition at line <a class="el" href="_barrier_8cpp_source.html#l00043">43</a> of file <a class="el" href="_barrier_8cpp_source.html">Barrier.cpp</a>.</p>
-
+<div class="fragment"><div class="line"><span class="lineno">   43</span>                        {</div>
+<div class="line"><span class="lineno">   44</span>  theMutex-&gt;<a class="code hl_function" href="class_semaphore.html#a72aabebf026e3a8b1f3e4d0fa8ee1eda">Wait</a>();</div>
+<div class="line"><span class="lineno">   45</span>  threadNum++;</div>
+<div class="line"><span class="lineno">   46</span> </div>
+<div class="line"><span class="lineno">   47</span>  <span class="keywordflow">if</span>(threadNum == count){</div>
+<div class="line"><span class="lineno">   48</span>    outerLock-&gt;<a class="code hl_function" href="class_semaphore.html#a72aabebf026e3a8b1f3e4d0fa8ee1eda">Wait</a>();</div>
+<div class="line"><span class="lineno">   49</span>    innerLock-&gt;<a class="code hl_function" href="class_semaphore.html#a86f92f738b4486439b296d8e235895f2">Signal</a>();</div>
+<div class="line"><span class="lineno">   50</span>  }</div>
+<div class="line"><span class="lineno">   51</span>  theMutex-&gt;<a class="code hl_function" href="class_semaphore.html#a86f92f738b4486439b296d8e235895f2">Signal</a>();</div>
+<div class="line"><span class="lineno">   52</span>  innerLock-&gt;<a class="code hl_function" href="class_semaphore.html#a72aabebf026e3a8b1f3e4d0fa8ee1eda">Wait</a>();</div>
+<div class="line"><span class="lineno">   53</span>  innerLock-&gt;<a class="code hl_function" href="class_semaphore.html#a86f92f738b4486439b296d8e235895f2">Signal</a>();</div>
+<div class="line"><span class="lineno">   54</span>  theMutex-&gt;<a class="code hl_function" href="class_semaphore.html#a72aabebf026e3a8b1f3e4d0fa8ee1eda">Wait</a>();</div>
+<div class="line"><span class="lineno">   55</span>  threadNum--;</div>
+<div class="line"><span class="lineno">   56</span>  <span class="keywordflow">if</span> (threadNum == 0){</div>
+<div class="line"><span class="lineno">   57</span>    innerLock-&gt;<a class="code hl_function" href="class_semaphore.html#a72aabebf026e3a8b1f3e4d0fa8ee1eda">Wait</a>();</div>
+<div class="line"><span class="lineno">   58</span>    outerLock-&gt;<a class="code hl_function" href="class_semaphore.html#a86f92f738b4486439b296d8e235895f2">Signal</a>();</div>
+<div class="line"><span class="lineno">   59</span>  }</div>
+<div class="line"><span class="lineno">   60</span>  theMutex-&gt;<a class="code hl_function" href="class_semaphore.html#a86f92f738b4486439b296d8e235895f2">Signal</a>();</div>
+<div class="line"><span class="lineno">   61</span>  outerLock-&gt;<a class="code hl_function" href="class_semaphore.html#a72aabebf026e3a8b1f3e4d0fa8ee1eda">Wait</a>();</div>
+<div class="line"><span class="lineno">   62</span>  outerLock-&gt;<a class="code hl_function" href="class_semaphore.html#a86f92f738b4486439b296d8e235895f2">Signal</a>();</div>
+<div class="line"><span class="lineno">   63</span>}</div>
+<div class="ttc" id="aclass_semaphore_html_a72aabebf026e3a8b1f3e4d0fa8ee1eda"><div class="ttname"><a href="class_semaphore.html#a72aabebf026e3a8b1f3e4d0fa8ee1eda">Semaphore::Wait</a></div><div class="ttdeci">void Wait()</div><div class="ttdef"><b>Definition</b> <a href="_semaphore_8cpp_source.html#l00011">Semaphore.cpp:11</a></div></div>
+<div class="ttc" id="aclass_semaphore_html_a86f92f738b4486439b296d8e235895f2"><div class="ttname"><a href="class_semaphore.html#a86f92f738b4486439b296d8e235895f2">Semaphore::Signal</a></div><div class="ttdeci">void Signal()</div><div class="ttdef"><b>Definition</b> <a href="_semaphore_8cpp_source.html#l00020">Semaphore.cpp:20</a></div></div>
+</div><!-- fragment -->
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
