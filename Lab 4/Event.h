@@ -44,9 +44,12 @@
 
 /* Code: */
 
+/*! \class Event
+    \brief An implementation of Event
 
+   Stores a random char.
 
-/* Event.h ends here */
+*/
 
 // basic constructor - val = LCASE
 
@@ -56,6 +59,7 @@
 #include <iostream>
 #include <stdio.h>
 
+#pragma once
 class Event
 {
 private:
@@ -65,3 +69,5 @@ public:
   Event();
   void consume();
 };
+
+/* Event.h ends here */
