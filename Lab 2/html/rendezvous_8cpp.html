@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Lab 2<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">Lab 2<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">Documentation for Concurrent Programming Lab 2. Created using Doxygen.</div>
+   <div id="projectbrief">Lab 2 documentation</div>
   </td>
  </tr>
  </tbody>
@@ -129,7 +129,33 @@ Functions</h2></td></tr>
 <p>&lt; Pointer to barrier object</p>
 
 <p class="definition">Definition at line <a class="el" href="rendezvous_8cpp_source.html#l00041">41</a> of file <a class="el" href="rendezvous_8cpp_source.html">rendezvous.cpp</a>.</p>
-
+<div class="fragment"><div class="line"><span class="lineno">   41</span>              {</div>
+<div class="line"><span class="lineno">   42</span>  std::shared_ptr&lt;Semaphore&gt; mutexSem;</div>
+<div class="line"><span class="lineno">   43</span>  std::shared_ptr&lt;Semaphore&gt; barrierSem;</div>
+<div class="line"><span class="lineno">   44</span> </div>
+<div class="line"><span class="lineno">   45</span>  std::shared_ptr&lt;int&gt; firstArrived;</div>
+<div class="line"><span class="lineno">   46</span>  std::shared_ptr&lt;int&gt; secondArrived;</div>
+<div class="line"><span class="lineno">   47</span>  </div>
+<div class="line"><span class="lineno">   48</span>  std::shared_ptr&lt;int&gt; threadCount;</div>
+<div class="line"><span class="lineno">   49</span>  </div>
+<div class="line"><span class="lineno">   50</span>  mutexSem=std::make_shared&lt;Semaphore&gt;(1);</div>
+<div class="line"><span class="lineno">   51</span>  barrierSem=std::make_shared&lt;Semaphore&gt;(0);</div>
+<div class="line"><span class="lineno">   52</span>  firstArrived=std::make_shared&lt;int&gt;(0);</div>
+<div class="line"><span class="lineno">   53</span>  secondArrived=std::make_shared&lt;int&gt;(0);</div>
+<div class="line"><span class="lineno">   54</span>  threadCount=std::make_shared&lt;int&gt;(5);</div>
+<div class="line"><span class="lineno">   56</span>  std::vector&lt;std::thread&gt; threadArray(*threadCount);</div>
+<div class="line"><span class="lineno">   59</span>  <span class="keywordflow">for</span>(<span class="keywordtype">long</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0; i &lt; threadArray.size(); i++){</div>
+<div class="line"><span class="lineno">   60</span>    threadArray[i]=std::thread(<a class="code hl_function" href="rendezvous_8cpp.html#a5ab4582931b6f6c84ee64df8da4688a3">task</a>,mutexSem,barrierSem,threadCount, firstArrived);</div>
+<div class="line"><span class="lineno">   61</span>  }</div>
+<div class="line"><span class="lineno">   62</span> </div>
+<div class="line"><span class="lineno">   63</span>  <span class="keywordflow">for</span>(<span class="keywordtype">long</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; threadArray.size(); i++){</div>
+<div class="line"><span class="lineno">   64</span>    threadArray[i].join();</div>
+<div class="line"><span class="lineno">   65</span>  }</div>
+<div class="line"><span class="lineno">   66</span>  </div>
+<div class="line"><span class="lineno">   67</span>  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   68</span>}</div>
+<div class="ttc" id="arendezvous_8cpp_html_a5ab4582931b6f6c84ee64df8da4688a3"><div class="ttname"><a href="rendezvous_8cpp.html#a5ab4582931b6f6c84ee64df8da4688a3">task</a></div><div class="ttdeci">void task(std::shared_ptr&lt; Semaphore &gt; mutexSem, std::shared_ptr&lt; Semaphore &gt; barrierSem, std::shared_ptr&lt; int &gt; threadCount, std::shared_ptr&lt; int &gt; firstArrived)</div><div class="ttdef"><b>Definition</b> <a href="rendezvous_8cpp_source.html#l00012">rendezvous.cpp:12</a></div></div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a5ab4582931b6f6c84ee64df8da4688a3" name="a5ab4582931b6f6c84ee64df8da4688a3"></a>
@@ -172,6 +198,33 @@ Functions</h2></td></tr>
 <p>displays the first function in the barrier being executed </p>
 
 <p class="definition">Definition at line <a class="el" href="rendezvous_8cpp_source.html#l00012">12</a> of file <a class="el" href="rendezvous_8cpp_source.html">rendezvous.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   12</span>                                                                                                                                                 {  </div>
+<div class="line"><span class="lineno">   13</span>  mutexSem-&gt;Wait();</div>
+<div class="line"><span class="lineno">   14</span>  *firstArrived += 1;</div>
+<div class="line"><span class="lineno">   15</span>  <span class="comment">//std::cout &lt;&lt; &quot;Arrival number: &quot; &lt;&lt; *firstArrived &lt;&lt; std::endl;  </span></div>
+<div class="line"><span class="lineno">   16</span>  </div>
+<div class="line"><span class="lineno">   17</span>  std::cout &lt;&lt; <span class="stringliteral">&quot;first &quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><span class="lineno">   18</span>  </div>
+<div class="line"><span class="lineno">   19</span>  <span class="comment">//barrier here</span></div>
+<div class="line"><span class="lineno">   20</span>  </div>
+<div class="line"><span class="lineno">   21</span>  <span class="keywordflow">if</span> (*firstArrived == *threadCount){</div>
+<div class="line"><span class="lineno">   22</span>    barrierSem-&gt;Signal();</div>
+<div class="line"><span class="lineno">   23</span>    <span class="comment">// outerDoor.wait</span></div>
+<div class="line"><span class="lineno">   24</span>    <span class="comment">// innerDoor.signal</span></div>
+<div class="line"><span class="lineno">   25</span>  }</div>
+<div class="line"><span class="lineno">   26</span>  mutexSem-&gt;Signal();</div>
+<div class="line"><span class="lineno">   27</span> </div>
+<div class="line"><span class="lineno">   28</span>  barrierSem-&gt;Wait();</div>
+<div class="line"><span class="lineno">   29</span>  barrierSem-&gt;Signal();</div>
+<div class="line"><span class="lineno">   30</span>  </div>
+<div class="line"><span class="lineno">   31</span>  std::cout &lt;&lt; <span class="stringliteral">&quot;second&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><span class="lineno">   32</span> </div>
+<div class="line"><span class="lineno">   33</span>  <span class="comment">// end of barrier</span></div>
+<div class="line"><span class="lineno">   34</span>  </div>
+<div class="line"><span class="lineno">   35</span>  </div>
+<div class="line"><span class="lineno">   36</span>}</div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="rendezvous_8cpp_source.html#l00041">main()</a>.</p>
 
 </div>
 </div>

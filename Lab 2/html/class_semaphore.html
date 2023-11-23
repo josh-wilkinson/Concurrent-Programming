@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Lab 2<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">Lab 2<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">Documentation for Concurrent Programming Lab 2. Created using Doxygen.</div>
+   <div id="projectbrief">Lab 2 documentation</div>
   </td>
  </tr>
  </tbody>
@@ -145,7 +145,8 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="_semaphore_8h_source.html#l00022">22</a> of file <a class="el" href="_semaphore_8h_source.html">Semaphore.h</a>.</p>
-
+<div class="fragment"><div class="line"><span class="lineno">   23</span>          : m_uiCount(uiCount) { };</div>
+</div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -165,7 +166,12 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="_semaphore_8cpp_source.html#l00030">30</a> of file <a class="el" href="_semaphore_8cpp_source.html">Semaphore.cpp</a>.</p>
-
+<div class="fragment"><div class="line"><span class="lineno">   31</span>{</div>
+<div class="line"><span class="lineno">   32</span>      std::unique_lock&lt; std::mutex &gt; lock(m_mutex);</div>
+<div class="line"><span class="lineno">   33</span>      ++m_uiCount;</div>
+<div class="line"><span class="lineno">   34</span>      m_condition.notify_one();</div>
+<div class="line"><span class="lineno">   35</span>}</div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a72aabebf026e3a8b1f3e4d0fa8ee1eda" name="a72aabebf026e3a8b1f3e4d0fa8ee1eda"></a>
@@ -184,7 +190,12 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="_semaphore_8cpp_source.html#l00012">12</a> of file <a class="el" href="_semaphore_8cpp_source.html">Semaphore.cpp</a>.</p>
-
+<div class="fragment"><div class="line"><span class="lineno">   13</span>{</div>
+<div class="line"><span class="lineno">   14</span>      std::unique_lock&lt; std::mutex &gt; lock(m_mutex);</div>
+<div class="line"><span class="lineno">   15</span>      m_condition.wait(lock,[&amp;]()-&gt;<span class="keywordtype">bool</span>{ <span class="keywordflow">return</span> m_uiCount&gt;0; });</div>
+<div class="line"><span class="lineno">   16</span>      --m_uiCount;</div>
+<div class="line"><span class="lineno">   17</span>}</div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a7f700173ae86ae623684109066e07656" name="a7f700173ae86ae623684109066e07656"></a>
@@ -206,7 +217,15 @@ template&lt;typename R , typename P &gt; </div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="_semaphore_8cpp_source.html#l00020">20</a> of file <a class="el" href="_semaphore_8cpp_source.html">Semaphore.cpp</a>.</p>
-
+<div class="fragment"><div class="line"><span class="lineno">   21</span>{</div>
+<div class="line"><span class="lineno">   22</span>      std::unique_lock&lt; std::mutex &gt; lock(m_mutex);</div>
+<div class="line"><span class="lineno">   23</span>      <span class="keywordflow">if</span> (!m_condition.wait_for(lock,crRelTime,[&amp;]()-&gt;bool{ return m_uiCount&gt;0; })){</div>
+<div class="line"><span class="lineno">   24</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   25</span>      }</div>
+<div class="line"><span class="lineno">   26</span>      --m_uiCount;</div>
+<div class="line"><span class="lineno">   27</span>      <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   28</span>}</div>
+</div><!-- fragment -->
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
