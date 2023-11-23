@@ -11,5 +11,8 @@ CPPFILES=Semaphore.cpp helloThreads.cpp
 HELLOTHREADS: $(CPPFILES)
 	$(CC) $(CPPFILES) $(CFLAGS)
 
+doc:
+	doxygen Doxyfile
+
 CLEAN:
-	rm josh.o
+	rm *.o

@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Lab 1<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">Lab 1<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">Documentation for Concurrent Programming Lab 1. Created using Doxygen.</div>
+   <div id="projectbrief">Lab 1 documentation</div>
   </td>
  </tr>
  </tbody>
@@ -132,7 +132,26 @@ Functions</h2></td></tr>
 <p>&lt; Wait for the threads to finish</p>
 
 <p class="definition">Definition at line <a class="el" href="hello_threads_8cpp_source.html#l00029">29</a> of file <a class="el" href="hello_threads_8cpp_source.html">helloThreads.cpp</a>.</p>
-
+<div class="fragment"><div class="line"><span class="lineno">   29</span>              {</div>
+<div class="line"><span class="lineno">   30</span>  std::thread threadOne, threadTwo;</div>
+<div class="line"><span class="lineno">   31</span>  std::shared_ptr&lt;Semaphore&gt; sem(<span class="keyword">new</span> <a class="code hl_class" href="class_semaphore.html">Semaphore</a>);</div>
+<div class="line"><span class="lineno">   32</span> </div>
+<div class="line"><span class="lineno">   33</span>  sem = std::make_shared&lt;Semaphore&gt;(0);</div>
+<div class="line"><span class="lineno">   34</span>  </div>
+<div class="line"><span class="lineno">   35</span>  <span class="comment">//sem-&gt;Signal();</span></div>
+<div class="line"><span class="lineno">   36</span>  <span class="comment">//sem-&gt;Wait();//these serve no purpose</span></div>
+<div class="line"><span class="lineno">   38</span>  <span class="keywordtype">int</span> taskOneDelay=5;</div>
+<div class="line"><span class="lineno">   39</span>  threadOne=std::thread(<a class="code hl_function" href="hello_threads_8cpp.html#abd7a2ca4eec20ee5632bc643148f1321">taskTwo</a>,sem);</div>
+<div class="line"><span class="lineno">   40</span>  threadTwo=std::thread(<a class="code hl_function" href="hello_threads_8cpp.html#a94abdd168622793d1bdb20094840cda9">taskOne</a>,sem,taskOneDelay);</div>
+<div class="line"><span class="lineno">   41</span>  std::cout &lt;&lt; <span class="stringliteral">&quot;Launched from the main\n&quot;</span>;</div>
+<div class="line"><span class="lineno">   43</span>  threadOne.join();</div>
+<div class="line"><span class="lineno">   44</span>  threadTwo.join();</div>
+<div class="line"><span class="lineno">   45</span>  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   46</span>}</div>
+<div class="ttc" id="aclass_semaphore_html"><div class="ttname"><a href="class_semaphore.html">Semaphore</a></div><div class="ttdoc">A Semaphore Implementation.</div><div class="ttdef"><b>Definition</b> <a href="_semaphore_8h_source.html#l00014">Semaphore.h:15</a></div></div>
+<div class="ttc" id="ahello_threads_8cpp_html_a94abdd168622793d1bdb20094840cda9"><div class="ttname"><a href="hello_threads_8cpp.html#a94abdd168622793d1bdb20094840cda9">taskOne</a></div><div class="ttdeci">void taskOne(std::shared_ptr&lt; Semaphore &gt; mutexSem, int delay)</div><div class="ttdef"><b>Definition</b> <a href="hello_threads_8cpp_source.html#l00007">helloThreads.cpp:7</a></div></div>
+<div class="ttc" id="ahello_threads_8cpp_html_abd7a2ca4eec20ee5632bc643148f1321"><div class="ttname"><a href="hello_threads_8cpp.html#abd7a2ca4eec20ee5632bc643148f1321">taskTwo</a></div><div class="ttdeci">void taskTwo(std::shared_ptr&lt; Semaphore &gt; mutexSem)</div><div class="ttdef"><b>Definition</b> <a href="hello_threads_8cpp_source.html#l00018">helloThreads.cpp:18</a></div></div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a94abdd168622793d1bdb20094840cda9" name="a94abdd168622793d1bdb20094840cda9"></a>
@@ -163,6 +182,17 @@ Functions</h2></td></tr>
 <p>displays a message first </p>
 
 <p class="definition">Definition at line <a class="el" href="hello_threads_8cpp_source.html#l00007">7</a> of file <a class="el" href="hello_threads_8cpp_source.html">helloThreads.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">    7</span>                                                          {</div>
+<div class="line"><span class="lineno">    8</span>  sleep(delay);</div>
+<div class="line"><span class="lineno">    9</span>  std::cout &lt;&lt;<span class="stringliteral">&quot;I &quot;</span>;</div>
+<div class="line"><span class="lineno">   10</span>  std::cout &lt;&lt; <span class="stringliteral">&quot;must &quot;</span>;</div>
+<div class="line"><span class="lineno">   11</span>  std::cout &lt;&lt; <span class="stringliteral">&quot;print &quot;</span>;</div>
+<div class="line"><span class="lineno">   12</span>  std::cout &lt;&lt; <span class="stringliteral">&quot;first&quot;</span>&lt;&lt;std::endl;</div>
+<div class="line"><span class="lineno">   13</span>  <span class="comment">//tell taskTwo to start now</span></div>
+<div class="line"><span class="lineno">   14</span>  mutexSem-&gt;Signal();</div>
+<div class="line"><span class="lineno">   15</span>}</div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="hello_threads_8cpp_source.html#l00029">main()</a>.</p>
 
 </div>
 </div>
@@ -184,6 +214,17 @@ Functions</h2></td></tr>
 <p>displays a message second </p>
 
 <p class="definition">Definition at line <a class="el" href="hello_threads_8cpp_source.html#l00018">18</a> of file <a class="el" href="hello_threads_8cpp_source.html">helloThreads.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   18</span>                                               {</div>
+<div class="line"><span class="lineno">   19</span>  mutexSem-&gt;Wait();</div>
+<div class="line"><span class="lineno">   20</span>  <span class="comment">//wait here until taskOne finishes...</span></div>
+<div class="line"><span class="lineno">   21</span>  std::cout &lt;&lt;<span class="stringliteral">&quot;This &quot;</span>;</div>
+<div class="line"><span class="lineno">   22</span>  std::cout &lt;&lt; <span class="stringliteral">&quot;will &quot;</span>;</div>
+<div class="line"><span class="lineno">   23</span>  sleep(5);</div>
+<div class="line"><span class="lineno">   24</span>  std::cout &lt;&lt; <span class="stringliteral">&quot;appear &quot;</span>;</div>
+<div class="line"><span class="lineno">   25</span>  std::cout &lt;&lt; <span class="stringliteral">&quot;second&quot;</span>&lt;&lt;std::endl;</div>
+<div class="line"><span class="lineno">   26</span>}</div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="hello_threads_8cpp_source.html#l00029">main()</a>.</p>
 
 </div>
 </div>
