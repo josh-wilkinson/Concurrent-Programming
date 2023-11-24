@@ -6,22 +6,24 @@
 ***
 **Date**: 30/10/2023
 ***
-**GitHub URL**: https://github.com/josh-wilkinson/Concurrent-Programming/tree/master/Lab%204
+**GitHub URL**: https://github.com/josh-wilkinson/Concurrent-Programming/tree/master/Lab%206
 ***
 **License**: GPL-3.0
 ***
-**Purpose**: There are 4 folders containing 
+**Purpose**: There are 4 folders containing different algorithms. They should be runnable.
 ***
 **Install**: g++ (or any suitable compiler for c++ code), Make, Doxygen (to generate documention).
 ***
 **Required Libraries (c++)**: thread
 ***
 **Steps to Run**:
-- type 'make -k' into your terminal in the project folder
-- type './ProducerConsumer' to run the executable.
+- enter a folder and type 'make -k'
+- execute the generated file, e.g. './executablefile'
+
 ***
+
 **Files**:
-- map
-- map-reduce
-- sort
-- stencil
+- map/
+- map-reduce/
+- sort/
+- stencil/

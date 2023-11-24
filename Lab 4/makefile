@@ -23,4 +23,4 @@ doc:
 	doxygen Doxyfile
 
 CLEAN:
-	rm *.o
+	rm *.o ProducerConsumer

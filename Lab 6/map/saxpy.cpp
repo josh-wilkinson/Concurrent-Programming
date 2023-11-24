@@ -52,6 +52,10 @@
 
 void saxpy(unsigned long n, float a,float y[], float x[])
 {
+  /*!
+    SAXPY is an acronym for Single precision A X plus Y.
+    Simple, right?
+   */
 #pragma omp parallel for
 	for (unsigned long i=0; i < n; ++i)
 	{
@@ -61,6 +65,9 @@ void saxpy(unsigned long n, float a,float y[], float x[])
 
 int main(void)
 {
+  /*!
+    Main method to run program. Sets all the values to be used as parameters for the saxpy method.
+   */
   const unsigned long size=1000000;
   const float A=1.234;
   

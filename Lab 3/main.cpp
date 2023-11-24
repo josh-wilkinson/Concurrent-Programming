@@ -8,7 +8,8 @@
 #include <vector>
 const int TotalThreads = 5;
 /*! displays the first function in the barrier being executed */
-void task(std::shared_ptr<Barrier> barrierObj){
+void task(std::shared_ptr<Barrier> barrierObj)
+{
   for (int i = 0; i < 5; ++i){
     std::cout << "first " << std::endl;
     barrierObj->waitForAll();
@@ -16,19 +17,17 @@ void task(std::shared_ptr<Barrier> barrierObj){
     barrierObj->waitForAll();
   }
 }
-int main(void){
-
-  /*!< An array of threads*/
-  std::vector<std::thread> threadArray(TotalThreads);
-  /*!< Pointer to barrier object*/
-  std::shared_ptr<Barrier> barrierObj( new Barrier(5));
+int main(void)
+{
+  std::vector<std::thread> threadArray(TotalThreads); /*! An array of threads*/
+  std::shared_ptr<Barrier> barrierObj( new Barrier(5)); /*! Pointer to Barrier object*/
 
   barrierObj->setCount(5);
-  /*!< Setting up array of threads*/
+  /*! Setting up array of threads*/
   for(int i=0; i < threadArray.size(); ++i){
     threadArray[i]=std::thread(task,barrierObj);
   }
-  /*!< Joining threads*/
+  /*! Joining threads*/
   for(int i = 0; i < threadArray.size(); i++){
     threadArray[i].join();
   }

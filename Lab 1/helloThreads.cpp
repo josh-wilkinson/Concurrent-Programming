@@ -4,7 +4,8 @@
 #include <unistd.h>
 
 /*! displays a message first*/
-void taskOne(std::shared_ptr<Semaphore> mutexSem, int delay){
+void taskOne(std::shared_ptr<Semaphore> mutexSem, int delay)
+{
   sleep(delay);
   std::cout <<"I ";
   std::cout << "must ";
@@ -15,7 +16,8 @@ void taskOne(std::shared_ptr<Semaphore> mutexSem, int delay){
 }
 
 /*! displays a message second*/
-void taskTwo(std::shared_ptr<Semaphore> mutexSem){
+void taskTwo(std::shared_ptr<Semaphore> mutexSem)
+{
   mutexSem->Wait();
   //wait here until taskOne finishes...
   std::cout <<"This ";
@@ -26,7 +28,8 @@ void taskTwo(std::shared_ptr<Semaphore> mutexSem){
 }
 
 
-int main(void){
+int main(void)
+{
   std::thread threadOne, threadTwo;
   std::shared_ptr<Semaphore> sem(new Semaphore);
 
@@ -34,12 +37,12 @@ int main(void){
   
   //sem->Signal();
   //sem->Wait();//these serve no purpose
-  /**< Launch the threads  */
+  /** Launch the threads  */
   int taskOneDelay=5;
   threadOne=std::thread(taskTwo,sem);
   threadTwo=std::thread(taskOne,sem,taskOneDelay);
   std::cout << "Launched from the main\n";
-   /**< Wait for the threads to finish */
+   /** Wait for the threads to finish */
   threadOne.join();
   threadTwo.join();
   return 0;

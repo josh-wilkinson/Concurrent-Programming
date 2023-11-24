@@ -19,7 +19,9 @@
 **Steps to Run**:
 - type 'make -k' into your terminal in the project folder
 - type './rendezvous' to run the executable
+
 ***
+
 **Files**:
 - *Semaphore.h*
 - *Semaphore.cpp*

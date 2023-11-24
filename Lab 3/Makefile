@@ -1,6 +1,8 @@
 # Name: Joshua Wilkinson
 # Date: 02/10/2023
 # Purpose: Make file for lab 3, reusable barrier.
+# License: GPL-3.0 license
+# See http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/ for info on make files.
 
 CC=g++
 CPPFILES=Barrier.cpp main.cpp Semaphore.cpp
@@ -21,4 +23,4 @@ doc:
 	doxygen Doxyfile
 
 CLEAN:
-	rm *.o
+	rm *.o barrier

@@ -139,11 +139,12 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Destructor method</p>
 
-<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00017">17</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   18</span>{</div>
-<div class="line"><span class="lineno">   19</span>  <span class="comment">//nothing to do</span></div>
-<div class="line"><span class="lineno">   20</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00019">19</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   20</span>{</div>
+<div class="line"><span class="lineno">   22</span>  <span class="comment">//nothing to do</span></div>
+<div class="line"><span class="lineno">   23</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -161,11 +162,13 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Constructor method</p>
+<p>Uses the rand() function to generate a random number out of 26 (for each letter in the alphabet)</p>
 
 <p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00012">12</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   13</span>{</div>
-<div class="line"><span class="lineno">   14</span>  c = <span class="charliteral">&#39;a&#39;</span> + rand() % 26; <span class="comment">// there are 26 possible letters</span></div>
-<div class="line"><span class="lineno">   15</span>}</div>
+<div class="line"><span class="lineno">   16</span>  c = <span class="charliteral">&#39;a&#39;</span> + rand() % 26; <span class="comment">// there are 26 possible letters</span></div>
+<div class="line"><span class="lineno">   17</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -184,12 +187,13 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Prints out to console the <a class="el" href="class_event.html" title="An implementation of Event.">Event</a> char in uppercase.</p>
 
-<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00023">23</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   24</span>{</div>
-<div class="line"><span class="lineno">   25</span>  <span class="keywordtype">char</span> cToUpperChar = c-32;</div>
-<div class="line"><span class="lineno">   26</span>  std::cout &lt;&lt; cToUpperChar &lt;&lt; std::endl;</div>
-<div class="line"><span class="lineno">   27</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00026">26</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   27</span>{</div>
+<div class="line"><span class="lineno">   29</span>  <span class="keywordtype">char</span> cToUpperChar = c-32;</div>
+<div class="line"><span class="lineno">   30</span>  std::cout &lt;&lt; cToUpperChar &lt;&lt; std::endl;</div>
+<div class="line"><span class="lineno">   31</span>}</div>
 </div><!-- fragment -->
 <p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00026">consumer()</a>.</p>
 

@@ -2,9 +2,6 @@
 #include <stdlib.h>
 #include "Event.h"
 
-/*! \class SafeBuffer
-    \brief A thread safe implementation of a buffer
-*/
 
 /*! \fn buffer constructor
     \brief Initialises the semaphores
@@ -21,6 +18,12 @@ SafeBuffer::SafeBuffer()
    * When it is negative, it indicates the number of consumer threads in the queue.
    */
   semaphore = std::make_shared<Semaphore>(0);
+}
+
+SafeBuffer::~SafeBuffer()
+{
+  /*! Destructor method */
+  // Nothing to do
 }
 
 /*! \fn buffer producer

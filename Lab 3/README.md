@@ -14,12 +14,14 @@
 ***
 **Install**: g++ (or any suitable compiler for c++ code), Make, Doxygen (to generate documention).
 ***
-**Required Libraries (c++)**: thread, vector
+**Required Libraries (c++)**: thread, vector, stdio.h
 ***
 **Steps to Run**:
 - type 'make -k' into your terminal in the project folder
 - type './barrier' to run the executable
+
 ***
+
 **Files**: 
 - *Semaphore.h*
 - *Semaphore.cpp*

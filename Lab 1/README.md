@@ -20,7 +20,9 @@ and run task2 after task1 has finished, successfully demostrating mutual exclusi
 **Steps to Run**:
 - type 'make -k' into your terminal in the project folder
 - type './mutualExclusion' to run the executable
+
 ***
+
 **Files**:
 - *Semaphore.h*
 - *Semaphore.cpp*

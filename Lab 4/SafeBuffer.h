@@ -45,9 +45,7 @@
 /* Code: */
 
 /*! \class SafeBuffer
-    \brief A thread safe implementation of a buffer
-
-    
+    \brief A thread safe implementation of a buffer    
 */
 
 #include "Semaphore.h"
@@ -61,6 +59,7 @@ private:
   std::shared_ptr<Semaphore> semaphore;
 public:
   SafeBuffer();
+  ~SafeBuffer();
   void push(Event theEvent);
   Event pop();
 };

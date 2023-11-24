@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['philosopher_0',['philosopher',['../main_8cpp.html#a61d704a6f65c3d915b82ea8a844cc527',1,'main.cpp']]],
-  ['put_5fforks_1',['put_forks',['../main_8cpp.html#a4cec90aab433a1e4df09b9b6662d5c3e',1,'main.cpp']]]
+  ['semaphore_0',['Semaphore',['../class_semaphore.html#a0d9290d316636875ca85d1d78950a817',1,'Semaphore']]],
+  ['signal_1',['Signal',['../class_semaphore.html#a86f92f738b4486439b296d8e235895f2',1,'Semaphore']]]
 ];

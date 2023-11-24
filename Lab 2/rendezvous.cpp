@@ -8,56 +8,58 @@
 #include <vector>
 #include <iostream>
 
-/*! displays the first function in the barrier being executed */
-void task(std::shared_ptr<Semaphore> mutexSem,std::shared_ptr<Semaphore> barrierSem, std::shared_ptr<int> threadCount, std::shared_ptr<int> firstArrived){  
+/*! \fn task
+  \brief The function being executed by the threads.
+ */
+void task(std::shared_ptr<Semaphore> mutexSem,std::shared_ptr<Semaphore> barrierSem, std::shared_ptr<int> threadCount, std::shared_ptr<int> firstArrived)
+{
+  /*! 
+    A mutex Semaphore is applied when the function is being executed. 
+    Then it is release when all the threads have completed the first half.
+   */  
   mutexSem->Wait();
   *firstArrived += 1;
   //std::cout << "Arrival number: " << *firstArrived << std::endl;  
   
   std::cout << "first " << std::endl;
   
-  //barrier here
-  
+  //barrier here  
   if (*firstArrived == *threadCount){
     barrierSem->Signal();
-    // outerDoor.wait
-    // innerDoor.signal
   }
   mutexSem->Signal();
 
   barrierSem->Wait();
   barrierSem->Signal();
-  
-  std::cout << "second" << std::endl;
 
   // end of barrier
-  
-  
+
+  std::cout << "second" << std::endl;  
 }
 
 
 
 
-int main(void){
+int main(void)
+{
+  /*! Four shared pointers: Two semaphores and Two integers. */
   std::shared_ptr<Semaphore> mutexSem;
   std::shared_ptr<Semaphore> barrierSem;
 
-  std::shared_ptr<int> firstArrived;
-  std::shared_ptr<int> secondArrived;
-  
+  std::shared_ptr<int> firstArrived;  
   std::shared_ptr<int> threadCount;
   
   mutexSem=std::make_shared<Semaphore>(1);
   barrierSem=std::make_shared<Semaphore>(0);
   firstArrived=std::make_shared<int>(0);
-  secondArrived=std::make_shared<int>(0);
   threadCount=std::make_shared<int>(5);
-  /*!< An array of threads*/
+  /*! And an array of threads the size of the thread count. */
   std::vector<std::thread> threadArray(*threadCount);
-  /*!< Pointer to barrier object*/
+
+  /*! Then the threads run the task method. */
 
   for(long unsigned int i=0; i < threadArray.size(); i++){
-    threadArray[i]=std::thread(task,mutexSem,barrierSem,threadCount, firstArrived);
+    threadArray[i]=std::thread(task, mutexSem, barrierSem, threadCount, firstArrived);
   }
 
   for(long unsigned int i = 0; i < threadArray.size(); i++){

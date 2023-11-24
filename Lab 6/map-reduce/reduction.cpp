@@ -113,6 +113,12 @@ float getTiledParallelsum(vector<int> data){
 
 
 int main(void){
+  /*!
+    Map/Reduce is the process of mapping a function to one or more
+    arrays of data, and then reducing the result back to a single
+    value. Map/Reduce in inherently parallelisable, as we will 
+    discover in this program.
+   */
   float sum=0.0;
   int average=0;
   NumThreads=omp_get_num_threads();
@@ -133,6 +139,12 @@ int main(void){
   average=sum/data.size();
   cout <<"Parallel Average is: "<<average<<endl;
   cout << endl;
+  /*!
+    The benefit of this over a seperate map and then reduce, is
+    that we do not need to create the itermediate vector results
+    from the map. Results from the map can immediately fed into the
+    reduce as they are available.
+   */
 }
 // 
 // reduction.cpp ends here

@@ -10,21 +10,22 @@
 ***
 **License**: GPL-3.0
 ***
-**Purpose**: To solve the dining philospher's problem.
+**Purpose**: To solve the dining philospher's problem, where threads need to find a way to share resources and avoid deadlock.
 ***
 **Install**: g++ (or any suitable compiler for c++ code), Make, Doxygen (to generate documention).
 ***
-**Required Libraries (c++)**: thread
+**Required Libraries (c++)**: thread, stdlib.h, iostream, vector
 ***
 **Steps to Run**:
 - type 'make -k' into your terminal in the project folder
 - type './DiningPhilosophers' to run the executable
+
 ***
+
 **Files**:
-- *a.out*
 - *Semaphore.h*
-- *main.cpp*
-- *README.md*
-- *makefile*
-- *Makefile1*
 - *Semaphore.cpp*
+- *main.cpp*
+- *makefile*
+- *Doxyfile*
+- *README.md*

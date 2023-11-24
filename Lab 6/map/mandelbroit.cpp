@@ -81,7 +81,10 @@ void mandel( int p[ROW][COL], int depth){
 }
 
 int main(void){
-
+  /*!
+    The mandelbroit set is a set of complex numbers which
+    has a highly conveluted fractal boundary when plotted.
+   */
   
   int myArray[ROW][COL];
   /* initialize random seed: */

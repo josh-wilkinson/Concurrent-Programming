@@ -1,4 +1,5 @@
 #Joseph Kehoe 13/9/2017
+#Joshua Wilkinson 24/11/2023
 #Simple Makefile
 #Used to contain commands to compile projects
 #Equivalent(?) to a project file in VStudio -- only better!

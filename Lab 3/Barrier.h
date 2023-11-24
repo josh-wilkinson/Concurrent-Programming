@@ -11,7 +11,7 @@
 class Barrier
 {
 private:
-
+  
   int count;
   int threadNum;
   bool condition;
@@ -22,7 +22,7 @@ private:
 
 public:
 
-  virtual ~Barrier();
+  virtual ~Barrier(); /*!< Initialises the Semaphores */
   Barrier(int count);
   void setCount(int count);
   int getCount();

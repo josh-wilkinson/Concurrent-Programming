@@ -59,7 +59,15 @@ using namespace std ;
 const int LENGTH=2000;
 
 //template <typename T>
-int partition (vector<int>& myArray , int low , int high ){
+int partition (vector<int>& myArray , int low , int high )
+{
+  /*!
+    Quicksort is a divide and conquer algorithm that works
+    by selecting a pivot element from the array and
+    partitioning the other elements into two sub arrays, 
+    according to whether they are less than or greater than
+    the pivot. The sub arrays are then recursively sorted.
+   */
   int pivot=myArray[high];
   int k=high;
   int i=low;
@@ -79,6 +87,9 @@ int partition (vector<int>& myArray , int low , int high ){
   
 //template<typename T>
 int quicksort(vector<int>& myArray , int low , int high ){
+  /*!
+    This method calls the pivot and does the actual sorting.
+   */
   if (low<high){
     int pivot=partition(myArray,low,high);
     //really we should only do this if each partition is above a certain size (1000 elements?)
@@ -94,7 +105,14 @@ int quicksort(vector<int>& myArray , int low , int high ){
 
 
 
-int main(void){
+int main(void)
+{
+  /*!
+    Sorting large amounts of data can be time consuming, but
+    by utilising parallel algorithms, we can break down the
+    sorting process into smaller, more manageable chunks,
+    that can be executed simultaneously.
+   */
   srand (time(NULL));
   vector<int> data(LENGTH);
   for(auto& value:data){

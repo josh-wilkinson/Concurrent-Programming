@@ -1,18 +1,25 @@
 # Name: Joshua Wilkinson
-# Purpose: simple make file for lab 1
+# Purpose: updated make file for lab 1
 # Date: 08/10/2023
 # License: GPL-3.0 license
+#See http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/ for info on make files.
 
 CC=g++
-CFLAGS= -Wall -o josh
+CFLAGS= -Wall
 CPPFILES=Semaphore.cpp helloThreads.cpp
 
+# each .o file depends on a .ccp file of the same name
+%.o: %.cpp
+	$(CC) -c -o $@ $< $(CFLAGS) $(DEBUGFLAGS)
 
-HELLOTHREADS: $(CPPFILES)
-	$(CC) $(CPPFILES) $(CFLAGS)
+ALL: $(CPPFILES)
+	$(CC) -o mutualExclusion $(CPPFILES) $(CFLAGS) $(DEBUGFLAGS)
+
+DEBUG: DEBUGFLAGS = -DDEBUG
+DEBUG: ALL
 
 doc:
 	doxygen Doxyfile
 
 CLEAN:
-	rm *.o
+	rm *.o mutualExclusion

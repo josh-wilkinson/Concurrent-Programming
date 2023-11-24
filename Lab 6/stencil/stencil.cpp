@@ -98,6 +98,11 @@ float getNewValue(vector<float> currentValues){
 }
 
 int main(void){
+  /*!
+    The stencil provides simple and efficient to use building blocks,
+    which can be used for larger scale computation.
+   */
+  
   vector<float> first(DIM), second(DIM);
   //initilise vectors
   srand (time(NULL));
