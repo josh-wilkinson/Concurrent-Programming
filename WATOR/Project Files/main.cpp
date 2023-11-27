@@ -46,6 +46,7 @@
 #include <chrono>
 #include <unistd.h> /* sleep() */
 #include <iostream> /* for debugging */
+#include <omp.h> /* for openMp */
 
 /* Struct */
 struct Square
@@ -56,7 +57,8 @@ struct Square
 };
 
 /* Variables */
-
+const int NUMCORES=2;//My core count -- change as required
+int NumThreads = 1; // number of threads used by OpenMP 
 // window parameters
 const int xdim = 100;
 const int ydim = 100;
@@ -86,6 +88,20 @@ const float fishRatio = 0.05;
 const float sharkRatio = 0.005;
 //delay
 const float updateDelay = 0.1;
+
+/* Thread methods */
+
+///! Find out how many threads are running!
+int get_num_threads(void) {
+  int num_threads = 1;
+  //must ask in parallel region otherwise 1 is returned
+#pragma omp parallel
+  {
+    //#pragma omp single
+    num_threads = omp_get_num_threads();
+  }
+  return num_threads;
+}
 
 /* Methods */
 
@@ -393,8 +409,11 @@ void moveShark(int x, int y)
 
 void move()
 {
+#pragma omp parallel for collapse(2)
   for (int i = 0; i < xdim; ++i){
     for (int k = 0; k < ydim; ++k){
+      int tid = omp_get_thread_num();
+      std::cout << tid;
       switch(worldData[i][k].value){
       case 1:
 	moveFish(i, k);
@@ -412,6 +431,10 @@ int main()
   unsigned int seed = static_cast<unsigned int>(10);
   srand(seed);
   sf::Clock clock;
+
+  NumThreads=omp_get_num_threads();
+  
+  std::cout << NumThreads;
 
   // populate all the sharks and fishes
   populate();
