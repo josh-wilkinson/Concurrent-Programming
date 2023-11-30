@@ -58,7 +58,7 @@ struct Square
 
 /* Variables */
 const int NUMCORES=2;//My core count -- change as required
-int NumThreads = 1; // number of threads used by OpenMP 
+int NumThreads = 2; // number of threads used by OpenMP 
 // window parameters
 const int xdim = 100;
 const int ydim = 100;
@@ -93,7 +93,7 @@ const float updateDelay = 0.1;
 
 ///! Find out how many threads are running!
 int get_num_threads(void) {
-  int num_threads = 1;
+  int num_threads = NumThreads;
   //must ask in parallel region otherwise 1 is returned
 #pragma omp parallel
   {
@@ -327,9 +327,9 @@ void moveShark(int x, int y)
 
   // check here to see if we found any adjacent fish blocks
   if (fishBlocksCounter != 0){
-    std::cout << "Found fish" << std::endl;
+    //std::cout << "Found fish" << std::endl;
     int randomFishBlockNumber = rand() % fishBlocksCounter; // get the indexes
-    std::cout << randomFishBlockNumber;
+    //std::cout << randomFishBlockNumber;
 
     unsigned int xpos = xFish[randomFishBlockNumber];
     unsigned int ypos = yFish[randomFishBlockNumber];
@@ -409,21 +409,43 @@ void moveShark(int x, int y)
 
 void move()
 {
-#pragma omp parallel for collapse(2)
-  for (int i = 0; i < xdim; ++i){
-    for (int k = 0; k < ydim; ++k){
-      int tid = omp_get_thread_num();
-      std::cout << tid;
-      switch(worldData[i][k].value){
-      case 1:
-	moveFish(i, k);
-	break;
-      case 2:
-	moveShark(i, k);	
-      }
-    }
-  }
-}
+#pragma omp parallel num_threads(2)
+  {//parallel start
+    int tid = omp_get_thread_num();
+    int tileRowSize = (xdim/omp_get_num_threads());
+    
+    int rowBlocksStart = tid * tileRowSize;
+    int columnBlocksStart = 0;
+    
+    int rowBlocksEnd = rowBlocksStart + tileRowSize;
+    int columnBlocksEnd = ydim;
+    
+    if (rowBlocksEnd > xdim)
+      rowBlocksEnd = xdim;
+    if (columnBlocksEnd > ydim)
+      columnBlocksEnd = ydim;
+    
+    for (int i = columnBlocksStart+1; i < columnBlocksEnd-1; ++i){//columns i
+      for (int k = rowBlocksStart+1; k < rowBlocksEnd-1; ++k){//rows k
+	switch(worldData[i][k].value){
+	case 1:
+	  moveFish(i, k);
+	  break;
+	case 2:
+	  moveShark(i, k);
+	}//switch
+      }//for k
+    }//for i
+
+    // barrier
+#pragma omp barrier // everyone must complete their blocks!
+#pragma omp single // one thread at a time!
+    {
+      
+    }// end single
+    
+  }//end parallel
+}//move
 
 int main()
 {
