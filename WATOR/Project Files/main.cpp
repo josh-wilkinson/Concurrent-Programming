@@ -409,11 +409,14 @@ void moveShark(int x, int y)
 
 void move()
 {
-#pragma omp parallel num_threads(2)
+#pragma omp parallel num_threads(8)
   {//parallel start
     int tid = omp_get_thread_num();
-    int tileRowSize = (xdim/omp_get_num_threads());    
-    int rowBlocksStart = tid * tileRowSize;
+    int tileRowSize = (xdim/omp_get_num_threads());
+
+    
+    
+    int rowBlocksStart = tid * tileRowSize;    
     int columnBlocksStart = 0;    
     int rowBlocksEnd = rowBlocksStart + tileRowSize;
     int columnBlocksEnd = ydim;
@@ -422,6 +425,10 @@ void move()
       rowBlocksEnd = xdim;
     if (columnBlocksEnd > ydim)
       columnBlocksEnd = ydim;
+    if ((omp_get_num_threads() == omp_get_thread_num()+1) && rowBlocksEnd < xdim){
+      //std::cout << xdim;
+      rowBlocksEnd = xdim + 1;
+    }
     
     for (int i = columnBlocksStart+1; i < columnBlocksEnd-1; ++i){//columns i
       for (int k = rowBlocksStart+1; k < rowBlocksEnd-1; ++k){//rows k
