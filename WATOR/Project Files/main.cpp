@@ -412,11 +412,9 @@ void move()
 #pragma omp parallel num_threads(2)
   {//parallel start
     int tid = omp_get_thread_num();
-    int tileRowSize = (xdim/omp_get_num_threads());
-    
+    int tileRowSize = (xdim/omp_get_num_threads());    
     int rowBlocksStart = tid * tileRowSize;
-    int columnBlocksStart = 0;
-    
+    int columnBlocksStart = 0;    
     int rowBlocksEnd = rowBlocksStart + tileRowSize;
     int columnBlocksEnd = ydim;
     
@@ -436,14 +434,34 @@ void move()
 	}//switch
       }//for k
     }//for i
-
     // barrier
 #pragma omp barrier // everyone must complete their blocks!
-#pragma omp single // one thread at a time!
     {
-      
-    }// end single
-    
+      // update top/bottom
+      for (int k = rowBlocksStart; k < rowBlocksEnd; k+=tileRowSize-1){
+	for (int i = columnBlocksStart; i < columnBlocksEnd; ++i){
+	  switch(worldData[i][k].value){
+	  case 1:
+	    moveFish(i, k);
+	    break;
+	  case 2:
+	    moveShark(i, k);
+	  }//switch
+	}//for i	
+      }//for k
+      // now update sides
+      for (int i = columnBlocksStart; i < columnBlocksEnd; i+=columnBlocksEnd-1){
+	for (int k = 1; k < rowBlocksEnd-1; ++k){
+	  switch(worldData[i][k].value){
+	  case 1:
+	    moveFish(i, k);
+	    break;
+	  case 2:
+	    moveShark(i, k);
+	  }//switch	  
+	}//for k
+      }//for i      
+    }//end barrier    
   }//end parallel
 }//move
 
