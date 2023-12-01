@@ -47,7 +47,7 @@
 #include <unistd.h> /* sleep() */
 #include <iostream> /* for debugging */
 #include <omp.h> /* for openMp */
-#include "SimpleTimer.h"
+//#include "SimpleTimer.h"
 //#include "matplotlibcpp.h"
 
 /* Struct */
@@ -59,8 +59,10 @@ struct Square
 };
 
 /* Variables */
-const int NUMCORES=2;//My core count -- change as required
-int NumThreads = 2; // number of threads used by OpenMP
+const int NUMCORES=2;// My core count -- change as required
+const int NumThreads = 8; // number of threads used by OpenMP
+double itime, ftime, execTime; // for time execution of OpenMP
+drand48_data rng[NumThreads];
 // window parameters
 const int xdim = 200;
 const int ydim = 200;
@@ -83,14 +85,14 @@ int numFish = 0;
 int fishCounter = 0;
 int sharkCounter = 0;
 long speedup;
-bool paused = true;
+bool paused = false;
 bool makeMoreFish = false;
 bool makeMoreSharks = false;
 // ratio for initial fish/shark population
 const float fishRatio = 0.05;
 const float sharkRatio = 0.005;
 //delay
-const float updateDelay = 0.1;
+const float updateDelay = 0;
 
 /* Thread methods */
 
@@ -154,7 +156,7 @@ void restart(){
 
 void update()
 {
-#pragma omp for collapse(2)
+
   for (int i = 0; i < xdim; ++i){
     for (int k = 0; k < ydim; ++k){
       // update colours
@@ -231,7 +233,10 @@ void moveFish(int x, int y)
 
   // now check here if we found any free neighbouring blocks
   if (freeBlocksCounter != 0){
-    int randomFreeBlockNumber = rand() % freeBlocksCounter; // get the index for xFree & yFree
+    long location;
+    lrand48_r(&rng[omp_get_thread_num()], &location);
+    location = location % freeBlocksCounter;
+    int randomFreeBlockNumber = location; // get the index for xFree & yFree
 
     unsigned int xpos = xFree[randomFreeBlockNumber];
     unsigned int ypos = yFree[randomFreeBlockNumber];
@@ -333,9 +338,10 @@ void moveShark(int x, int y)
 
   // check here to see if we found any adjacent fish blocks
   if (fishBlocksCounter != 0){
-    //std::cout << "Found fish" << std::endl;
-    int randomFishBlockNumber = rand() % fishBlocksCounter; // get the indexes
-    //std::cout << randomFishBlockNumber;
+    long location;
+    lrand48_r(&rng[omp_get_thread_num()], &location);
+    location = location % fishBlocksCounter;
+    int randomFishBlockNumber = location; // get the index for xFree & yFree
 
     unsigned int xpos = xFish[randomFishBlockNumber];
     unsigned int ypos = yFish[randomFishBlockNumber];
@@ -367,7 +373,10 @@ void moveShark(int x, int y)
   }  
   // check here if we cannot find any fish but there's an empty block adjacent
   if (freeBlocksCounter != 0 && fishBlocksCounter == 0){
-    int randomFreeBlockNumber = rand() % freeBlocksCounter; // get the index for xFree & yFree
+    long location;
+    lrand48_r(&rng[omp_get_thread_num()], &location);
+    location = location % freeBlocksCounter;
+    int randomFreeBlockNumber = location; // get the index for xFree & yFree
 
     unsigned int xpos = xFree[randomFreeBlockNumber];
     unsigned int ypos = yFree[randomFreeBlockNumber];
@@ -422,25 +431,24 @@ void move()
 {
 #pragma omp parallel num_threads(NumThreads)
   {//parallel start
+    // first start the execution timer
+    itime = omp_get_wtime();
+    // now declare the variables for the tiling
     int tid = omp_get_thread_num();
-    int tileRowSize = (xdim/omp_get_num_threads());
-
-    
-    
+    int tileRowSize = (xdim/omp_get_num_threads());    
     int rowBlocksStart = tid * tileRowSize;    
     int columnBlocksStart = 0;    
     int rowBlocksEnd = rowBlocksStart + tileRowSize;
     int columnBlocksEnd = ydim;
-    
+    // failsafes
     if (rowBlocksEnd > xdim)
       rowBlocksEnd = xdim;
     if (columnBlocksEnd > ydim)
       columnBlocksEnd = ydim;
     if ((omp_get_num_threads() == omp_get_thread_num()+1) && rowBlocksEnd < xdim){
-      //std::cout << xdim;
       rowBlocksEnd = xdim + 1;
     }
-    
+    // update movement for inner blocks
     for (int i = columnBlocksStart+1; i < columnBlocksEnd-1; ++i){//columns i
       for (int k = rowBlocksStart+1; k < rowBlocksEnd-1; ++k){//rows k
 	switch(worldData[i][k].value){
@@ -455,7 +463,7 @@ void move()
     // barrier
 #pragma omp barrier // everyone must complete their blocks!
     {
-      // update top/bottom
+      // update movement for outer blocks
       for (int k = rowBlocksStart; k < rowBlocksEnd; k+=tileRowSize-1){
 	for (int i = columnBlocksStart; i < columnBlocksEnd; ++i){
 	  switch(worldData[i][k].value){
@@ -479,7 +487,7 @@ void move()
 	  }//switch	  
 	}//for k
       }//for i      
-    }//end barrier    
+    }//end barrier
   }//end parallel
 }//move
 
@@ -489,14 +497,10 @@ int main()
   unsigned int seed = static_cast<unsigned int>(10);
   srand48(seed);
   sf::Clock clock;
-  sf::Clock speedupTimer;
-  simpletimer::SimpleTimer::get().start("Speedup Timer");
   bool gotSpeedupTime = false;
   int speedupCounter = 0;
 
   //NumThreads=omp_get_num_threads();
-  
-  std::cout << NumThreads;
 
   // populate all the sharks and fishes
   populate();
@@ -550,10 +554,19 @@ int main()
 	//game loop here
 	//updates everyones position
 	if (clock.getElapsedTime().asSeconds() > updateDelay && !paused){
-	  clock.restart();	  
+	  clock.restart();
+	  itime = omp_get_wtime();
 	  move();
-	  update();
+	  ftime = omp_get_wtime();
+	  if (!gotSpeedupTime){
+	    execTime = ftime - itime;
+	    gotSpeedupTime = true;
+	    std::cout << "num shark: " << numShark << std::endl;
+	    std::cout << "num fish: " << numFish << std::endl;
+	  }
+	  update();//sfml
 	  speedupCounter++;
+	  //simpletimer::SimpleTimer::get().printAllResults();
 	}
 	
 	//loop these three lines to draw frames
@@ -565,17 +578,15 @@ int main()
 	}
         window.display();
 	if (speedupCounter > 100 && !gotSpeedupTime){
-	  simpletimer::SimpleTimer::get().stop("Speedup Timer");
-	  simpletimer::SimpleTimer::get().printAllResults();
+	  //simpletimer::SimpleTimer::get().stop("Speedup Timer");
+	  //simpletimer::SimpleTimer::get().printAllResults();
 	  speedupCounter = 0;
 	  gotSpeedupTime = true;
 	}
     }// for -game/simulation loop
+    std::cout << "Execution Time: " << execTime << std::endl;
     std::cout << "Grid size: " << xdim << " x " << ydim << std::endl;
-    std::cout << "num shark: " << numShark << std::endl;
-    std::cout << "num fish: " << numFish << std::endl;
     std::cout << "num threads: " << NumThreads << std::endl;
-    std::cout << "speedup time: " << speedup << std::endl;
     return 0;
 }
 
