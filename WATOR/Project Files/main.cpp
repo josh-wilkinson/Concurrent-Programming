@@ -47,6 +47,8 @@
 #include <unistd.h> /* sleep() */
 #include <iostream> /* for debugging */
 #include <omp.h> /* for openMp */
+#include "SimpleTimer.h"
+//#include "matplotlibcpp.h"
 
 /* Struct */
 struct Square
@@ -58,10 +60,10 @@ struct Square
 
 /* Variables */
 const int NUMCORES=2;//My core count -- change as required
-int NumThreads = 2; // number of threads used by OpenMP 
+int NumThreads = 2; // number of threads used by OpenMP
 // window parameters
-const int xdim = 100;
-const int ydim = 100;
+const int xdim = 200;
+const int ydim = 200;
 // dynamic parameters
 const unsigned int fishBreed = 3;
 const unsigned int sharkBreed = 6;
@@ -80,6 +82,7 @@ int numShark = 0;
 int numFish = 0;
 int fishCounter = 0;
 int sharkCounter = 0;
+long speedup;
 bool paused = true;
 bool makeMoreFish = false;
 bool makeMoreSharks = false;
@@ -151,6 +154,7 @@ void restart(){
 
 void update()
 {
+#pragma omp for collapse(2)
   for (int i = 0; i < xdim; ++i){
     for (int k = 0; k < ydim; ++k){
       // update colours
@@ -234,8 +238,10 @@ void moveFish(int x, int y)
 
     // now update worldData
     worldData[xpos][ypos].value = 1; // move fish
-    if (breeding)
+    if (breeding){
       worldData[x][y].value = 1;
+      numFish++;
+    }
     else
       worldData[x][y].value = 0;
     
@@ -337,6 +343,7 @@ void moveShark(int x, int y)
     //std::cout << xpos << " " << ypos << std::endl;
 
     worldData[xpos][ypos].value = 0; // kill fish
+    numFish--;
 
     // move shark
     worldData[xpos][ypos].value = 2;
@@ -344,6 +351,7 @@ void moveShark(int x, int y)
       // new shark
       worldData[x][y].value = 2;
       worldData[x][y].sharkStarveProgress = 1;
+      numShark++;
     }
     else{
       worldData[x][y].value = 0;
@@ -374,6 +382,7 @@ void moveShark(int x, int y)
       // new shark
       worldData[x][y].value = 2;
       worldData[x][y].sharkStarveProgress = 1;
+      numShark++;
     }
     else{
       worldData[x][y].value = 0;
@@ -388,6 +397,7 @@ void moveShark(int x, int y)
       worldData[xpos][ypos].value = 0; // RIP goodnight sweet prince
       worldData[xpos][ypos].sharkStarveProgress = 0; // reset starve progress
       worldData[xpos][ypos].age = 0; // reset age
+      numShark--;
     }
   }  
   // check if nothing is found
@@ -401,6 +411,7 @@ void moveShark(int x, int y)
       worldData[x][y].value = 0; // RIP goodnight sweet prince
       worldData[x][y].sharkStarveProgress = 0; // reset starve progress
       worldData[x][y].age = 0; // reset age
+      numShark--;
     }
   }
   
@@ -409,7 +420,7 @@ void moveShark(int x, int y)
 
 void move()
 {
-#pragma omp parallel num_threads(8)
+#pragma omp parallel num_threads(NumThreads)
   {//parallel start
     int tid = omp_get_thread_num();
     int tileRowSize = (xdim/omp_get_num_threads());
@@ -476,10 +487,14 @@ int main()
 {
   // rng seed setup
   unsigned int seed = static_cast<unsigned int>(10);
-  srand(seed);
+  srand48(seed);
   sf::Clock clock;
+  sf::Clock speedupTimer;
+  simpletimer::SimpleTimer::get().start("Speedup Timer");
+  bool gotSpeedupTime = false;
+  int speedupCounter = 0;
 
-  NumThreads=omp_get_num_threads();
+  //NumThreads=omp_get_num_threads();
   
   std::cout << NumThreads;
 
@@ -506,7 +521,7 @@ int main()
 
     while (window.isOpen())
     {      
-        sf::Event event;	
+        sf::Event event;
 	
         while (window.pollEvent(event))
         {	  
@@ -538,6 +553,7 @@ int main()
 	  clock.restart();	  
 	  move();
 	  update();
+	  speedupCounter++;
 	}
 	
 	//loop these three lines to draw frames
@@ -548,8 +564,18 @@ int main()
 	  }
 	}
         window.display();
+	if (speedupCounter > 100 && !gotSpeedupTime){
+	  simpletimer::SimpleTimer::get().stop("Speedup Timer");
+	  simpletimer::SimpleTimer::get().printAllResults();
+	  speedupCounter = 0;
+	  gotSpeedupTime = true;
+	}
     }// for -game/simulation loop
-
+    std::cout << "Grid size: " << xdim << " x " << ydim << std::endl;
+    std::cout << "num shark: " << numShark << std::endl;
+    std::cout << "num fish: " << numFish << std::endl;
+    std::cout << "num threads: " << NumThreads << std::endl;
+    std::cout << "speedup time: " << speedup << std::endl;
     return 0;
 }
 
