@@ -3,7 +3,7 @@
 // Filename: test.cpp
 // Description: 
 // Author: Joseph
-// Maintainer: 
+// Maintainer: Joshua Wilkinson
 // Created: Fri Nov  3 15:51:15 2023 (+0000)
 // Last-Updated: Fri Nov  3 16:49:06 2023 (+0000)
 //           By: Joseph
@@ -13,8 +13,8 @@
 
 // Commentary: 
 // 
-// 
-// 
+// Using an SFML example made by Joseph to add the
+// Wa-Tor simulation made by Joshua. 
 // 
 // 
 // 
@@ -47,10 +47,10 @@
 #include <unistd.h> /* sleep() */
 #include <iostream> /* for debugging */
 #include <omp.h> /* for openMp */
-//#include "SimpleTimer.h"
-//#include "matplotlibcpp.h"
 
-/* Struct */
+/*! \fn Square
+    \brief A struct that contains sharks, fish, sea, starve progress, age.
+ */
 struct Square
 {
   int value; // 0 = ocean, 1 = fish, 2 = shark.
@@ -59,57 +59,42 @@ struct Square
 };
 
 /* Variables */
-const int NUMCORES=2;// My core count -- change as required
-const int NumThreads = 8; // number of threads used by OpenMP
-double itime, ftime, execTime; // for time execution of OpenMP
-drand48_data rng[NumThreads];
+const int NUMCORES=4; /*!< My core count -- change as required. */
+const int NumThreads = NUMCORES * 2; /*!< number of threads used by OpenMP -- change as required. */
+double itime; /*!< for time execution of OpenMP. */
+double ftime; /*!< for time execution of OpenMP. */
+double execTime; /*!< for time execution of OpenMP. */
+drand48_data rng[NumThreads]; /*!< RNG container, one per thread. */
 // window parameters
-const int xdim = 200;
-const int ydim = 200;
+const int xdim = 200; /*!< Amount of rows. */
+const int ydim = 200; /*!< Amount of columns. */
 // dynamic parameters
-const unsigned int fishBreed = 3;
-const unsigned int sharkBreed = 6;
-const int starve = 4;
+const unsigned int fishBreed = 3; /*!< A fish can reproduce after (X) updates. */
+const unsigned int sharkBreed = 6; /*!< A shark can reporduce after (X) updates. */
+const int starve = 4; /*!< A shark will starve after (X) updates, unless it eats a fish. */
 //each shape will represent either a fish, shark or empty space
 //e.g. blue for empty, red for shark and green for fish
-sf::RectangleShape recArray[xdim][ydim];  
-Square worldData[xdim][ydim]; //contains a 0(nothing), 1(fish) or a 2(shark).
-Square restartData[xdim][ydim];
-int WindowXSize=800;
-int WindowYSize=600;
-int cellXSize=WindowXSize/xdim;
-int cellYSize=WindowYSize/ydim;
-int movePosition;
-int numShark = 0;
-int numFish = 0;
-int fishCounter = 0;
-int sharkCounter = 0;
-long speedup;
-bool paused = false;
-bool makeMoreFish = false;
-bool makeMoreSharks = false;
+sf::RectangleShape recArray[xdim][ydim]; /*!< 2-D array of RectangleShape, used for the SFML display, takes x and y dimensions. */
+Square worldData[xdim][ydim]; /*!< The 2-D array contains a a struct (Square) which contains the value 0(nothing), 1(fish) or a 2(shark). */
+Square restartData[xdim][ydim]; /*!< A copy of the worldData for restarting the simulation. */
+int WindowXSize=1000; /*!< Width of the window. */
+int WindowYSize=1000; /*!< Height of the window. */
+int cellXSize=WindowXSize/xdim; /*!< Row size for each square in the SFML window. */
+int cellYSize=WindowYSize/ydim; /*!< Column size for each quare in the SFML window. */
+int numShark;
+int numFish;
+bool paused = false; /*!< If the 'space' key is pressed, this will flip. TRUE will pause the sim. */
 // ratio for initial fish/shark population
-const float fishRatio = 0.05;
-const float sharkRatio = 0.005;
+const float fishRatio = 0.05; /*!< Ratio for initial population of fish. */
+const float sharkRatio = 0.005; /*!< Ratio for initial population of sharks. */
 //delay
-const float updateDelay = 0;
-
-/* Thread methods */
-
-///! Find out how many threads are running!
-int get_num_threads(void) {
-  int num_threads = NumThreads;
-  //must ask in parallel region otherwise 1 is returned
-#pragma omp parallel
-  {
-    //#pragma omp single
-    num_threads = omp_get_num_threads();
-  }
-  return num_threads;
-}
+const float updateDelay = 0.1; /*!< Time in seconds for every update. */
 
 /* Methods */
-
+/*! \fn populate
+  \brief This method is responsible for the initial population of the simulation,
+  adding sharks and fish according the sharkRatio and fishRatio.
+ */
 void populate()
 {
   numFish = 0;
@@ -117,13 +102,14 @@ void populate()
   std::cout << "Placing sharks and fishes..." << std::endl;
   for (int i = 0; i < xdim; ++i){
     for (int k = 0; k < ydim; ++k){      
-      float randomNumber = (rand() % 10000) / 10000.0; // random number between 0 and 1 (fish or shark)      
-      //std::cout << randomNumber;      
+      float randomNumber = (rand() % 10000) / 10000.0; // random number between 0 and 1 (for fish or shark)      
       if (randomNumber <= fishRatio){
+	// Increase the numFish
 	worldData[i][k].value = 1;
 	numFish++;
       }
       else if (randomNumber > fishRatio && randomNumber < fishRatio + sharkRatio){
+	// Increase the numShark
         worldData[i][k].value = 2;
 	numShark++;	
       }
@@ -132,11 +118,13 @@ void populate()
       }
       worldData[i][k].sharkStarveProgress = 0;
     }
-    //std::cout << std::endl;
   }
 }
-
-void copyArray(Square array[xdim][ydim], Square copyArray[xdim][ydim]){
+/*! \fn copyArray(Square array[xdim][ydim], Square copyArray[xdim][ydim])
+  \brief Simply copies over the squares of one array to another.
+ */
+void copyArray(Square array[xdim][ydim], Square copyArray[xdim][ydim])
+{
   for (int i = 0; i < xdim; ++i){
     for (int k = 0; k < ydim; ++k){
       copyArray[i][k].value = array[i][k].value;
@@ -145,18 +133,23 @@ void copyArray(Square array[xdim][ydim], Square copyArray[xdim][ydim]){
     }
   }
 }
-
-void restart(){
+/*! \fn restart
+  \brief Makes worldData equal to restartData.
+ */
+void restart()
+{
   for (int i = 0; i < xdim; ++i){
     for (int k = 0; k < ydim; ++k){
       worldData[i][k] = restartData[i][k];
     }
   }
 }
-
+/*! \fn update
+  \brief Matches the worldData to the recArray, showing the position
+  of the sharks and fish. Note: Red is Shark, Green is Fish, Blue is empty sea.
+ */
 void update()
 {
-
   for (int i = 0; i < xdim; ++i){
     for (int k = 0; k < ydim; ++k){
       // update colours
@@ -169,24 +162,26 @@ void update()
     }
   }
 }
-
+/*! \fn moveFish(int x, int y)
+  \brief Behaviour for moving a fish.
+ */
 void moveFish(int x, int y)
 {
   // check for fish
   if (worldData[x][y].value != 1)
     return;
-  
+  // for storing empty square locations:
   int xFree[8] = {0};
   int yFree[8] = {0};
 
   int xIndex = 0;
   int yIndex = 0;
-
+  // age for the square being left behind
   int oldPositionAge = 0;
   int newPositionAge = 0;
-
+  
   int freeBlocksCounter = 0; // to count all the free adjacent blocks
-
+  // check for adding a new fish
   bool breeding = false;
   
   // fish age / breeding condition
@@ -260,7 +255,10 @@ void moveFish(int x, int y)
   }
   
 }
-
+/*! \fn moveShark(int x, int y)
+  \brief Behaviour for moving a shark, similar to moveFish, except sharks
+  can starve and must take out the any fish it comes across (randomly).
+ */
 void moveShark(int x, int y)
 {
   // check for shark
@@ -426,9 +424,13 @@ void moveShark(int x, int y)
   
 }  
 
-
+/*! \fn move
+  \brief This method is responsible for moving the squares (shark, fish),
+  but also parallelising the movements with OpenMP.
+ */
 void move()
 {
+  // First thing, declare the parallel region...
 #pragma omp parallel num_threads(NumThreads)
   {//parallel start
     // first start the execution timer
@@ -460,7 +462,7 @@ void move()
 	}//switch
       }//for k
     }//for i
-    // barrier
+    // barrier beginning
 #pragma omp barrier // everyone must complete their blocks!
     {
       // update movement for outer blocks
@@ -489,8 +491,12 @@ void move()
       }//for i      
     }//end barrier
   }//end parallel
-}//move
-
+}// end move
+/*! \fn main
+  \brief Driver containing the game loop and some initialisations.
+  It starts the window and detects inputs. Note: space for pause, 
+  'R' for restart, 'P' for populate(random restart), 'C' for copy, Escape for quit.
+ */
 int main()
 {
   // rng seed setup
@@ -499,8 +505,6 @@ int main()
   sf::Clock clock;
   bool gotSpeedupTime = false;
   int speedupCounter = 0;
-
-  //NumThreads=omp_get_num_threads();
 
   // populate all the sharks and fishes
   populate();
@@ -511,7 +515,6 @@ int main()
     for(int k=0;k<ydim;++k){//give each one a size, position and color
       recArray[i][k].setSize(sf::Vector2f(cellXSize,cellYSize));
       recArray[i][k].setPosition(i*cellXSize,k*cellYSize);//position is top left corner!
-      //int id=i*1-+k;      
       //put world data stuff here (if 0,1,2)
       if (worldData[i][k].value == 1)
 	recArray[i][k].setFillColor(sf::Color::Green);
@@ -522,7 +525,7 @@ int main()
     }
   }
     sf::RenderWindow window(sf::VideoMode(WindowXSize,WindowYSize), "SFML Wa-Tor world");
-
+    // let's start the window...
     while (window.isOpen())
     {      
         sf::Event event;
