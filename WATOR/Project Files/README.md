@@ -15,6 +15,8 @@ Joshua Wilkinson
 C++ Compiler (e.g. g++) SFML
 ### License:
 GPL-3.0
+### GitHub link:
+https://github.com/josh-wilkinson/Concurrent-Programming/tree/master/WATOR/Project%20Files
 
 ***
 
