@@ -4,7 +4,9 @@ This is an implementation of the Wa-Tor, population dynamics simulation.
 <a><img src="https://img.shields.io/badge/Language-C++-blue"></a>
 <a><img src="https://img.shields.io/badge/version-1.0-red"></a>
 </p>
+
 ***
+
 ## More Info:
 ***
 ### Name
@@ -13,8 +15,11 @@ Joshua Wilkinson
 C++ Compiler (e.g. g++) SFML
 ### License:
 GPL-3.0
+
 ***
+
 ## Sample Output
+
 ***
 Every fish and shark has an age and a position in the worldData 2-D array. Also, every shark has a starvation
 progress. Each fish and shark is placed randomly according to a ratio. The rules are:
@@ -25,7 +30,9 @@ progress. Each fish and shark is placed randomly according to a ratio. The rules
 5. If a shark cannot find a fish in time, it starves and is removed from the worldData.
 
 ***
+
 ## Running the Code
+
 ***
 1. Type 'make -k' in the terminal opened in the project folder.
 2. Then type './WaTor' to run the executable.
