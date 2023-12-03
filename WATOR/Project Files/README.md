@@ -23,8 +23,9 @@ progress. Each fish and shark is placed randomly according to a ratio. The rules
 3. After each update, the age of each shark and fish is increased.
 4. If the age of a shark/fish is equal to sharkBreed/fishBreed, a new shark/fish is created in its previous place.
 5. If a shark cannot find a fish in time, it starves and is removed from the worldData.
+
 ***
-### Running the Code
+## Running the Code
 ***
 1. Type 'make -k' in the terminal opened in the project folder.
 2. Then type './WaTor' to run the executable.

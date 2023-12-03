@@ -4,7 +4,7 @@
 
 CXX = g++
 CPPFILES= main.cpp
-CPPFLAGS= -Wall -fopenmp
+CPPFLAGS= -Wall -fopenmp -I/usr/include/python3.10 -lpython3.10
 LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system -lgomp
 EXE= WaTor
 
