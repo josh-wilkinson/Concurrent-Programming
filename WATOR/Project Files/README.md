@@ -16,7 +16,6 @@ GPL-3.0
 ***
 ## Sample Output
 ***
-![alt text](https://github.com/josh-wilkinson/Concurrent-Programming/blob/master/WATOR/Project%20Files/Screenshot.png "Title")
 Every fish and shark has an age and a position in the worldData 2-D array. Also, every shark has a starvation
 progress. Each fish and shark is placed randomly according to a ratio. The rules are:
 1. A fish can move into a random empty square if available, or it does not move.
